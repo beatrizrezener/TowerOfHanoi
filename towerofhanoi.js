@@ -23,8 +23,8 @@ towerofhanoi.start = function() {
     var scene1 = new lime.Scene();
 
     /* fundo */
-    //Definindo um gradiente linear, para o c�u azul gradiente, que neste caso come�a
-    //no topo esquerdo da tela e termina na direita em baixo. Come�a no (0,0) e termina no (1,1)
+    //Definindo um gradiente linear, para o céu azul gradiente, que neste caso começa
+    //no topo esquerdo da tela e termina na direita em baixo. Começa no (0,0) e termina no (1,1)
     var sky_gradient = new lime.fill.LinearGradient().setDirection(0, 0, 1, 1)
             .addColorStop(0, '#B2DFEE').addColorStop(1, '#0000CD'); //#0000CD = dark blue
 
@@ -47,7 +47,7 @@ towerofhanoi.start = function() {
     var disc2 = new lime.Sprite().setSize(80,20).setPosition(140,520).setAnchorPoint(0,0).setFill('assets/madeiravermelha.jpg');
     var disc3 = new lime.Sprite().setSize(100,20).setPosition(130,540).setAnchorPoint(0,0).setFill('assets/madeiraverde2.jpg');
     
-    //add os elementos na cena
+    //add elements in the scene
     scene1.appendChild(sky);
     scene1.appendChild(footer);
     scene1.appendChild(plataform);
@@ -57,6 +57,15 @@ towerofhanoi.start = function() {
     scene1.appendChild(disc1);
     scene1.appendChild(disc2);
     scene1.appendChild(disc3);
+    
+    //PAUSE
+    var btn_pause = new lime.Sprite().setSize(100,100).setPosition(675,25).setAnchorPoint(0,0).setFill('assets/pause.png');
+    scene1.appendChild(btn_pause);
+    
+    goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e){
+        director.setPaused(true);
+        lime.updateDirtyObjects(); //acrescentei para resolver bug relatado em: https://groups.google.com/forum/?fromgroups=#!topic/limejs/pFxUh_VoFF8
+    });
     
     // set current scene active
     director.replaceScene(scene1);
