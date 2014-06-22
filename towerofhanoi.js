@@ -38,15 +38,10 @@ towerofhanoi.start = function() {
     var plataform = new lime.Polygon().setPosition(100,560).setAnchorPoint(0,0).setFill('assets/texturamadeira.jpg').addPoints(-40,40,0,0, 600,0, 640,40,-40,40);
     
     /* BASES */
-    var base1 = new lime.Sprite().setSize(20,140).setPosition(170,420).setAnchorPoint(0,0).setFill('assets/texturamadeiraclara2.jpg');
-    var base2 = new lime.Sprite().setSize(20,140).setPosition(390,420).setAnchorPoint(0,0).setFill('assets/texturamadeiraclara2.jpg');
-    var base3 = new lime.Sprite().setSize(20,140).setPosition(610,420).setAnchorPoint(0,0).setFill('assets/texturamadeiraclara2.jpg');
-    
-    /* DISCS */
-    var disc1 = new lime.Sprite().setSize(60,20).setPosition(150,500).setAnchorPoint(0,0).setFill('assets/madeiraazul4.jpg');
-    var disc2 = new lime.Sprite().setSize(80,20).setPosition(140,520).setAnchorPoint(0,0).setFill('assets/madeiravermelha.jpg');
-    var disc3 = new lime.Sprite().setSize(100,20).setPosition(130,540).setAnchorPoint(0,0).setFill('assets/madeiraverde2.jpg');
-    
+    var base1 = new lime.Sprite().setSize(20,240).setPosition(170,320).setAnchorPoint(0,0).setFill('assets/texturamadeiraclara2.jpg');
+    var base2 = new lime.Sprite().setSize(20,240).setPosition(390,320).setAnchorPoint(0,0).setFill('assets/texturamadeiraclara2.jpg');
+    var base3 = new lime.Sprite().setSize(20,240).setPosition(610,320).setAnchorPoint(0,0).setFill('assets/texturamadeiraclara2.jpg');
+      
     //add elements in the scene
     scene1.appendChild(sky);
     scene1.appendChild(footer);
@@ -54,10 +49,10 @@ towerofhanoi.start = function() {
     scene1.appendChild(base1);
     scene1.appendChild(base2);
     scene1.appendChild(base3);
-    scene1.appendChild(disc1);
-    scene1.appendChild(disc2);
-    scene1.appendChild(disc3);
-    
+
+  /* DISCS */
+  create_discs(scene1, disc_count=7);
+
     //PAUSE
     var btn_pause = new lime.Sprite().setSize(100,100).setPosition(675,25).setAnchorPoint(0,0).setFill('assets/pause.png');
     scene1.appendChild(btn_pause);
@@ -70,3 +65,25 @@ towerofhanoi.start = function() {
     // set current scene active
     director.replaceScene(scene1);
 };
+
+function create_discs(scene, disc_count){
+    var max_width  = 140;
+    var min_width  = 50;
+    var width_step = (max_width - min_width)/(disc_count - 1);
+    var x_step     = width_step/2;
+    var height     = 210/disc_count;
+    var width      = max_width;
+    var x          = 110;
+    var y          = 560 - height;
+    var discs = new Array();
+    var colors = ['#FF0000', '#33ff33', '#0000FF', '#FF00FF','#FFFF00', '#000000', '#00FFFF'];
+    
+    for (var i = 0; i < disc_count; ++i) {
+        var disc = new lime.Sprite().setSize(width,height).setPosition(x,y).setAnchorPoint(0,0).setFill(colors[i]);
+        scene.appendChild(disc);
+        x = x + x_step;
+        width = width - width_step;
+        y = y - height;
+    }
+    return discs;
+}
