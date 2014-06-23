@@ -83,7 +83,6 @@ towerofhanoi.start = function() {
         
         goog.events.listen(rightTower,['mousedown','touchstart'],function(){
             moveDisc(towers, 0, 2);
-
         });
         
         goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
@@ -158,8 +157,38 @@ function createDiscs(scene, disc_count){
     return discs;
 }
 
-function moveDisc(towers, from_tower, to_tower){
+function verifyDiscSize(towers,from_tower,to_tower){
 
+  if(towers[to_tower].length == 0){
+    alert("vazia");
+    return true;
+    }
+  else{
+ var top_disc_size = towers[from_tower].pop();
+ var top_disc_size2 = towers[to_tower].pop();
+ if(top_disc_size.getSize().width < top_disc_size2.getSize().width){
+   alert("valido");
+   alert("size do disco menor: " + top_disc_size.getSize());
+   alert("size do disco maior : " + top_disc_size2.getSize());
+   towers[from_tower].push(top_disc_size);
+   towers[to_tower].push(top_disc_size2);
+   return true;
+  }
+ else{
+   alert("Invalido");
+   alert("size do disco menor: " + top_disc_size2.getSize());
+   alert("size do disco maior : " + top_disc_size.getSize());
+   alert("Maior");
+   towers[from_tower].push(top_disc_size);
+   towers[to_tower].push(top_disc_size2);
+   return false;
+   }
+}
+return;
+}
+
+function moveDisc(towers, from_tower, to_tower){
+  if (verifyDiscSize(towers,from_tower,to_tower) == true){
     var from_top_disc = towers[from_tower].pop();
     var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
     var old_position = from_top_disc.getPosition();
@@ -171,4 +200,5 @@ function moveDisc(towers, from_tower, to_tower){
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
     return;
+  }
 }
