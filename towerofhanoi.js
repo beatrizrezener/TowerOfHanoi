@@ -1,3 +1,8 @@
+var POSITION_OF_FIRST_DISC = 520;
+var HEIGHT_OF_DISCS = 40;
+var DISTANCE_BETWEEN_TOWERS = 200;
+
+
 //set main namespace
 goog.provide('towerofhanoi');
 
@@ -23,16 +28,42 @@ towerofhanoi.start = function() {
 
     var scene1 = new lime.Scene();
 
-    var bg_gradient = new lime.fill.LinearGradient().setDirection(0.5, 0, 0.5, 1)
-            .addColorStop(0, '#F0F8FF').addColorStop(1, '#8470FF'); //#0000CD = dark blue
-    var background = new lime.Sprite().setSize(800,640).setPosition(0,0).setAnchorPoint(0,0).setFill(bg_gradient);
+    var bg_gradient = new lime.fill.LinearGradient()
+            .setDirection(0.5, 0, 0.5, 1)
+            .addColorStop(0, '#F0F8FF')
+            .addColorStop(1, '#8470FF');
     
-    var plataform = new lime.Polygon().setPosition(100,560).setAnchorPoint(0,0).setFill('assets/metal.jpg').addPoints(-30,30,0,0, 600,0, 630,30,-30,30);
+    var background = new lime.Sprite()
+            .setSize(800,640)
+            .setPosition(0,0)
+            .setAnchorPoint(0,0)
+            .setFill(bg_gradient);
+    
+    var plataform = new lime.Polygon()
+            .setPosition(100,560)
+            .setAnchorPoint(0,0)
+            .setFill('assets/metal.jpg')
+            .addPoints(-30,30,0,0, 600,0, 630,30,-30,30);
     
     /* BASES */
-    var leftTower = new lime.RoundedRect().setSize(15,400).setPosition(190,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
-    var middleTower = new lime.RoundedRect().setSize(15,400).setPosition(390,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
-    var rightTower = new lime.RoundedRect().setSize(15,400).setPosition(590,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
+    var leftTower = new lime.RoundedRect()
+            .setSize(15,400)
+            .setPosition(190,165)
+            .setAnchorPoint(0,0)
+            .setFill('assets/metal.png')
+            .setRadius(50);
+    var middleTower = new lime.RoundedRect()
+            .setSize(15,400)
+            .setPosition(390,165)
+            .setAnchorPoint(0,0)
+            .setFill('assets/metal.png')
+            .setRadius(50);
+    var rightTower = new lime.RoundedRect()
+            .setSize(15,400)
+            .setPosition(590,165)
+            .setAnchorPoint(0,0)
+            .setFill('assets/metal.png')
+            .setRadius(50);
       
     //add elements in the scene
     scene1.appendChild(background);
@@ -48,10 +79,11 @@ towerofhanoi.start = function() {
     towers[1] = new Array();
     towers[2] = new Array();
     
-    goog.events.listen(leftTower,['mousedown','touchstart'],function(e){
+    goog.events.listen(leftTower,['mousedown','touchstart'],function(){
         
-        goog.events.listen(rightTower,['mousedown','touchstart'],function(e){
+        goog.events.listen(rightTower,['mousedown','touchstart'],function(){
             moveDisc(towers, 0, 2);
+
         });
         
         goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
@@ -85,7 +117,11 @@ towerofhanoi.start = function() {
     });       
 
     /* PAUSE */
-    var btn_pause = new lime.Sprite().setSize(100,100).setPosition(675,25).setAnchorPoint(0,0).setFill('assets/pause.png');
+    var btn_pause = new lime.Sprite()
+            .setSize(100,100)
+            .setPosition(675,25)
+            .setAnchorPoint(0,0)
+            .setFill('assets/pause.png');
     scene1.appendChild(btn_pause);
     
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e){
@@ -103,7 +139,7 @@ function createDiscs(scene, disc_count){
     var width_step = (max_width - min_width)/(disc_count - 1);
     var x_step     = width_step/2;
 //    var height     = 360/disc_count;
-    var height     = 45;
+    var height     = HEIGHT_OF_DISCS;
     var width      = max_width;
     var x          = 107.5;
     var y          = 560 - height;
@@ -125,14 +161,14 @@ function createDiscs(scene, disc_count){
 function moveDisc(towers, from_tower, to_tower){
 
     var from_top_disc = towers[from_tower].pop();
-    var x_move = (to_tower - from_tower) * 200;
+    var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
+    var old_position = from_top_disc.getPosition();
+    var new_position_x = (parseInt(old_position.x) + x_move); 
+    var new_position_y = (POSITION_OF_FIRST_DISC  - (towers[to_tower].length * HEIGHT_OF_DISCS));
     towers[to_tower].push(from_top_disc);
-    
-    var old_position_x = from_top_disc.getPosition();
-    var new_position_x = (parseInt(old_position_x.x) + x_move); 
-    //Ainda é necessário calcular quanto o disco deve mover e, Y!! :)
-    //Além de outros ajustes...
-    var disc_movement = new lime.animation.MoveTo(new_position_x, 380).setDuration(1);
+    var disc_movement = new lime.animation
+            .MoveTo(new_position_x, new_position_y)
+            .setDuration(1);
     from_top_disc.runAction(disc_movement);
     return;
 }
