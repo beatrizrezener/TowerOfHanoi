@@ -30,26 +30,37 @@ towerofhanoi.start = function() {
     var plataform = new lime.Polygon().setPosition(100,560).setAnchorPoint(0,0).setFill('assets/metal.jpg').addPoints(-30,30,0,0, 600,0, 630,30,-30,30);
     
     /* BASES */
-    var base1 = new lime.RoundedRect().setSize(15,400).setPosition(190,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
-    var base2 = new lime.RoundedRect().setSize(15,400).setPosition(390,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
-    var base3 = new lime.RoundedRect().setSize(15,400).setPosition(590,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
+    var leftTower = new lime.RoundedRect().setSize(15,400).setPosition(190,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
+    var middleTower = new lime.RoundedRect().setSize(15,400).setPosition(390,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
+    var rightTower = new lime.RoundedRect().setSize(15,400).setPosition(590,165).setAnchorPoint(0,0).setFill('assets/metal.png').setRadius(50);
       
     //add elements in the scene
     scene1.appendChild(background);
-    scene1.appendChild(base1);
-    scene1.appendChild(base2);
-    scene1.appendChild(base3);
+    scene1.appendChild(leftTower);
+    scene1.appendChild(middleTower);
+    scene1.appendChild(rightTower);
     scene1.appendChild(plataform);
-
-    /* DISCS */
-    var discs = create_discs(scene1, disc_count=4);
-    for(var i=0; i<disc_count; i++){
-        goog.events.listen(discs[i],['mousedown','touchstart'],function(e){
-            e.startDrag(true);
-        });
-    }
     
-    //PAUSE
+    /* DISCS */
+    var discsLeftTower = createDiscs(scene1, disc_count=4);
+    var towers = new Array(3);
+    towers[0] = discsLeftTower;
+    towers[1] = new Array();
+    towers[2] = new Array();
+    
+    goog.events.listen(leftTower,['mousedown','touchstart'],function(e){
+        
+        goog.events.listen(rightTower,['mousedown','touchstart'],function(e){
+            moveDisc(towers, 0, 2);
+        });
+        
+        goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
+            moveDisc(towers, 0, 1);
+        });
+        
+    });        
+
+    /* PAUSE */
     var btn_pause = new lime.Sprite().setSize(100,100).setPosition(675,25).setAnchorPoint(0,0).setFill('assets/pause.png');
     scene1.appendChild(btn_pause);
     
@@ -62,7 +73,7 @@ towerofhanoi.start = function() {
     director.replaceScene(scene1);
 };
 
-function create_discs(scene, disc_count){
+function createDiscs(scene, disc_count){
     var max_width  = 180;
     var min_width  = 70;
     var width_step = (max_width - min_width)/(disc_count - 1);
@@ -83,5 +94,21 @@ function create_discs(scene, disc_count){
         width = width - width_step;
         y = y - height;
     }
+    
     return discs;
+}
+
+function moveDisc(towers, from_tower, to_tower){
+
+    var from_top_disc = towers[from_tower].pop();
+    var x_move = (to_tower - from_tower) * 200;
+    towers[to_tower].push(from_top_disc);
+    
+    var old_position_x = from_top_disc.getPosition();
+    var new_position_x = (parseInt(old_position_x.x) + x_move); 
+    //Ainda é necessário calcular quanto o disco deve mover e, Y!! :)
+    //Além de outros ajustes...
+    var disc_movement = new lime.animation.MoveTo(new_position_x, 380).setDuration(1);
+    from_top_disc.runAction(disc_movement);
+    return;
 }
