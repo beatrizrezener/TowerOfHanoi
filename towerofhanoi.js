@@ -58,7 +58,31 @@ towerofhanoi.start = function() {
             moveDisc(towers, 0, 1);
         });
         
-    });        
+    });  
+
+    goog.events.listen(rightTower,['mousedown','touchstart'],function(e){
+        
+        goog.events.listen(leftTower,['mousedown','touchstart'],function(e){
+            moveDisc(towers, 2, 0);
+        });
+        
+        goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
+            moveDisc(towers, 2, 1);
+        });
+        
+    }); 
+
+    goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
+        
+        goog.events.listen(rightTower,['mousedown','touchstart'],function(e){
+            moveDisc(towers, 1, 2);
+        });
+        
+        goog.events.listen(leftTower,['mousedown','touchstart'],function(e){
+            moveDisc(towers, 1, 0);
+        });
+        
+    });       
 
     /* PAUSE */
     var btn_pause = new lime.Sprite().setSize(100,100).setPosition(675,25).setAnchorPoint(0,0).setFill('assets/pause.png');
