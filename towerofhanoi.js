@@ -2,7 +2,6 @@ var POSITION_OF_FIRST_DISC = 520;
 var HEIGHT_OF_DISCS = 40;
 var DISTANCE_BETWEEN_TOWERS = 200;
 
-
 //set main namespace
 goog.provide('towerofhanoi');
 
@@ -14,12 +13,9 @@ goog.require('lime.RoundedRect');
 goog.require('lime.fill.LinearGradient'); //Classe inclu�da para criar o gradiente do c�u
 goog.require('lime.Polygon');
 goog.require('lime.animation.MoveTo');
+goog.require('lime.animation.Loop');
 goog.require('lime.animation.RotateBy');
-goog.require('lime.animation.FadeTo');
-goog.require('lime.transitions.SlideInRight');
-goog.require('lime.transitions.Dissolve');
 
-// entrypoint
 towerofhanoi.start = function() {
 
     var director = new lime.Director(document.body, 800, 640);
@@ -79,42 +75,7 @@ towerofhanoi.start = function() {
     towers[1] = new Array();
     towers[2] = new Array();
     
-    goog.events.listen(leftTower,['mousedown','touchstart'],function(){
-        
-        goog.events.listen(rightTower,['mousedown','touchstart'],function(){
-            moveDisc(towers, 0, 2);
-
-        });
-        
-        goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
-            moveDisc(towers, 0, 1);
-        });
-        
-    });  
-
-    goog.events.listen(rightTower,['mousedown','touchstart'],function(e){
-        
-        goog.events.listen(leftTower,['mousedown','touchstart'],function(e){
-            moveDisc(towers, 2, 0);
-        });
-        
-        goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
-            moveDisc(towers, 2, 1);
-        });
-        
-    }); 
-
-    goog.events.listen(middleTower,['mousedown','touchstart'],function(e){
-        
-        goog.events.listen(rightTower,['mousedown','touchstart'],function(e){
-            moveDisc(towers, 1, 2);
-        });
-        
-        goog.events.listen(leftTower,['mousedown','touchstart'],function(e){
-            moveDisc(towers, 1, 0);
-        });
-        
-    });       
+    game(towers); 
 
     /* PAUSE */
     var btn_pause = new lime.Sprite()
@@ -158,17 +119,41 @@ function createDiscs(scene, disc_count){
     return discs;
 }
 
-function moveDisc(towers, from_tower, to_tower){
-
+function moveDisc(towers, from_tower, to_tower, current_position){
     var from_top_disc = towers[from_tower].pop();
     var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
-    var old_position = from_top_disc.getPosition();
-    var new_position_x = (parseInt(old_position.x) + x_move); 
+//    var old_position = from_top_disc.getPosition();
+    var new_position_x = (parseInt(current_position.x) + x_move); 
     var new_position_y = (POSITION_OF_FIRST_DISC  - (towers[to_tower].length * HEIGHT_OF_DISCS));
     towers[to_tower].push(from_top_disc);
     var disc_movement = new lime.animation
             .MoveTo(new_position_x, new_position_y)
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
-    return;
+
+    goog.events.listen(disc_movement,lime.animation.Event.STOP,function(){
+        goog.events.unlisten(from_top_disc,['mousedown','touchstart'],function(){});
+    });
+    
+    game(towers);
+}
+
+function game(towers) {
+
+    if(towers[0].length !== 0){
+        var tam = towers[0].length;
+        var topDiscLeftTower = towers[0][tam-1];
+        goog.events.listen(topDiscLeftTower,['mousedown','touchstart'],function(e){
+        var origin_position = topDiscLeftTower.getPosition();
+        e.startDrag();
+            e.swallow(['mouseup','touchend', 'touchcancel'], function(){
+                if(parseInt(topDiscLeftTower.getPosition().x) > 320 && parseInt(topDiscLeftTower.getPosition().x) < 420){
+                   moveDisc(towers, 0, 1, origin_position);
+                } else {
+                    moveDisc(towers, 0, 0, origin_position);
+                }
+            });
+        });
+    };
+    
 }
