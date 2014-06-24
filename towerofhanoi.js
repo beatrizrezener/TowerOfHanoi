@@ -71,7 +71,7 @@ towerofhanoi.start = function() {
     scene1.appendChild(plataform);
     
     /* DISCS */
-    var qty_discs = 1; //É necessário capturar esse valor quando o jogador escolher o nível!!
+    var qty_discs = 4; //É necessário capturar esse valor quando o jogador escolher o nível!!
     
     var discsLeftTower = createDiscs(scene1, qty_discs);
     var towers = new Array(3);
@@ -89,27 +89,27 @@ towerofhanoi.start = function() {
         e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
             alert(this.getPosition().x);
             if(jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT){
-                if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420){
+                if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420 && verifyDiscSize(towers,0,1)){
                     moveDisc(towers, 0, 1, origin_position);
-                } else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630){
+                } else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630 && verifyDiscSize(towers,0,2)){
                     moveDisc(towers, 0, 2, origin_position);
                 } else {
                     moveDisc(towers, 0, 0, origin_position);
                 }
             } else if(jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT){
-                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200){
+                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200 && verifyDiscSize(towers,1,0)){
                     moveDisc(towers, 1, 0, origin_position);
-                } else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630){
+                } else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630 && verifyDiscSize(towers,1,2)){
                     moveDisc(towers, 1, 2, origin_position);
-                } else {
+                } else if(verifyDiscSize(towers,1,1)) {
                     moveDisc(towers, 1, 1, origin_position);
                 }
             } else if(jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT){
-                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200){
+                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200 && verifyDiscSize(towers,2,0)){
                     moveDisc(towers, 2, 0, origin_position);
-                } else if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420){
+                } else if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420 && verifyDiscSize(towers,2,1)){
                     moveDisc(towers, 2, 1, origin_position);
-                } else {
+                } else if(verifyDiscSize(towers,2,2)) {
                     moveDisc(towers, 2, 2, origin_position);
                 }
             };
@@ -161,6 +161,29 @@ function createDiscs(scene, disc_count){
     }
     return discs;
 }
+
+function verifyDiscSize(towers,from_tower,to_tower){
+
+  if(towers[to_tower].length == 0){
+    return true;
+  }
+  else{
+    var top_disc_size = towers[from_tower].pop();
+    var top_disc_size2 = towers[to_tower].pop();
+    if(top_disc_size.getSize().width < top_disc_size2.getSize().width){
+      towers[from_tower].push(top_disc_size);
+      towers[to_tower].push(top_disc_size2);
+      return true;
+    }
+    else{
+      towers[from_tower].push(top_disc_size);
+      towers[to_tower].push(top_disc_size2);
+      return false;
+    }
+  }
+  return;
+}
+
 
 function moveDisc(towers, from_tower, to_tower, old_position){
     var from_top_disc = towers[from_tower].pop();
