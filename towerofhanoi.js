@@ -70,7 +70,9 @@ towerofhanoi.start = function() {
     scene1.appendChild(plataform);
     
     /* DISCS */
-    var discsLeftTower = createDiscs(scene1, 4);
+    var qty_discs = 7; //É necessário capturar esse valor quando o jogador escolher o nível!!
+    
+    var discsLeftTower = createDiscs(scene1, qty_discs);
     var towers = new Array(3);
     towers[0] = discsLeftTower;
     towers[1] = new Array();
@@ -117,7 +119,7 @@ towerofhanoi.start = function() {
         e.event.stopPropagation();
     };
     
-    for(var c = 0; c < 4; c++){
+    for(var c = 0; c < qty_discs; c++){
        goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], game);
     }
     
@@ -143,7 +145,6 @@ function createDiscs(scene, disc_count){
     var min_width  = 70;
     var width_step = (max_width - min_width)/(disc_count - 1);
     var x_step     = width_step/2;
-//    var height     = 360/disc_count;
     var height     = HEIGHT_OF_DISCS;
     var width      = max_width;
     var x          = 107.5;
@@ -175,8 +176,4 @@ function moveDisc(towers, from_tower, to_tower, old_position){
     from_top_disc.runAction(disc_movement);
 
     //game(towers);
-}
-
-function game(towers) {
-    
 }
