@@ -79,37 +79,78 @@ towerofhanoi.start = function() {
     towers[1] = new Array();
     towers[2] = new Array();
     
+    function moveOnlyFromTop(origin_position,towers,from_tower){
+      
+      this.getPosition().x == towers[0][towers[0].length - 1].getPosition().x
+    }
+
     var game = function(e) {
         var origin_position = this.getPosition();
-        
         e.swallow(['touchmove', 'mousemove'], function(e) {
             this.setPosition(this.localToNode(e.position, scene1));
         });
-        
+         //alert("entrou");
         e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
-            alert(this.getPosition().x);
             if(jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT){
-                if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420 && verifyDiscSize(towers,0,1)){
-                    moveDisc(towers, 0, 1, origin_position);
-                } else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630 && verifyDiscSize(towers,0,2)){
+                if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420){
+              if(this.getPosition().x == towers[0][towers[0].length - 1].getPosition().x){
+                  if (verifyDiscSize(origin_position,towers,0,1)){
+                      moveDisc(towers, 0, 1, origin_position);
+                  }
+                  else{
+                e.swallow(['touchend', 'touchcancel','mouseup'], function(e) {
+                    var move = new lime.animation.MoveTo(origin_position);
+                    this.runAction(move);
+                  });
+                }
+              }
+              else{
+                e.swallow(['touchend', 'touchcancel','mouseup'], function(e) {
+                    var move = new lime.animation.MoveTo(origin_position);
+                    this.runAction(move);
+                });
+              }
+                }
+                else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630){
+       if(this.getPosition().x == towers[0][towers[0].length - 1].getPosition().x)
+                  if (verifyDiscSize(origin_position,towers,0,1))
                     moveDisc(towers, 0, 2, origin_position);
-                } else {
+                } 
+                else {
+       if(this.getPosition().x == towers[0][towers[0].length - 1].getPosition().x)
+                  if (verifyDiscSize(origin_position,towers,0,1))
                     moveDisc(towers, 0, 0, origin_position);
                 }
-            } else if(jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT){
-                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200 && verifyDiscSize(towers,1,0)){
+              } 
+
+
+
+
+
+
+
+
+
+
+
+
+              else if(jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT){
+                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200 && verifyDiscSize(origin_position,towers,1,0)){
                     moveDisc(towers, 1, 0, origin_position);
-                } else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630 && verifyDiscSize(towers,1,2)){
+                } 
+                else if(parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630 && verifyDiscSize(origin_position,towers,1,2)){
                     moveDisc(towers, 1, 2, origin_position);
-                } else if(verifyDiscSize(towers,1,1)) {
+                }
+                else if(verifyDiscSize(origin_position,towers,1,1)) {
                     moveDisc(towers, 1, 1, origin_position);
                 }
-            } else if(jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT){
-                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200 && verifyDiscSize(towers,2,0)){
+            } 
+                else if(jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT){
+                if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200 && verifyDiscSize(origin_position,towers,2,0)){
                     moveDisc(towers, 2, 0, origin_position);
-                } else if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420 && verifyDiscSize(towers,2,1)){
+                } else if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420 && verifyDiscSize(origin_position,towers,2,1)){
                     moveDisc(towers, 2, 1, origin_position);
-                } else if(verifyDiscSize(towers,2,2)) {
+                } else if(verifyDiscSize(origin_position,towers,2,2)) {
                     moveDisc(towers, 2, 2, origin_position);
                 }
             };
@@ -162,7 +203,8 @@ function createDiscs(scene, disc_count){
     return discs;
 }
 
-function verifyDiscSize(towers,from_tower,to_tower){
+
+function verifyDiscSize(origin_position,towers,from_tower,to_tower){
 
   if(towers[to_tower].length == 0){
     return true;
