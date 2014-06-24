@@ -11,6 +11,7 @@ goog.require('lime.Director');
 goog.require('lime.Scene');
 goog.require('lime.Sprite');
 goog.require('lime.RoundedRect');
+goog.require('lime.Layer');
 goog.require('lime.fill.LinearGradient'); //Classe inclu�da para criar o gradiente do c�u
 goog.require('lime.Polygon');
 goog.require('lime.animation.MoveTo');
@@ -18,11 +19,57 @@ goog.require('lime.animation.Loop');
 goog.require('lime.animation.RotateBy');
 goog.require('lime.animation.ScaleTo');
 
+
+var WIDTH = 800;
+var HEIGHT = 640;
+
 towerofhanoi.start = function() {
 
-    var director = new lime.Director(document.body, 800, 640);
-    director.makeMobileWebAppCapable();
-    director.setDisplayFPS(false);
+    towerofhanoi.director = new lime.Director(document.body, towerofhanoi.WIDTH, towerofhanoi.HEIGHT);
+    towerofhanoi.director.makeMobileWebAppCapable();
+    towerofhanoi.director.setDisplayFPS(false);
+    
+    towerofhanoi.loadMenu();
+};
+
+towerofhanoi.loadMenu = function() {
+   var scene = new lime.Scene(),
+	    layer = new lime.Layer().setPosition(towerofhanoi.WIDTH / 2, 0);
+    
+    var title = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(28)
+            .setText("Tower of Hanoi")
+            .setPosition(300, 22);
+	layer.appendChild(title);
+    var text = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(20)
+            .setText("Clique para continuar")
+            .setPosition(300, 70);
+	layer.appendChild(title);
+        layer.appendChild(text);
+        scene.appendChild(layer);
+  
+  
+  
+    goog.events.listen(scene, ['mousedown', 'touchstart'], function(e){
+        towerofhanoi.newGame(4);
+    });
+    
+    towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
+    
+};
+
+// load new game scene
+towerofhanoi.newGame = function(qtyDiscs) {
+    var scene = new towerofhanoi.Game(qtyDiscs);
+	towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
+};
+
+towerofhanoi.Game = function(qtyDiscs) {
 
     var scene1 = new lime.Scene();
 
@@ -71,9 +118,8 @@ towerofhanoi.start = function() {
     scene1.appendChild(plataform);
     
     /* DISCS */
-    var qty_discs = 4; //É necessário capturar esse valor quando o jogador escolher o nível!!
     
-    var discsLeftTower = createDiscs(scene1, qty_discs);
+    var discsLeftTower = createDiscs(scene1, qtyDiscs);
     var towers = new Array(3);
     towers[0] = discsLeftTower;
     towers[1] = new Array();
@@ -84,12 +130,11 @@ towerofhanoi.start = function() {
       this.getPosition().x == towers[0][towers[0].length - 1].getPosition().x
     }
 
-    var game = function(e) {
+    var listenDiscs = function(e) {
         var origin_position = this.getPosition();
         e.swallow(['touchmove', 'mousemove'], function(e) {
             this.setPosition(this.localToNode(e.position, scene1));
         });
-         //alert("entrou");
         e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
             if(jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT){
                 if(parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420){
@@ -121,20 +166,7 @@ towerofhanoi.start = function() {
                   if (verifyDiscSize(origin_position,towers,0,1))
                     moveDisc(towers, 0, 0, origin_position);
                 }
-              } 
-
-
-
-
-
-
-
-
-
-
-
-
-              else if(jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT){
+              } else if(jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT){
                 if(parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200 && verifyDiscSize(origin_position,towers,1,0)){
                     moveDisc(towers, 1, 0, origin_position);
                 } 
@@ -159,8 +191,8 @@ towerofhanoi.start = function() {
     };
     
     /* MAKING DISCS LISTENABLE */
-    for(var c = 0; c < qty_discs; c++){
-       goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], game);
+    for(var c = 0; c < qtyDiscs; c++){
+       goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], listenDiscs);
     }
     
     /* PAUSE */
@@ -172,12 +204,12 @@ towerofhanoi.start = function() {
     scene1.appendChild(btn_pause);
     
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e){
-        director.setPaused(true);
+        towerofhanoi.director.setPaused(true);
         lime.updateDirtyObjects(); //acrescentei para resolver bug relatado em: https://groups.google.com/forum/?fromgroups=#!topic/limejs/pFxUh_VoFF8
     });
     
     // set current scene active
-    director.replaceScene(scene1);
+    towerofhanoi.director.replaceScene(scene1);
 };
 
 function createDiscs(scene, disc_count){
