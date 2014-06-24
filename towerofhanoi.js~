@@ -36,8 +36,7 @@ var scene1 = new lime.Scene();
             .setPosition(0,0)
             .setAnchorPoint(0,0)
             .setFill(bg_gradient);
-          
-    alert("Clique na tela para continuar");
+        
  
     goog.events.listen(background, 'click', function() {
 	  towerofhanoi.start();
