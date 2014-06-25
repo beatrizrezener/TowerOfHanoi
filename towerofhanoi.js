@@ -105,7 +105,7 @@ towerofhanoi.loadMenu = function() {
     scene.appendChild(layer);
 
     goog.events.listen(scene, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(4);
+       towerofhanoi.newGame(5);
    });
 
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);

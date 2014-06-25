@@ -68,7 +68,7 @@ towerofhanoi.Game = function(qtyDiscs) {
 
 
     /* DISCS */
-    var mydiscs = new towerofhanoi.Disc(layer, 4);
+    var mydiscs = new towerofhanoi.Disc(layer, qtyDiscs);
     var discsLeftTower = mydiscs.getDiscs();
     
     var towers = new Array(3);
