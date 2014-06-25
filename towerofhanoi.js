@@ -64,33 +64,33 @@ towerofhanoi.loadMenu = function() {
             .setFill(bg_gradient);
 
     var btn_level1 = new lime.Sprite()
-            .setSize(150, 50);
-            .setPosition(600, 50);
-            .setAnchorPoint(0, 0);
+            .setSize(150, 50)
+            .setPosition(600, 50)
+            .setAnchorPoint(0, 0)
             .setFill('assets/level1.png');
 
     var btn_level2 = new lime.Sprite()
-            .setSize(150, 50);
-            .setPosition(600, 100);
-            .setAnchorPoint(0, 0);
+            .setSize(150, 50)
+            .setPosition(600, 100)
+            .setAnchorPoint(0, 0)
             .setFill('assets/level2.png');
     
     var btn_level3 = new lime.Sprite()
-            .setSize(150, 50);
-            .setPosition(600, 150);
-            .setAnchorPoint(0, 0);
+            .setSize(150, 50)
+            .setPosition(600, 150)
+            .setAnchorPoint(0, 0)
             .setFill('assets/level3.png');
 
     var btn_level4 = new lime.Sprite()
-            .setSize(150, 50);
-            .setPosition(600, 200);
-            .setAnchorPoint(0, 0);
+            .setSize(150, 50)
+            .setPosition(600, 200)
+            .setAnchorPoint(0, 0)
             .setFill('assets/level4.png');
 
     var btn_level5 = new lime.Sprite()
-            .setSize(150, 50);
-            .setPosition(600, 150);
-            .setAnchorPoint(0, 0);
+            .setSize(150, 50)
+            .setPosition(600, 150)
+            .setAnchorPoint(0, 0)
             .setFill('assets/level4.png');
 
     layer.appendChild(background);
