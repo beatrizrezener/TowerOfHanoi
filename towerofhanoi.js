@@ -44,8 +44,9 @@ towerofhanoi.loadMenu = function() {
             .setFontSize(28)
             .setText("Tower of Hanoi")
             .setPosition(300, 22);
-    layer.appendChild(title);
-    var text = new lime.Label().setAlign('center')
+    scene.appendChild(title);
+    
+   var text = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(20)
@@ -100,24 +101,40 @@ towerofhanoi.loadMenu = function() {
             .setAnchorPoint(0, 0)
             .setFill('assets/tower.gif');
 
-    layer.appendChild(background);
-    layer.appendChild(title);
-    layer.appendChild(text);
-    layer.appendChild(btn_level1);
-    layer.appendChild(btn_level2);
-    layer.appendChild(btn_level3);
-    layer.appendChild(btn_level4);
-    layer.appendChild(btn_level5);
-    layer.appendChild(tower_imagen );
+    scene.appendChild(background);
+    scene.appendChild(title);
+    scene.appendChild(text);
+    scene.appendChild(btn_level1);
+    scene.appendChild(btn_level2);
+    scene.appendChild(btn_level3);
+    scene.appendChild(btn_level4);
+    scene.appendChild(btn_level5);
+    scene.appendChild(tower_imagen);
+    
+    goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
+       towerofhanoi.newGame(1);
+   });
+  
+    goog.events.listen(btn_level2, ['mousedown', 'touchstart'], function(e) {
+       towerofhanoi.newGame(2);
+   });  
+  
+   goog.events.listen(btn_level3, ['mousedown', 'touchstart'], function(e) {
+       towerofhanoi.newGame(3);
+   });  
+
+    goog.events.listen(btn_level4, ['mousedown', 'touchstart'], function(e) {
+       towerofhanoi.newGame(4);
+   }); 
+
+    goog.events.listen(btn_level5, ['mousedown', 'touchstart'], function(e) {
+       towerofhanoi.newGame(5);
+   });
 
     scene.appendChild(layer);
 
-    goog.events.listen(scene, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(4);
-   });
-
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
-
+    
 };
 
 // load new game scene
