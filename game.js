@@ -1,11 +1,47 @@
 goog.provide('towerofhanoi.Game');
-
 goog.require('towerofhanoi.Disc');
 
 var cont_moviments = 0;
 /**
  * Game scene for Tower of Hanoi game.
  */
+
+
+
+function checkTowerPositToMoveDisk(actual_disk,actual_tower){
+  var list_tower  = [];
+  if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
+    list_tower = [actual_tower,1,actual_disk.getSize().width]; 
+    return list_tower;
+  }
+  else if(parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630){
+    list_tower = [actual_tower,2,actual_disk.getSize().width];
+    return list_tower;
+  }
+  else if(parseInt(actual_disk.getPosition().x) > -60  && parseInt(actual_disk.getPosition().x) < 200){
+    list_tower = [actual_tower,0,actual_disk.getSize().width];
+    return list_tower;
+  }
+  return [actual_tower,0,actual_disck.getSize().width];
+}
+
+
+function moveOnlyFromTop(towers,list_tower,disck_to_move,origin_position,e) {
+  disk_of_top  = towers[list_tower[0]][towers[list_tower[0]].length - 1];
+  var disk_to_move_size = list_tower[2];
+  if(parseInt(disk_to_move_size)  === parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers,list_tower[0],list_tower[1])){
+    moveDisc(towers,list_tower[0],list_tower[1], origin_position);
+    incrementMoviments(moviments);
+  }
+  else {
+    e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
+      var move = new lime.animation.MoveTo(origin_position);
+      disck_to_move.runAction(move);
+    });
+  }
+}
+
+
 towerofhanoi.Game = function(qtyDiscs) {
     lime.Scene.call(this);
 
@@ -77,50 +113,6 @@ towerofhanoi.Game = function(qtyDiscs) {
     towers[2] = new Array();
 
 
-    function checkTowerPositToMoveDisk(actual_disck,actual_tower){
-        var list_tower  = []
-        if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
-          list_tower = [tower,1]; 
-          return list_tower;
-        }
-        else if(parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630){
-          list_tower = [tower,2];
-          return list_tower;
-        }
-     return [tower,0];
-    }
-
-    function checkTowerPositToMoveDisk(actual_disk,actual_tower){
-      var list_tower  = [];
-      if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
-        list_tower = [actual_tower,1,actual_disk.getSize().width]; 
-        return list_tower;
-      }
-      else if(parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630){
-        list_tower = [actual_tower,2,actual_disk.getSize().width];
-        return list_tower;
-      }
-      else if(parseInt(actual_disk.getPosition().x) > -60  && parseInt(actual_disk.getPosition().x) < 200){
-        list_tower = [actual_tower,0,actual_disk.getSize().width];
-        return list_tower;
-      }
-      return [actual_tower,0,actual_disck.getSize().width];
-    }
-
-    function moveOnlyFromTop(list_tower,disck_to_move,origin_position,e) {
-        disk_of_top  = towers[list_tower[0]][towers[list_tower[0]].length - 1];
-        var disk_to_move_size = list_tower[2];
-        if(parseInt(disk_to_move_size)  === parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers,list_tower[0],list_tower[1])){
-          moveDisc(towers,list_tower[0],list_tower[1], origin_position);
-          incrementMoviments(moviments);
-        }
-        else {
-            e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                var move = new lime.animation.MoveTo(origin_position);
-                disck_to_move.runAction(move);
-            });
-        }
-    }
     var listenDiscs = function(e) {
         var origin_position = this.getPosition();
         e.swallow(['touchmove', 'mousemove'], function(e) {
@@ -132,18 +124,18 @@ towerofhanoi.Game = function(qtyDiscs) {
             if (jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT) {
               var list = [];
               list = checkTowerPositToMoveDisk(this,0);
-              moveOnlyFromTop(list,this,origin_position,e);
+              moveOnlyFromTop(towers,list,this,origin_position,e);
             }
             else if (jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT) {
               var list = [];
               list = checkTowerPositToMoveDisk(this,1);
-              moveOnlyFromTop(list,this,origin_position,e);
+              moveOnlyFromTop(towers,list,this,origin_position,e);
 
            }
             else if (jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT) {
               var list = [];
               list = checkTowerPositToMoveDisk(this,2);
-              moveOnlyFromTop(list,this,origin_position,e);
+              moveOnlyFromTop(towers,list,this,origin_position,e);
            }
         });
         e.event.stopPropagation();
