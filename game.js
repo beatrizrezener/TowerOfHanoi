@@ -7,42 +7,8 @@ var cont_moviments = 0;
  */
 
 
-
-function checkTowerPositToMoveDisk(actual_disk,actual_tower){
-  var list_tower  = [];
-  if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
-    list_tower = [actual_tower,1,actual_disk.getSize().width]; 
-    return list_tower;
-  }
-  else if(parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630){
-    list_tower = [actual_tower,2,actual_disk.getSize().width];
-    return list_tower;
-  }
-  else if(parseInt(actual_disk.getPosition().x) > -60  && parseInt(actual_disk.getPosition().x) < 200){
-    list_tower = [actual_tower,0,actual_disk.getSize().width];
-    return list_tower;
-  }
-  return [actual_tower,0,actual_disck.getSize().width];
-}
-
-
-function moveOnlyFromTop(towers,list_tower,disck_to_move,origin_position,e) {
-  disk_of_top  = towers[list_tower[0]][towers[list_tower[0]].length - 1];
-  var disk_to_move_size = list_tower[2];
-  if(parseInt(disk_to_move_size)  === parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers,list_tower[0],list_tower[1])){
-    moveDisc(towers,list_tower[0],list_tower[1], origin_position);
-    incrementMoviments(moviments);
-  }
-  else {
-    e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-      var move = new lime.animation.MoveTo(origin_position);
-      disck_to_move.runAction(move);
-    });
-  }
-}
-
-
 towerofhanoi.Game = function(qtyDiscs) {
+
     lime.Scene.call(this);
 
     var layer = new lime.Layer();
@@ -111,6 +77,42 @@ towerofhanoi.Game = function(qtyDiscs) {
     towers[0] = discsLeftTower;
     towers[1] = new Array();
     towers[2] = new Array();
+
+/* validation methods */
+
+function checkTowerPositToMoveDisk(actual_disk,actual_tower){
+  var list_tower  = [];
+  if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
+    list_tower = [actual_tower,1,actual_disk.getSize().width]; 
+    return list_tower;
+  }
+  else if(parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630){
+    list_tower = [actual_tower,2,actual_disk.getSize().width];
+    return list_tower;
+  }
+  else if(parseInt(actual_disk.getPosition().x) > -60  && parseInt(actual_disk.getPosition().x) < 200){
+    list_tower = [actual_tower,0,actual_disk.getSize().width];
+    return list_tower;
+  }
+  return [actual_tower,0,actual_disck.getSize().width];
+}
+
+
+function moveOnlyFromTop(towers,list_tower,disck_to_move,origin_position,e) {
+  disk_of_top  = towers[list_tower[0]][towers[list_tower[0]].length - 1];
+  var disk_to_move_size = list_tower[2];
+  if(parseInt(disk_to_move_size)  === parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers,list_tower[0],list_tower[1])){
+    moveDisc(towers,list_tower[0],list_tower[1], origin_position);
+    //incrementMoviments(moviments);
+  }
+  else {
+    e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
+      var move = new lime.animation.MoveTo(origin_position);
+      disck_to_move.runAction(move);
+    });
+  }
+}
+
 
 
     var listenDiscs = function(e) {
@@ -189,11 +191,6 @@ function verifyDiscSize(towers, from_tower, to_tower) {
     return;
 }
 
-function winner(towers,to_tower){
-  if(towers[to_tower].length == qtyDiscs && to_tower != 0){
-    alert("WINNER");
-  }
-}
 
 function moveDisc(towers, from_tower, to_tower, old_position) {
     var from_top_disc = towers[from_tower].pop();
@@ -205,4 +202,14 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .MoveTo(new_position_x, new_position_y)
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
+    verifyWinner(towers,to_tower,4);
 }
+
+function verifyWinner(towers,to_tower,n_disks){
+  if(towers[to_tower].length == n_disks && towers[towers] != 0){
+    alert("Winner");
+//  var moviments_lbl = new lime.Label().setFontFamily('Trebuchet MS').setFontColor('#4f96ed').setFontSize(18).
+//      setPosition(30,50).setText('Winner').setAnchorPoint(0, 0).setFontWeight(700);
+//  this.layer.appendChild(moviments_lbl);
+    }
+  }
