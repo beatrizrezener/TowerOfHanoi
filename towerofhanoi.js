@@ -37,16 +37,30 @@ var scene1 = new lime.Scene();
             .setPosition(0,0)
             .setAnchorPoint(0,0)
             .setFill(bg_gradient);
-        
-   alert("Clique na tela para inciar o jogo");
+   
+   var btn_level1 = new lime.Sprite()
+            .setSize(100,100)
+            .setPosition(675,25)
+            .setAnchorPoint(0,0)
+            .setFill('assets/imagemVerde.png');
 
-   goog.events.listen(background, 'click', function() {
+    var btn_level2 = new lime.Sprite()
+            .setSize(100,100)
+            .setPosition(500,25)
+            .setAnchorPoint(0,0)
+            .setFill('assets/images.jpg');
+ 
+
+        
+   alert("Clique no botão verde para inciar o jogo");
+
+   goog.events.listen(btn_level1, 'click', function() {
 	  towerofhanoi.start();
    });
     
     scene1.appendChild(background);
-   // scene1.appendChild(btn_level1);
-   // scene1.appendChild(btn_level2);
+    scene1.appendChild(btn_level1);
+    scene1.appendChild(btn_level2);
    
     // set current scene active
     director.replaceScene(scene1);
