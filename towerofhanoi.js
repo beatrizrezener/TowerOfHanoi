@@ -25,10 +25,11 @@ var HEIGHT = 640;
 
 towerofhanoi.start = function() {
 
-    towerofhanoi.director = new lime.Director(document.body, towerofhanoi.WIDTH, towerofhanoi.HEIGHT);
-    towerofhanoi.director.makeMobileWebAppCapable();
-    towerofhanoi.director.setDisplayFPS(false);
+    var director = new lime.Director(document.body, WIDTH, HEIGHT);
+    director.makeMobileWebAppCapable();
+    director.setDisplayFPS(false);
     
+    towerofhanoi.director = director;
     towerofhanoi.loadMenu();
 };
 
@@ -65,8 +66,9 @@ towerofhanoi.loadMenu = function() {
 
 // load new game scene
 towerofhanoi.newGame = function(qtyDiscs) {
-    var scene = new towerofhanoi.Game(qtyDiscs);
-	towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
+//    var scene = new towerofhanoi.Game(qtyDiscs);
+//	towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
+        towerofhanoi.Game(qtyDiscs);
 };
 
 towerofhanoi.Game = function(qtyDiscs) {
