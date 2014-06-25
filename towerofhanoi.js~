@@ -94,6 +94,12 @@ towerofhanoi.loadMenu = function() {
             .setAnchorPoint(0, 0)
             .setFill('assets/level5.png');
 
+   var btn_help = new lime.Sprite()
+            .setSize(150, 50)
+            .setPosition(600, 300)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/help.png');
+
 
     var tower_imagen = new lime.Sprite()
             .setSize(200, 200)
@@ -110,25 +116,26 @@ towerofhanoi.loadMenu = function() {
     scene.appendChild(btn_level4);
     scene.appendChild(btn_level5);
     scene.appendChild(tower_imagen);
+    scene.appendChild(btn_help);
     
     goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(1);
+       towerofhanoi.newGame(3);
    });
   
     goog.events.listen(btn_level2, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(2);
+       towerofhanoi.newGame(4);
    });  
   
    goog.events.listen(btn_level3, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(3);
+       towerofhanoi.newGame(6);
    });  
 
     goog.events.listen(btn_level4, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(4);
+       towerofhanoi.newGame(7);
    }); 
 
     goog.events.listen(btn_level5, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(5);
+       towerofhanoi.newGame(8);
    });
 
     scene.appendChild(layer);
