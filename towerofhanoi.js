@@ -49,7 +49,7 @@ towerofhanoi.loadMenu = function() {
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(20)
-            .setText("Clique no bot\u00e3o verde para continuar") // \u00e3 = ã
+            .setText("Clique no bot\u00e3o para continuar") // \u00e3 = ã
             .setPosition(300, 70);
 
     var bg_gradient = new lime.fill.LinearGradient()
@@ -89,9 +89,16 @@ towerofhanoi.loadMenu = function() {
 
     var btn_level5 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(600, 150)
+            .setPosition(600, 250)
             .setAnchorPoint(0, 0)
-            .setFill('assets/level4.png');
+            .setFill('assets/level5.png');
+
+
+    var tower_imagen = new lime.Sprite()
+            .setSize(200, 200)
+            .setPosition(75, 400)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/tower.gif');
 
     layer.appendChild(background);
     layer.appendChild(title);
@@ -101,6 +108,7 @@ towerofhanoi.loadMenu = function() {
     layer.appendChild(btn_level3);
     layer.appendChild(btn_level4);
     layer.appendChild(btn_level5);
+    layer.appendChild(tower_imagen );
 
     scene.appendChild(layer);
 
