@@ -1,5 +1,6 @@
 goog.provide('towerofhanoi.Game');
 
+var cont_moviments = 0;
 /**
  * Game scene for Tower of Hanoi game.
  */
@@ -52,6 +53,17 @@ towerofhanoi.Game = function(qtyDiscs) {
     layer.appendChild(rightTower);
     layer.appendChild(plataform);
     this.appendChild(layer);
+
+    // label for moviments message
+    var moviments_lbl = new lime.Label().setFontFamily('Trebuchet MS').setFontColor('#4f96ed').setFontSize(24).
+        setPosition(30, 22).setText('Moviments:').setAnchorPoint(0, 0).setFontWeight(700);
+    layer.appendChild(moviments_lbl);
+
+    // moviments message label
+    var moviments = new lime.Label().setFontColor('#fff').setFontSize(92).setText(0).setPosition(30, 40)
+        .setAnchorPoint(0, 0).setFontWeight(700);
+    layer.appendChild(moviments);
+
 
     /* DISCS */
 
