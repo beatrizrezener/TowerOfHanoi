@@ -255,3 +255,12 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
 }
+
+function score(number_of_moviments, qtyDiscs) {
+    var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
+    var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
+    var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
+
+    
+}
+
