@@ -1,11 +1,13 @@
-goog.provide('towerofhanoi.game');
+goog.provide('towerofhanoi.Game');
 
 /**
  * Game scene for Tower of Hanoi game.
  */
 towerofhanoi.Game = function(qtyDiscs) {
-
-    var scene1 = new lime.Scene();
+    lime.Scene.call(this);
+    
+    var layer = new lime.Layer();
+    this.appendChild(layer);
 
     var bg_gradient = new lime.fill.LinearGradient()
             .setDirection(0.5, 0, 0.5, 1)
@@ -15,7 +17,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     var background = new lime.Sprite()
             .setSize(800,640)
             .setPosition(0,0)
-            .setAnchorPoint(0,0)
+            //.setAnchorPoint(0,0)
             .setFill(bg_gradient);
     
     var plataform = new lime.Polygon()
@@ -45,15 +47,15 @@ towerofhanoi.Game = function(qtyDiscs) {
             .setRadius(50);
       
     //add elements in the scene
-    scene1.appendChild(background);
-    scene1.appendChild(leftTower);
-    scene1.appendChild(middleTower);
-    scene1.appendChild(rightTower);
-    scene1.appendChild(plataform);
+    layer.appendChild(background);
+    layer.appendChild(leftTower);
+    layer.appendChild(middleTower);
+    layer.appendChild(rightTower);
+    layer.appendChild(plataform);
     
     /* DISCS */
     
-    var discsLeftTower = createDiscs(scene1, qtyDiscs);
+    var discsLeftTower = createDiscs(this, qtyDiscs);
     var towers = new Array(3);
     towers[0] = discsLeftTower;
     towers[1] = new Array();
@@ -67,7 +69,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     var listenDiscs = function(e) {
         var origin_position = this.getPosition();
         e.swallow(['touchmove', 'mousemove'], function(e) {
-            this.setPosition(this.localToNode(e.position, scene1));
+            this.setPosition(this.localToNode(e.position, this));
         });
         e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
             if(jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT){
@@ -135,7 +137,7 @@ towerofhanoi.Game = function(qtyDiscs) {
             .setPosition(675,25)
             .setAnchorPoint(0,0)
             .setFill('assets/pause.png');
-    scene1.appendChild(btn_pause);
+    this.appendChild(btn_pause);
     
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e){
         towerofhanoi.director.setPaused(true);
@@ -143,8 +145,9 @@ towerofhanoi.Game = function(qtyDiscs) {
     });
     
     // set current scene active
-    towerofhanoi.director.replaceScene(scene1);
+    //towerofhanoi.director.replaceScene(scene1);
 };
+goog.inherits(towerofhanoi.Game, lime.Scene);
 
 function createDiscs(scene, disc_count){
     var max_width  = 180;
@@ -171,7 +174,6 @@ function createDiscs(scene, disc_count){
 
 
 function verifyDiscSize(origin_position,towers,from_tower,to_tower){
-
   if(towers[to_tower].length == 0){
     return true;
   }
@@ -191,7 +193,6 @@ function verifyDiscSize(origin_position,towers,from_tower,to_tower){
   }
   return;
 }
-
 
 function moveDisc(towers, from_tower, to_tower, old_position){
     var from_top_disc = towers[from_tower].pop();
