@@ -45,8 +45,8 @@ var scene1 = new lime.Scene();
    });
     
     scene1.appendChild(background);
-   // scene1.appendChild(btn_level1);
-   // scene1.appendChild(btn_level2);
+    scene1.appendChild(btn_level1);
+    scene1.appendChild(btn_level2);
    
     // set current scene active
     director.replaceScene(scene1);
