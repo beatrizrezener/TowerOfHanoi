@@ -1,80 +1,12 @@
-var POSITION_OF_FIRST_DISC = 520;
-var HEIGHT_OF_DISCS = 40;
-var DISTANCE_BETWEEN_TOWERS = 200;
-var NO_SUCH_OBJECT = -1;
+goog.provide('towerofhanoi.Game');
 
-//set main namespace
-goog.provide('towerofhanoi');
-
-//get requirements
-goog.require('lime.Director');
-goog.require('lime.Scene');
-goog.require('lime.Sprite');
-goog.require('lime.RoundedRect');
-goog.require('lime.fill.LinearGradient'); //Classe inclu�da para criar o gradiente do c�u
-goog.require('lime.Polygon');
-goog.require('lime.animation.MoveTo');
-goog.require('lime.animation.Loop');
-goog.require('lime.animation.RotateBy');
-goog.require('lime.animation.ScaleTo');
-
-towerofhanoi.inicio2 = function(){
-
-var director = new lime.Director(document.body, 800, 640);
-    director.makeMobileWebAppCapable();
-    director.setDisplayFPS(false);
-
-var scene1 = new lime.Scene();
-   // layer = new lime.Layer().setPosition(rb.WIDTH / 2, 0);
-
-    var bg_gradient = new lime.fill.LinearGradient()
-            .setDirection(0.5, 0, 0.5, 1)
-            .addColorStop(0, '#F0F8FF')
-            .addColorStop(1, '#8470FF');
+/**
+ * Game scene for Tower of Hanoi game.
+ */
+towerofhanoi.Game = function(qtyDiscs) {
+    lime.Scene.call(this);
     
-    var background = new lime.Sprite()
-            .setSize(800,640)
-            .setPosition(0,0)
-            .setAnchorPoint(0,0)
-            .setFill(bg_gradient);
-   
-   var btn_level1 = new lime.Sprite()
-            .setSize(100,100)
-            .setPosition(675,25)
-            .setAnchorPoint(0,0)
-            .setFill('assets/imagemVerde.png');
-
-    var btn_level2 = new lime.Sprite()
-            .setSize(100,100)
-            .setPosition(500,25)
-            .setAnchorPoint(0,0)
-            .setFill('assets/images.jpg');
- 
-
-        
-   alert("Clique na tela para inciar o jogo");
-
-   goog.events.listen(btn_level1, 'click', function() {
-	  towerofhanoi.start();
-   });
-    
-    scene1.appendChild(background);
-    scene1.appendChild(btn_level1);
-    scene1.appendChild(btn_level2);
-   
-    // set current scene active
-    director.replaceScene(scene1);
-    
-};
-
-
-towerofhanoi.start = function() {
-
-    var director = new lime.Director(document.body, 800, 640);
-    director.makeMobileWebAppCapable();
-    director.setDisplayFPS(false);
-
-    var scene1 = new lime.Scene();
+    var layer = new lime.Layer();
 
     var bg_gradient = new lime.fill.LinearGradient()
             .setDirection(0.5, 0, 0.5, 1)
@@ -114,16 +46,16 @@ towerofhanoi.start = function() {
             .setRadius(50);
       
     //add elements in the scene
-    scene1.appendChild(background);
-    scene1.appendChild(leftTower);
-    scene1.appendChild(middleTower);
-    scene1.appendChild(rightTower);
-    scene1.appendChild(plataform);
+    layer.appendChild(background);
+    layer.appendChild(leftTower);
+    layer.appendChild(middleTower);
+    layer.appendChild(rightTower);
+    layer.appendChild(plataform);
+    this.appendChild(layer);
     
     /* DISCS */
-    var qty_discs = 4; //É necessário capturar esse valor quando o jogador escolher o nível!!
     
-    var discsLeftTower = createDiscs(scene1, qty_discs);
+    var discsLeftTower = createDiscs(layer, qtyDiscs);
     var towers = new Array(3);
     towers[0] = discsLeftTower;
     towers[1] = new Array();
@@ -134,10 +66,10 @@ towerofhanoi.start = function() {
       this.getPosition().x == towers[0][towers[0].length - 1].getPosition().x
     }
 
-    var game = function(e) {
+    var listenDiscs = function(e) {
       var origin_position = this.getPosition();
       e.swallow(['touchmove', 'mousemove'], function(e) {
-        this.setPosition(this.localToNode(e.position, scene1));
+        this.setPosition(this.localToNode(e.position, layer));
       });
 
       e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
@@ -244,11 +176,11 @@ towerofhanoi.start = function() {
         }
       });
       e.event.stopPropagation();
-    }
-
+    };
+    
     /* MAKING DISCS LISTENABLE */
-    for(var c = 0; c < qty_discs; c++){
-       goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], game);
+    for(var c = 0; c < qtyDiscs; c++){
+       goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], listenDiscs);
     }
     
     /* PAUSE */
@@ -257,18 +189,17 @@ towerofhanoi.start = function() {
             .setPosition(675,25)
             .setAnchorPoint(0,0)
             .setFill('assets/pause.png');
-    scene1.appendChild(btn_pause);
+    this.appendChild(btn_pause);
     
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e){
-        director.setPaused(true);
+        towerofhanoi.director.setPaused(true);
         lime.updateDirtyObjects(); //acrescentei para resolver bug relatado em: https://groups.google.com/forum/?fromgroups=#!topic/limejs/pFxUh_VoFF8
     });
     
-    // set current scene active
-    director.replaceScene(scene1);
 };
+goog.inherits(towerofhanoi.Game, lime.Scene);
 
-function createDiscs(scene, disc_count){
+function createDiscs(layer, disc_count){
     var max_width  = 180;
     var min_width  = 70;
     var width_step = (max_width - min_width)/(disc_count - 1);
@@ -283,7 +214,7 @@ function createDiscs(scene, disc_count){
     for (var i = 0; i < disc_count; ++i) {
         var disc = new lime.RoundedRect().setSize(width,height).setPosition(x,y).setAnchorPoint(0,0).setFill(colors[i]).setRadius(10);
         discs.push(disc);
-        scene.appendChild(disc);
+        layer.appendChild(disc);
         x = x + x_step;
         width = width - width_step;
         y = y - height;
@@ -293,7 +224,6 @@ function createDiscs(scene, disc_count){
 
 
 function verifyDiscSize(origin_position,towers,from_tower,to_tower){
-
   if(towers[to_tower].length == 0){
     return true;
   }
@@ -313,7 +243,6 @@ function verifyDiscSize(origin_position,towers,from_tower,to_tower){
   }
   return;
 }
-
 
 function moveDisc(towers, from_tower, to_tower, old_position){
     var from_top_disc = towers[from_tower].pop();
