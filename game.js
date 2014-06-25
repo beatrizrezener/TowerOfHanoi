@@ -75,32 +75,25 @@ towerofhanoi.Game = function(qtyDiscs) {
      return [tower,0];
     }//}}}
 
-    var listenDiscs = function(e) {
-        var origin_position = this.getPosition();
-        e.swallow(['touchmove', 'mousemove'], function(e) {
-            this.setPosition(this.localToNode(e.position, layer));
-        });
+    function checkTowerPositToMoveDisk(actual_disk,actual_tower){
+      var list_tower  = []
+        alert("value pink: " + actual_disk.getPosition().x);
+      if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
+        list_tower = [actual_tower,1,actual_disk.getSize().width]; 
+        return list_tower;
+      }
+      else if(parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630){
+        list_tower = [actual_tower,2,actual_disk.getSize().width];
+        return list_tower;
+      }
+      else if(parseInt(actual_disk.getPosition().x) > -60  && parseInt(actual_disk.getPosition().x) < 200){
+        list_tower = [actual_tower,0,actual_disk.getSize().width];
+        return list_tower;
+      }
+      return [actual_tower,0,actual_disck.getSize().width];
+    }
 
-        e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
-            function checkTowerPositToMoveDisk(actual_disk,actual_tower){//{{{
-                var list_tower  = []
-                alert("value pink: " + actual_disk.getPosition().x);
-                if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
-                  list_tower = [actual_tower,1,actual_disk.getSize().width]; 
-                  return list_tower;
-                }
-                else if(parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630){
-                  list_tower = [actual_tower,2,actual_disk.getSize().width];
-                  return list_tower;
-                }
-                else if(parseInt(actual_disk.getPosition().x) > -60  && parseInt(actual_disk.getPosition().x) < 200){
-                  list_tower = [actual_tower,0,actual_disk.getSize().width];
-                  return list_tower;
-                }
-            return [actual_tower,0,actual_disck.getSize().width];
-            }//}}}
-
-    function moveOnlyFromTop(list_tower,disck_to_move,origin_position,e) {//{{{
+    function moveOnlyFromTop(list_tower,disck_to_move,origin_position,e) {
         disk_of_top  = towers[list_tower[0]][towers[list_tower[0]].length - 1];
         var disk_to_move_size = list_tower[2];
         alert("size 1: " + disk_to_move_size);
@@ -115,7 +108,15 @@ towerofhanoi.Game = function(qtyDiscs) {
                 disck_to_move.runAction(move);
             });
         }
-    }//}}}
+    }
+    var listenDiscs = function(e) {
+        var origin_position = this.getPosition();
+        e.swallow(['touchmove', 'mousemove'], function(e) {
+            this.setPosition(this.localToNode(e.position, layer));
+        });
+
+        e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
+
             if (jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT) {
               var list = [];
               list = checkTowerPositToMoveDisk(this,0);
@@ -128,38 +129,10 @@ towerofhanoi.Game = function(qtyDiscs) {
 
            }
             else if (jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT) {
-                if (parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200) {
-                    if (this.getPosition().x === towers[2][towers[2].length - 1].getPosition().x && verifyDiscSize(towers, 2, 0)) {
-                        moveDisc(towers, 2, 0, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420) {
-                    if (this.getPosition().x === towers[2][towers[2].length - 1].getPosition().x && verifyDiscSize(towers, 2, 1)) {
-                        moveDisc(towers, 2, 1, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (this.getPosition().x === towers[2][towers[2].length - 1].getPosition().x && verifyDiscSize(towers, 2, 2)) {
-                    moveDisc(towers, 2, 2, origin_position);
-                }
-                else {
-                    e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                        var move = new lime.animation.MoveTo(origin_position);
-                        this.runAction(move);
-                    });
-                }
-            }
+              var list = [];
+              list = checkTowerPositToMoveDisk(this,2);
+              moveOnlyFromTop(list,this,origin_position,e);
+           }
         });
         e.event.stopPropagation();
     };
