@@ -1,5 +1,7 @@
 goog.provide('towerofhanoi.Game');
 
+goog.require('towerofhanoi.Disc');
+
 var cont_moviments = 0;
 /**
  * Game scene for Tower of Hanoi game.
@@ -66,8 +68,9 @@ towerofhanoi.Game = function(qtyDiscs) {
 
 
     /* DISCS */
-
-    var discsLeftTower = createDiscs(layer, qtyDiscs);
+    var mydiscs = new towerofhanoi.Disc(layer, 4);
+    var discsLeftTower = mydiscs.getDiscs();
+    
     var towers = new Array(3);
     towers[0] = discsLeftTower;
     towers[1] = new Array();
@@ -88,7 +91,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     }
 
     function checkTowerPositToMoveDisk(actual_disk,actual_tower){
-      var list_tower  = []
+      var list_tower  = [];
       if(parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420){
         list_tower = [actual_tower,1,actual_disk.getSize().width]; 
         return list_tower;
@@ -171,30 +174,6 @@ function incrementMoviments(moviments){
     cont_moviments += 1;
     moviments.setText(cont_moviments );
 };
-
-function createDiscs(layer, disc_count) {
-    var max_width = 180;
-    var min_width = 70;
-    var width_step = (max_width - min_width) / (disc_count - 1);
-    var x_step = width_step / 2;
-    var height = HEIGHT_OF_DISCS;
-    var width = max_width;
-    var x = 107.5;
-    var y = 560 - height;
-    var discs = new Array();
-    var colors = ['#FF0000', '#33ff33', '#0000FF', '#FF00FF', '#FFFF00', '#000000', '#00FFFF'];
-
-    for (var i = 0; i < disc_count; ++i) {
-        var disc = new lime.RoundedRect().setSize(width, height).setPosition(x, y).setAnchorPoint(0, 0).setFill(colors[i]).setRadius(10);
-        discs.push(disc);
-        layer.appendChild(disc);
-        x = x + x_step;
-        width = width - width_step;
-        y = y - height;
-    }
-    return discs;
-}
-
 
 function verifyDiscSize(towers, from_tower, to_tower) {
     if (towers[to_tower].length === 0) {
