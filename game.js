@@ -7,7 +7,6 @@ towerofhanoi.Game = function(qtyDiscs) {
     lime.Scene.call(this);
     
     var layer = new lime.Layer();
-    this.appendChild(layer);
 
     var bg_gradient = new lime.fill.LinearGradient()
             .setDirection(0.5, 0, 0.5, 1)
@@ -17,7 +16,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     var background = new lime.Sprite()
             .setSize(800,640)
             .setPosition(0,0)
-            //.setAnchorPoint(0,0)
+            .setAnchorPoint(0,0)
             .setFill(bg_gradient);
     
     var plataform = new lime.Polygon()
@@ -52,10 +51,11 @@ towerofhanoi.Game = function(qtyDiscs) {
     layer.appendChild(middleTower);
     layer.appendChild(rightTower);
     layer.appendChild(plataform);
+    this.appendChild(layer);
     
     /* DISCS */
     
-    var discsLeftTower = createDiscs(this, qtyDiscs);
+    var discsLeftTower = createDiscs(layer, qtyDiscs);
     var towers = new Array(3);
     towers[0] = discsLeftTower;
     towers[1] = new Array();
@@ -69,7 +69,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     var listenDiscs = function(e) {
         var origin_position = this.getPosition();
         e.swallow(['touchmove', 'mousemove'], function(e) {
-            this.setPosition(this.localToNode(e.position, this));
+            this.setPosition(this.localToNode(e.position, layer));
         });
         e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
             if(jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT){
@@ -149,7 +149,7 @@ towerofhanoi.Game = function(qtyDiscs) {
 };
 goog.inherits(towerofhanoi.Game, lime.Scene);
 
-function createDiscs(scene, disc_count){
+function createDiscs(layer, disc_count){
     var max_width  = 180;
     var min_width  = 70;
     var width_step = (max_width - min_width)/(disc_count - 1);
@@ -164,7 +164,7 @@ function createDiscs(scene, disc_count){
     for (var i = 0; i < disc_count; ++i) {
         var disc = new lime.RoundedRect().setSize(width,height).setPosition(x,y).setAnchorPoint(0,0).setFill(colors[i]).setRadius(10);
         discs.push(disc);
-        scene.appendChild(disc);
+        layer.appendChild(disc);
         x = x + x_step;
         width = width - width_step;
         y = y - height;
