@@ -183,11 +183,23 @@ towerofhanoi.help = function() {
             .setPosition(0, 0)
             .setAnchorPoint(0, 0)
             .setFill(bg_gradient);
+    
+    var btn_menu = new lime.Sprite()
+            .setSize(150, 50)
+            .setPosition(625, 575)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/help.fw.png');
 
    
       scene.appendChild(background);
       scene.appendChild(title);
       scene.appendChild(text);
+      scene.appendChild(btn_menu);
+  
+   goog.events.listen(btn_menu, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.loadMenu();
+    })
+
       
      towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
 };
