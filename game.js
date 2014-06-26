@@ -27,7 +27,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     .setFill(bg_gradient);
 
   var plataform = new lime.Polygon()
-    .setPosition(100, 560)
+    .setPosition(100, 530)
     .setAnchorPoint(0, 0)
     .setFill('assets/metal.jpg')
     .addPoints(-30, 30, 0, 0, 600, 0, 630, 30, -30, 30);
@@ -35,19 +35,19 @@ towerofhanoi.Game = function(qtyDiscs) {
     /* BASES */
     var leftTower = new lime.RoundedRect()
             .setSize(15, 400)
-            .setPosition(190, 165)
+            .setPosition(190, 135)
             .setAnchorPoint(0, 0)
             .setFill('assets/metal.png')
             .setRadius(50);
     var middleTower = new lime.RoundedRect()
             .setSize(15, 400)
-            .setPosition(390, 165)
+            .setPosition(390, 135)
             .setAnchorPoint(0, 0)
             .setFill('assets/metal.png')
             .setRadius(50);
     var rightTower = new lime.RoundedRect()
             .setSize(15, 400)
-            .setPosition(590, 165)
+            .setPosition(590, 135)
             .setAnchorPoint(0, 0)
             .setFill('assets/metal.png')
             .setRadius(50);
@@ -62,8 +62,8 @@ towerofhanoi.Game = function(qtyDiscs) {
 
     /* PAUSE */
     var btn_pause = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(675, 25)
+            .setSize(65, 65)
+            .setPosition(720, 20)
             .setAnchorPoint(0, 0)
             .setFill('assets/pause.png');
     layer.appendChild(btn_pause);
@@ -75,7 +75,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     /* REPLAY */
     var btn_replay = new lime.Sprite()
             .setSize(65, 65)
-            .setPosition(600, 35)
+            .setPosition(640, 20)
             .setAnchorPoint(0, 0)
             .setFill('assets/replay.png');
     layer.appendChild(btn_replay);
@@ -85,7 +85,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     /* BACK */
     var btn_back = new lime.Sprite()
             .setSize(65, 65)
-            .setPosition(1, 575)
+            .setPosition(20, 575)
             .setAnchorPoint(0, 0)
             .setFill('assets/back.png');
     layer.appendChild(btn_back);

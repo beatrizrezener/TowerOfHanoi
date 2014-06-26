@@ -1,4 +1,4 @@
-var POSITION_OF_FIRST_DISC = 520;
+var POSITION_OF_FIRST_DISC = 490;
 var HEIGHT_OF_DISCS = 40;
 var DISTANCE_BETWEEN_TOWERS = 200;
 var NO_SUCH_OBJECT = -1;
@@ -41,10 +41,22 @@ towerofhanoi.loadMenu = function() {
         var scene = new lime.Scene(),
 	    layer = new lime.Layer().setPosition(WIDTH / 2, 0);
 
+        var bg_gradient = new lime.fill.LinearGradient()
+            .setDirection(0.5, 0, 0.5, 1)
+            .addColorStop(0, '#F0F8FF')
+            .addColorStop(1, '#8470FF');
+
+        var background = new lime.Sprite()
+            .setSize(800, 640)
+            .setPosition(0, 0)
+            .setAnchorPoint(0, 0)
+            .setFill(bg_gradient);
+        scene.appendChild(background);
+
+
 	var title = new lime.Sprite().setFill('assets/inicial.jpg').setPosition(0, 160);
 	title.qualityRenderer = true;
 	layer.appendChild(title);
-
 
 	var btns = new lime.Layer().setPosition(0, 120);
 	layer.appendChild(btns);

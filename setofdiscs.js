@@ -15,7 +15,7 @@ towerofhanoi.SetOfDiscs = function(layer, disc_count) {
     var x_step = width_step / 2;
     var width = MAX_WIDTH;
     var x = 107.5;
-    var y = 560 - HEIGHT;
+    var y = 530 - HEIGHT;
     this.discs = new Array();
     var colors = ['#FF0000', '#33ff33', '#0000FF', '#FF00FF', '#FFFF00', '#000000', '#00FFFF'];
 
