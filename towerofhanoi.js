@@ -19,6 +19,7 @@ goog.require('lime.animation.Loop');
 goog.require('lime.animation.RotateBy');
 goog.require('lime.animation.ScaleTo');
 goog.require('towerofhanoi.Game');
+goog.require('towerofhanoi.PauseScene');
 
 
 var WIDTH = 800;
@@ -107,9 +108,9 @@ towerofhanoi.loadMenu = function() {
     goog.events.listen(scene, ['mousedown', 'touchstart'], function(e) {
        towerofhanoi.newGame(5);
    });
-
+    towerofhanoi.director.pauseClassFactory = towerofhanoi.PauseScene; 
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
-
+    
 };
 
 // load new game scene
@@ -117,4 +118,8 @@ towerofhanoi.newGame = function(qtyDiscs) {
     var scene = new towerofhanoi.Game(qtyDiscs);
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
 //        towerofhanoi.Game(qtyDiscs);
+};
+
+towerofhanoi.pause = function(){
+	towerofhanoi.director.setPaused(true);
 };

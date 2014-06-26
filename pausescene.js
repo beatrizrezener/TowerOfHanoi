@@ -1,19 +1,15 @@
-goog.provide('lime.helper.PauseScene');
+goog.provide('towerofhanoi.PauseScene');
 
 goog.require('lime.Label');
 goog.require('lime.Scene');
 goog.require('lime.Sprite');
 
-// OBS: Substitua o arquivo do caminho 'lime\src\helper\pausescene.js' por este.
-
 /**
- * 
- * 
  * PauseScene. This scene appears when director is paused.
  * @constructor
  * @extends lime.Scene
  */
-lime.helper.PauseScene = function() {
+towerofhanoi.PauseScene = function() {
     lime.Scene.call(this);
 
     this.domElement.style.cssText = 'background:rgba(255,255,255,.8)';
@@ -29,4 +25,4 @@ lime.helper.PauseScene = function() {
     });
     
 };
-goog.inherits(lime.helper.PauseScene, lime.Scene);
+goog.inherits(towerofhanoi.PauseScene, lime.Scene);
