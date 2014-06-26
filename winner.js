@@ -3,7 +3,7 @@ goog.require('towerofhanoi.Game');
 
 
 towerofhanoi.verifyWinner = function (towers, to_tower, n_disks) {
-    if (towers[to_tower].length == n_disks && towers[towers] != 0) {
+    if (towers[to_tower].length == n_disks && to_tower != 0) {
       var scene = new lime.Scene();
 
       var layer = new lime.Layer();
