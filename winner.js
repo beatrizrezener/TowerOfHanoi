@@ -39,7 +39,7 @@ towerofhanoi.verifyWinner = function (towers, to_tower, n_disks) {
 
       this.director.replaceScene(scene);
     goog.events.listen(continue_play, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.newGame(n_disks);
+        towerofhanoi.Game.playAgain(n_disks);
     });
     goog.events.listen(back_to_menu, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();

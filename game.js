@@ -81,7 +81,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     layer.appendChild(btn_replay);
     goog.events.listen(btn_replay, ['mousedown', 'touchstart'], function(e) {
         if(confirm("Restart the game?")){
-            towerofhanoi.newGame(qtyDiscs);
+            towerofhanoi.Game.playAgain(qtyDiscs);
         } else {
             //Nothing to do
         }
@@ -260,4 +260,9 @@ function score(number_of_moviments, qtyDiscs) {
             .setFill('assets/one_star.png');
         this.appendChild(one_star);
     }
+}
+
+towerofhanoi.Game.playAgain = function(qtyDiscs) {
+     cont_moviments = 0;
+     towerofhanoi.newGame(qtyDiscs);
 }
