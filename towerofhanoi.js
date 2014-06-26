@@ -19,6 +19,7 @@ goog.require('lime.animation.Loop');
 goog.require('lime.animation.RotateBy');
 goog.require('lime.animation.ScaleTo');
 goog.require('towerofhanoi.Game');
+goog.require('towerofhanoi.PauseScene');
 
 
 var WIDTH = 800;
@@ -35,8 +36,7 @@ towerofhanoi.start = function() {
 };
 
 towerofhanoi.loadMenu = function() {
-    var scene = new lime.Scene(),
-            layer = new lime.Layer().setPosition(towerofhanoi.WIDTH / 2, 0);
+    var scene = new lime.Scene();
 
     var title = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
@@ -44,9 +44,8 @@ towerofhanoi.loadMenu = function() {
             .setFontSize(28)
             .setText("Tower of Hanoi")
             .setPosition(300, 22);
-    scene.appendChild(title);
-    
-   var text = new lime.Label().setAlign('center')
+
+    var text = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(20)
@@ -75,7 +74,7 @@ towerofhanoi.loadMenu = function() {
             .setPosition(600, 100)
             .setAnchorPoint(0, 0)
             .setFill('assets/level2.png');
-    
+
     var btn_level3 = new lime.Sprite()
             .setSize(150, 50)
             .setPosition(600, 150)
@@ -94,7 +93,7 @@ towerofhanoi.loadMenu = function() {
             .setAnchorPoint(0, 0)
             .setFill('assets/level5.png');
 
-   var btn_help = new lime.Sprite()
+    var btn_help = new lime.Sprite()
             .setSize(150, 50)
             .setPosition(600, 300)
             .setAnchorPoint(0, 0)
@@ -117,36 +116,42 @@ towerofhanoi.loadMenu = function() {
     scene.appendChild(btn_level5);
     scene.appendChild(tower_imagen);
     scene.appendChild(btn_help);
-    
+
     goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(3);
-   });
-  
+        towerofhanoi.newGame(3);
+    });
+
     goog.events.listen(btn_level2, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(4);
-   });  
-  
-   goog.events.listen(btn_level3, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(6);
-   });  
+        towerofhanoi.newGame(4);
+    });
+
+    goog.events.listen(btn_level3, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.newGame(5);
+    });
 
     goog.events.listen(btn_level4, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(7);
-   }); 
+        towerofhanoi.newGame(6);
+    });
 
     goog.events.listen(btn_level5, ['mousedown', 'touchstart'], function(e) {
-       towerofhanoi.newGame(8);
-   });
-
-    scene.appendChild(layer);
+        towerofhanoi.newGame(7);
+    });
 
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
-    
+
 };
 
 // load new game scene
 towerofhanoi.newGame = function(qtyDiscs) {
     var scene = new towerofhanoi.Game(qtyDiscs);
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
-//        towerofhanoi.Game(qtyDiscs);
+};
+
+towerofhanoi.pause = function() {
+    towerofhanoi.director.setPaused(true);
+    lime.updateDirtyObjects(); //acrescentei para resolver bug relatado em: https://groups.google.com/forum/?fromgroups=#!topic/limejs/pFxUh_VoFF8
+};
+
+towerofhanoi.play = function() {
+    towerofhanoi.director.setPaused(false);
 };

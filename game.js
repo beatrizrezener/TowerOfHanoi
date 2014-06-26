@@ -1,9 +1,14 @@
 goog.provide('towerofhanoi.Game');
+goog.require('towerofhanoi.Disc');
 
+var cont_moviments = 0;
 /**
  * Game scene for Tower of Hanoi game.
  */
+
+
 towerofhanoi.Game = function(qtyDiscs) {
+
     lime.Scene.call(this);
 
     var layer = new lime.Layer();
@@ -53,16 +58,59 @@ towerofhanoi.Game = function(qtyDiscs) {
     layer.appendChild(plataform);
     this.appendChild(layer);
 
-    /* DISCS */
+    // label for moviments message
+    var moviments_lbl = new lime.Label().setFontFamily('Trebuchet MS').setFontColor('#4f96ed').setFontSize(24).
+            setPosition(30, 22).setText('Moviments:').setAnchorPoint(0, 0).setFontWeight(700);
+    layer.appendChild(moviments_lbl);
 
-    var discsLeftTower = createDiscs(layer, qtyDiscs);
+    // moviments message label
+    var moviments = new lime.Label().setFontColor('#fff').setFontSize(92).setText(0).setPosition(30, 40)
+            .setAnchorPoint(0, 0).setFontWeight(700);
+    layer.appendChild(moviments);
+
+
+    /* DISCS */
+    var mydiscs = new towerofhanoi.Disc(layer, qtyDiscs);
+    var discsLeftTower = mydiscs.getDiscs();
+
     var towers = new Array(3);
     towers[0] = discsLeftTower;
     towers[1] = new Array();
     towers[2] = new Array();
 
-    function moveOnlyFromTop(origin_position, towers, from_tower) {
-        this.getPosition().x === towers[0][towers[0].length - 1].getPosition().x
+    /* validation methods */
+
+    function checkTowerPositToMoveDisk(actual_disk, actual_tower) {
+        var list_tower = [];
+        if (parseInt(actual_disk.getPosition().x) > 220 && parseInt(actual_disk.getPosition().x) < 420) {
+            list_tower = [actual_tower, 1, actual_disk.getSize().width];
+            return list_tower;
+        }
+        else if (parseInt(actual_disk.getPosition().x) > 430 && parseInt(actual_disk.getPosition().x) < 630) {
+            list_tower = [actual_tower, 2, actual_disk.getSize().width];
+            return list_tower;
+        }
+        else if (parseInt(actual_disk.getPosition().x) > -60 && parseInt(actual_disk.getPosition().x) < 200) {
+            list_tower = [actual_tower, 0, actual_disk.getSize().width];
+            return list_tower;
+        }
+        return [actual_tower, 0, actual_disck.getSize().width];
+    }
+
+
+    function moveOnlyFromTop(towers, list_tower, disck_to_move, origin_position, e) {
+        disk_of_top = towers[list_tower[0]][towers[list_tower[0]].length - 1];
+        var disk_to_move_size = list_tower[2];
+        if (parseInt(disk_to_move_size) === parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers, list_tower[0], list_tower[1])) {
+            moveDisc(towers, list_tower[0], list_tower[1], origin_position);
+            incrementMoviments(moviments);
+        }
+        else {
+            e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
+                var move = new lime.animation.MoveTo(origin_position);
+                disck_to_move.runAction(move);
+            });
+        }
     }
 
     var listenDiscs = function(e) {
@@ -72,106 +120,22 @@ towerofhanoi.Game = function(qtyDiscs) {
         });
 
         e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
+
             if (jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT) {
-                if (parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420) {
-                    if (this.getPosition().x === towers[0][towers[0].length - 1].getPosition().x && verifyDiscSize(towers, 0, 1)) {
-                        moveDisc(towers, 0, 1, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630) {
-                    if (this.getPosition().x === towers[0][towers[0].length - 1].getPosition().x && verifyDiscSize(towers, 0, 2)) {
-                        moveDisc(towers, 0, 2, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (this.getPosition().x === towers[0][towers[0].length - 1].getPosition().x && verifyDiscSize(towers, 0, 0)) {
-                    moveDisc(towers, 0, 0, origin_position);
-                }
-                else {
-                    e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                        var move = new lime.animation.MoveTo(origin_position);
-                        this.runAction(move);
-                    });
-                }
+                var list = [];
+                list = checkTowerPositToMoveDisk(this, 0);
+                moveOnlyFromTop(towers, list, this, origin_position, e);
             }
             else if (jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT) {
-                if (parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200) {
-                    if (this.getPosition().x === towers[1][towers[1].length - 1].getPosition().x && verifyDiscSize(towers, 1, 0)) {
-                        moveDisc(towers, 1, 0, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (parseInt(this.getPosition().x) > 430 && parseInt(this.getPosition().x) < 630) {
-                    if (this.getPosition().x === towers[1][towers[1].length - 1].getPosition().x && verifyDiscSize(towers, 1, 2)) {
-                        moveDisc(towers, 1, 2, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (this.getPosition().x === towers[1][towers[1].length - 1].getPosition().x && verifyDiscSize(towers, 1, 1)) {
-                    moveDisc(towers, 1, 1, origin_position);
-                }
-                else {
-                    e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                        alert("entrou");
-                        var move = new lime.animation.MoveTo(origin_position);
-                        this.runAction(move);
-                    });
-                }
+                var list = [];
+                list = checkTowerPositToMoveDisk(this, 1);
+                moveOnlyFromTop(towers, list, this, origin_position, e);
 
             }
             else if (jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT) {
-                if (parseInt(this.getPosition().x) > -60 && parseInt(this.getPosition().x) < 200) {
-                    if (this.getPosition().x === towers[2][towers[2].length - 1].getPosition().x && verifyDiscSize(towers, 2, 0)) {
-                        moveDisc(towers, 2, 0, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (parseInt(this.getPosition().x) > 220 && parseInt(this.getPosition().x) < 420) {
-                    if (this.getPosition().x === towers[2][towers[2].length - 1].getPosition().x && verifyDiscSize(towers, 2, 1)) {
-                        moveDisc(towers, 2, 1, origin_position);
-                    }
-                    else {
-                        e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                            var move = new lime.animation.MoveTo(origin_position);
-                            this.runAction(move);
-                        });
-                    }
-                }
-                else if (this.getPosition().x === towers[2][towers[2].length - 1].getPosition().x && verifyDiscSize(towers, 2, 2)) {
-                    moveDisc(towers, 2, 2, origin_position);
-                }
-                else {
-                    e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
-                        var move = new lime.animation.MoveTo(origin_position);
-                        this.runAction(move);
-                    });
-                }
+                var list = [];
+                list = checkTowerPositToMoveDisk(this, 2);
+                moveOnlyFromTop(towers, list, this, origin_position, e);
             }
         });
         e.event.stopPropagation();
@@ -191,36 +155,17 @@ towerofhanoi.Game = function(qtyDiscs) {
     this.appendChild(btn_pause);
 
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.director.setPaused(true);
-        lime.updateDirtyObjects(); //acrescentei para resolver bug relatado em: https://groups.google.com/forum/?fromgroups=#!topic/limejs/pFxUh_VoFF8
+        towerofhanoi.pause();
     });
 
 };
 goog.inherits(towerofhanoi.Game, lime.Scene);
 
-function createDiscs(layer, disc_count) {
-    var max_width = 180;
-    var min_width = 70;
-    var width_step = (max_width - min_width) / (disc_count - 1);
-    var x_step = width_step / 2;
-    var height = HEIGHT_OF_DISCS;
-    var width = max_width;
-    var x = 107.5;
-    var y = 560 - height;
-    var discs = new Array();
-    var colors = ['#FF0000', '#33ff33', '#0000FF', '#FF00FF', '#FFFF00', '#000000', '#00FFFF'];
-
-    for (var i = 0; i < disc_count; ++i) {
-        var disc = new lime.RoundedRect().setSize(width, height).setPosition(x, y).setAnchorPoint(0, 0).setFill(colors[i]).setRadius(10);
-        discs.push(disc);
-        layer.appendChild(disc);
-        x = x + x_step;
-        width = width - width_step;
-        y = y - height;
-    }
-    return discs;
+function incrementMoviments(moviments) {
+    cont_moviments += 1;
+    moviments.setText(cont_moviments);
 }
-
+;
 
 function verifyDiscSize(towers, from_tower, to_tower) {
     if (towers[to_tower].length === 0) {
@@ -244,6 +189,7 @@ function verifyDiscSize(towers, from_tower, to_tower) {
     return;
 }
 
+
 function moveDisc(towers, from_tower, to_tower, old_position) {
     var from_top_disc = towers[from_tower].pop();
     var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
@@ -254,35 +200,12 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .MoveTo(new_position_x, new_position_y)
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
+    verifyWinner(towers, to_tower, 4);
 }
 
-function score(number_of_moviments, qtyDiscs) {
-    var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
-    var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
-    var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
+function verifyWinner(towers, to_tower, n_disks) {
+    if (towers[to_tower].length == n_disks && towers[towers] != 0) {
+        var scene = new lime.Scene();
 
-    if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
-        var three_stars = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(350, 250)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/three_stars.png');
-        this.appendChild(three_stars);
-    }
-    if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){
-        var two_stars = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(350, 250)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/two_stars.png');
-        this.appendChild(two_stars);
-    }
-    if(number_of_moviments >= number_moviments_one_star){
-        var one_star = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(350, 250)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/one_star.png');
-        this.appendChild(one_star);
     }
 }
