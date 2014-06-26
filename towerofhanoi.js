@@ -12,7 +12,6 @@ goog.require('lime.Scene');
 goog.require('lime.Sprite');
 goog.require('lime.RoundedRect');
 goog.require('lime.Layer');
-goog.require('lime.fill.LinearGradient'); //Classe inclu�da para criar o gradiente do c�u
 goog.require('lime.Polygon');
 goog.require('lime.animation.MoveTo');
 goog.require('lime.animation.Loop');
@@ -40,19 +39,6 @@ towerofhanoi.loadMenu = function() {
     
         var scene = new lime.Scene(),
 	    layer = new lime.Layer().setPosition(WIDTH / 2, 0);
-
-        var bg_gradient = new lime.fill.LinearGradient()
-            .setDirection(0.5, 0, 0.5, 1)
-            .addColorStop(0, '#F0F8FF')
-            .addColorStop(1, '#8470FF');
-
-        var background = new lime.Sprite()
-            .setSize(800, 640)
-            .setPosition(0, 0)
-            .setAnchorPoint(0, 0)
-            .setFill(bg_gradient);
-        scene.appendChild(background);
-
 
 	var title = new lime.Sprite().setFill('assets/inicial.jpg').setPosition(0, 160);
 	title.qualityRenderer = true;
@@ -110,17 +96,6 @@ towerofhanoi.classicMenu = function() {
 //           .setText("Clique no bot\u00e3o para continuar") // \u00e3 = ã
 //            .setPosition(300, 70);
 
-  var bg_gradient = new lime.fill.LinearGradient()
-            .setDirection(0.5, 0, 0.5, 1)
-            .addColorStop(0, '#F0F8FF')
-            .addColorStop(1, '#8470FF');
-
-    var background = new lime.Sprite()
-            .setSize(800, 640)
-            .setPosition(0, 0)
-            .setAnchorPoint(0, 0)
-            .setFill(bg_gradient);
-
     var btn_level1 = new lime.Sprite()
             .setSize(150, 50)
             .setPosition(300, 375)
@@ -170,8 +145,6 @@ towerofhanoi.classicMenu = function() {
             .setAnchorPoint(0, 0)
             .setFill('assets/inicial.jpg');
 
-
-    scene.appendChild(background);
   //  scene.appendChild(title);
   //  scene.appendChild(text);
     scene.appendChild(btn_level1);
@@ -228,18 +201,6 @@ towerofhanoi.help = function() {
             .setFontSize(20)
             .setText("Clique no bot\u00e3o para continuar") // \u00e3 = ã
             .setPosition(300, 70);
-
-       
-    var bg_gradient = new lime.fill.LinearGradient()
-            .setDirection(0.5, 0, 0.5, 1)
-            .addColorStop(0, '#F0F8FF')
-            .addColorStop(1, '#8470FF');
-
-    var background = new lime.Sprite()
-            .setSize(800, 640)
-            .setPosition(0, 0)
-            .setAnchorPoint(0, 0)
-            .setFill(bg_gradient);
     
     var btn_menu = new lime.Sprite()
             .setSize(150, 50)
@@ -247,8 +208,6 @@ towerofhanoi.help = function() {
             .setAnchorPoint(0, 0)
             .setFill('assets/help.fw.png');
 
-   
-      scene.appendChild(background);
       scene.appendChild(title);
       scene.appendChild(text);
       scene.appendChild(btn_menu);

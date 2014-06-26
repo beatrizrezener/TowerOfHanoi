@@ -53,7 +53,7 @@ towerofhanoi.Game = function(qtyDiscs) {
             .setRadius(50);
 
     //add elements in the scene
-    layer.appendChild(background);
+    //layer.appendChild(background);
     layer.appendChild(leftTower);
     layer.appendChild(middleTower);
     layer.appendChild(rightTower);
@@ -96,7 +96,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     // label for moviments message
     var moviments_lbl = new lime.Label()
             .setFontFamily('Trebuchet MS')
-            .setFontColor('#4f96ed')
+            .setFontColor('#483D8B')
             .setFontSize(24)
             .setPosition(30, 22)
             .setText('Moviments:')
