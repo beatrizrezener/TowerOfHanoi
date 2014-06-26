@@ -38,21 +38,22 @@ towerofhanoi.start = function() {
 towerofhanoi.loadMenu = function() {
     var scene = new lime.Scene();
 
-    var title = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setText("Tower of Hanoi")
-            .setPosition(300, 22);
+  //    var title = new lime.Label().setAlign('center')
+//            .setFontFamily('"Trebuchet MS"')
+//            .setFontColor('#000080')
+//            .setFontSize(28)
+//            .setText("Tower of Hanoi")
+//            .setPosition(300, 22);
+ //   scene.appendChild(title);
+    
+//    var text = new lime.Label().setAlign('center')
+//            .setFontFamily('"Trebuchet MS"')
+//            .setFontColor('#000080')
+//            .setFontSize(20)
+//           .setText("Clique no bot\u00e3o para continuar") // \u00e3 = ã
+//            .setPosition(300, 70);
 
-    var text = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(20)
-            .setText("Clique no bot\u00e3o para continuar") // \u00e3 = ã
-            .setPosition(300, 70);
-
-    var bg_gradient = new lime.fill.LinearGradient()
+  var bg_gradient = new lime.fill.LinearGradient()
             .setDirection(0.5, 0, 0.5, 1)
             .addColorStop(0, '#F0F8FF')
             .addColorStop(1, '#8470FF');
@@ -65,50 +66,57 @@ towerofhanoi.loadMenu = function() {
 
     var btn_level1 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(600, 50)
+            .setPosition(300, 375)
             .setAnchorPoint(0, 0)
             .setFill('assets/level1.png');
 
     var btn_level2 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(600, 100)
+            .setPosition(300, 425)
             .setAnchorPoint(0, 0)
             .setFill('assets/level2.png');
-
+    
     var btn_level3 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(600, 150)
+            .setPosition(300, 475)
             .setAnchorPoint(0, 0)
             .setFill('assets/level3.png');
 
     var btn_level4 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(600, 200)
+            .setPosition(300, 525)
             .setAnchorPoint(0, 0)
             .setFill('assets/level4.png');
 
     var btn_level5 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(600, 250)
+            .setPosition(300, 575)
             .setAnchorPoint(0, 0)
             .setFill('assets/level5.png');
 
-    var btn_help = new lime.Sprite()
+   var btn_help = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(600, 300)
+            .setPosition(625, 575)
             .setAnchorPoint(0, 0)
-            .setFill('assets/botao_help.png');
+            .setFill('assets/help.fw.png');
 
 
     var tower_imagen = new lime.Sprite()
-            .setSize(200, 200)
-            .setPosition(75, 400)
+            .setSize(400, 100)
+            .setPosition(150, 40)
             .setAnchorPoint(0, 0)
-            .setFill('assets/tower.gif');
+            .setFill('assets/inicial.jpg');
+
+    var logo = new lime.Sprite()
+            .setSize(200, 400)
+            .setPosition(100, 400)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/inicial.jpg');
+
 
     scene.appendChild(background);
-    scene.appendChild(title);
-    scene.appendChild(text);
+  //  scene.appendChild(title);
+  //  scene.appendChild(text);
     scene.appendChild(btn_level1);
     scene.appendChild(btn_level2);
     scene.appendChild(btn_level3);
