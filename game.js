@@ -58,16 +58,53 @@ towerofhanoi.Game = function(qtyDiscs) {
     layer.appendChild(plataform);
     this.appendChild(layer);
 
+    /* PAUSE */
+    var btn_pause = new lime.Sprite()
+            .setSize(100, 100)
+            .setPosition(675, 25)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/pause.png');
+    layer.appendChild(btn_pause);
+
+    goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.pause();
+    });
+    
+    /* REPLAY */
+    var btn_replay = new lime.Sprite()
+            .setSize(65, 65)
+            .setPosition(600, 35)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/replay.png');
+    layer.appendChild(btn_replay);
+    goog.events.listen(btn_replay, ['mousedown', 'touchstart'], function(e) {
+        if(confirm("Restart the game?")){
+            towerofhanoi.newGame(qtyDiscs);
+        } else {
+            //Nothing to do
+        }
+    });
+    
     // label for moviments message
-    var moviments_lbl = new lime.Label().setFontFamily('Trebuchet MS').setFontColor('#4f96ed').setFontSize(24).
-            setPosition(30, 22).setText('Moviments:').setAnchorPoint(0, 0).setFontWeight(700);
+    var moviments_lbl = new lime.Label()
+            .setFontFamily('Trebuchet MS')
+            .setFontColor('#4f96ed')
+            .setFontSize(24)
+            .setPosition(30, 22)
+            .setText('Moviments:')
+            .setAnchorPoint(0, 0)
+            .setFontWeight(700);
     layer.appendChild(moviments_lbl);
 
     // moviments message label
-    var moviments = new lime.Label().setFontColor('#fff').setFontSize(92).setText(0).setPosition(30, 40)
-            .setAnchorPoint(0, 0).setFontWeight(700);
+    var moviments = new lime.Label()
+            .setFontColor('#fff')
+            .setFontSize(92)
+            .setText(0)
+            .setPosition(30, 40)
+            .setAnchorPoint(0, 0)
+            .setFontWeight(700);
     layer.appendChild(moviments);
-
 
     /* DISCS */
     var setofdiscs = new towerofhanoi.SetOfDiscs(layer, qtyDiscs);
@@ -145,18 +182,6 @@ towerofhanoi.Game = function(qtyDiscs) {
     for (var c = 0; c < qtyDiscs; c++) {
         goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], listenDiscs);
     }
-
-    /* PAUSE */
-    var btn_pause = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(675, 25)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/pause.png');
-    this.appendChild(btn_pause);
-
-    goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.pause();
-    });
 
 };
 goog.inherits(towerofhanoi.Game, lime.Scene);
