@@ -124,8 +124,7 @@ towerofhanoi.loadMenu = function() {
     scene.appendChild(tower_imagen);
     scene.appendChild(btn_help);
 
-   goog.events.listen(btn_help, ['mousedown', 'touchstart'], function(e) {
-      //   towerofhanoi.newGame(3); 
+   goog.events.listen(btn_help, ['mousedown', 'touchstart'], function(e) { 
            towerofhanoi.help();
    });
     goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
