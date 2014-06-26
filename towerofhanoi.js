@@ -137,6 +137,7 @@ towerofhanoi.loadMenu = function() {
         towerofhanoi.newGame(7);
     });
 
+    towerofhanoi.director.pauseClassFactory = towerofhanoi.PauseScene;
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
 
 };
