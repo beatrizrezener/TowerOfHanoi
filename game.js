@@ -157,8 +157,7 @@ function moveOnlyFromTop(towers,list_tower,disck_to_move,origin_position,e) {
     this.appendChild(btn_pause);
 
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.pause();
-        lime.updateDirtyObjects(); //acrescentei para resolver bug relatado em: https://groups.google.com/forum/?fromgroups=#!topic/limejs/pFxUh_VoFF8
+        towerofhanoi.pause();       
     });
 
 };

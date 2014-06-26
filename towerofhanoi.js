@@ -122,4 +122,9 @@ towerofhanoi.newGame = function(qtyDiscs) {
 
 towerofhanoi.pause = function(){
 	towerofhanoi.director.setPaused(true);
+        lime.updateDirtyObjects(); //acrescentei para resolver bug relatado em: https://groups.google.com/forum/?fromgroups=#!topic/limejs/pFxUh_VoFF8
+};
+
+towerofhanoi.play = function(){
+	towerofhanoi.director.setPaused(false);
 };
