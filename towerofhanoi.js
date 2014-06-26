@@ -20,6 +20,7 @@ goog.require('lime.animation.RotateBy');
 goog.require('lime.animation.ScaleTo');
 goog.require('towerofhanoi.Game');
 goog.require('towerofhanoi.PauseScene');
+goog.require('towerofhanoi.Button');
 
 
 var WIDTH = 800;
@@ -36,6 +37,50 @@ towerofhanoi.start = function() {
 };
 
 towerofhanoi.loadMenu = function() {
+    
+        var scene = new lime.Scene(),
+	    layer = new lime.Layer().setPosition(WIDTH / 2, 0);
+
+	var title = new lime.Sprite().setFill('assets/inicial.jpg').setPosition(0, 160);
+	title.qualityRenderer = true;
+	layer.appendChild(title);
+
+
+	var btns = new lime.Layer().setPosition(0, 120);
+	layer.appendChild(btns);
+
+	var btn = towerofhanoi.makeButton('Play Classic').setPosition(0, 200);
+	goog.events.listen(btn, 'click', function() {
+	    //towerofhanoi.usemode = towerofhanoi.Mode.CLASSIC;
+	    towerofhanoi.classicMenu();
+	});
+	btns.appendChild(btn);
+
+	btn = towerofhanoi.makeButton('Play Timed').setPosition(0, 320);
+	goog.events.listen(btn, 'click', function() {
+	    //towerofhanoi.usemode = towerofhanoi.Mode.TIMED;
+	    //alert('timed');
+	});
+	btns.appendChild(btn);
+
+	btn = towerofhanoi.makeButton('Help').setPosition(0, 440);
+	goog.events.listen(btn, 'click', function() {
+	    towerofhanoi.help();
+	});
+	btns.appendChild(btn);
+	scene.appendChild(layer);
+
+	// set current scene active
+	towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
+};
+
+// helper for same size buttons
+towerofhanoi.makeButton = function(text) {
+    var btn = new towerofhanoi.Button(text).setSize(300, 90);
+    return btn;
+};
+
+towerofhanoi.classicMenu = function() {
     var scene = new lime.Scene();
 
   //    var title = new lime.Label().setAlign('center')
@@ -198,7 +243,7 @@ towerofhanoi.help = function() {
   
    goog.events.listen(btn_menu, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();
-    })
+    });
 
       
      towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
