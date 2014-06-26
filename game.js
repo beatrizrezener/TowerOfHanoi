@@ -103,7 +103,7 @@ function moveOnlyFromTop(towers,list_tower,disck_to_move,origin_position,e) {
   var disk_to_move_size = list_tower[2];
   if(parseInt(disk_to_move_size)  === parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers,list_tower[0],list_tower[1])){
     moveDisc(towers,list_tower[0],list_tower[1], origin_position);
-    //incrementMoviments(moviments);
+    incrementMoviments(moviments);
   }
   else {
     e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
@@ -113,102 +113,98 @@ function moveOnlyFromTop(towers,list_tower,disck_to_move,origin_position,e) {
   }
 }
 
+var listenDiscs = function(e) {
+  var origin_position = this.getPosition();
+  e.swallow(['touchmove', 'mousemove'], function(e) {
+    this.setPosition(this.localToNode(e.position, layer));
+  });
 
+  e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
 
-    var listenDiscs = function(e) {
-        var origin_position = this.getPosition();
-        e.swallow(['touchmove', 'mousemove'], function(e) {
-            this.setPosition(this.localToNode(e.position, layer));
-        });
-
-        e.swallow(['touchend', 'touchcancel', 'mouseup'], function() {
-
-            if (jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT) {
-              var list = [];
-              list = checkTowerPositToMoveDisk(this,0);
-              moveOnlyFromTop(towers,list,this,origin_position,e);
-            }
-            else if (jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT) {
-              var list = [];
-              list = checkTowerPositToMoveDisk(this,1);
-              moveOnlyFromTop(towers,list,this,origin_position,e);
-
-           }
-            else if (jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT) {
-              var list = [];
-              list = checkTowerPositToMoveDisk(this,2);
-              moveOnlyFromTop(towers,list,this,origin_position,e);
-           }
-        });
-        e.event.stopPropagation();
-    };
-
-    /* MAKING DISCS LISTENABLE */
-    for (var c = 0; c < qtyDiscs; c++) {
-        goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], listenDiscs);
+    if (jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT) {
+      var list = [];
+      list = checkTowerPositToMoveDisk(this,0);
+      moveOnlyFromTop(towers,list,this,origin_position,e);
     }
+    else if (jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT) {
+      var list = [];
+      list = checkTowerPositToMoveDisk(this,1);
+      moveOnlyFromTop(towers,list,this,origin_position,e);
 
-    /* PAUSE */
-    var btn_pause = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(675, 25)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/pause.png');
-    this.appendChild(btn_pause);
+    }
+    else if (jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT) {
+      var list = [];
+      list = checkTowerPositToMoveDisk(this,2);
+      moveOnlyFromTop(towers,list,this,origin_position,e);
+    }
+  });
+  e.event.stopPropagation();
+};
 
-    goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
+/* MAKING DISCS LISTENABLE */
+for (var c = 0; c < qtyDiscs; c++) {
+  goog.events.listen(discsLeftTower[c], ['mousedown', 'touchstart'], listenDiscs);
+}
+
+/* PAUSE */
+  var btn_pause = new lime.Sprite()
+  .setSize(100, 100)
+  .setPosition(675, 25)
+.setAnchorPoint(0, 0)
+  .setFill('assets/pause.png');
+  this.appendChild(btn_pause);
+
+  goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.pause();       
-    });
+  });
 
 };
 goog.inherits(towerofhanoi.Game, lime.Scene);
 
 function incrementMoviments(moviments){
-    cont_moviments += 1;
-    moviments.setText(cont_moviments );
+  cont_moviments += 1;
+  moviments.setText(cont_moviments );
 };
 
 function verifyDiscSize(towers, from_tower, to_tower) {
-    if (towers[to_tower].length === 0) {
-        return true;
-    } else if (from_tower === to_tower) {
-        return true;
-    } else {
-        var top_disc_size = towers[from_tower].pop();
-        var top_disc_size2 = towers[to_tower].pop();
-        if (top_disc_size.getSize().width < top_disc_size2.getSize().width) {
-            towers[from_tower].push(top_disc_size);
-            towers[to_tower].push(top_disc_size2);
-            return true;
-        }
-        else {
-            towers[from_tower].push(top_disc_size);
-            towers[to_tower].push(top_disc_size2);
-            return false;
-        }
+  if (towers[to_tower].length === 0) {
+    return true;
+  } else if (from_tower === to_tower) {
+    return true;
+  } else {
+    var top_disc_size = towers[from_tower].pop();
+    var top_disc_size2 = towers[to_tower].pop();
+    if (top_disc_size.getSize().width < top_disc_size2.getSize().width) {
+      towers[from_tower].push(top_disc_size);
+      towers[to_tower].push(top_disc_size2);
+      return true;
     }
-    return;
+    else {
+      towers[from_tower].push(top_disc_size);
+      towers[to_tower].push(top_disc_size2);
+      return false;
+    }
+  }
+  return;
 }
 
 
 function moveDisc(towers, from_tower, to_tower, old_position) {
-    var from_top_disc = towers[from_tower].pop();
-    var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
-    var new_position_x = (parseInt(old_position.x) + x_move);
-    var new_position_y = (POSITION_OF_FIRST_DISC - (towers[to_tower].length * HEIGHT_OF_DISCS));
-    towers[to_tower].push(from_top_disc);
-    var disc_movement = new lime.animation
-            .MoveTo(new_position_x, new_position_y)
-            .setDuration(1);
-    from_top_disc.runAction(disc_movement);
-    verifyWinner(towers,to_tower,4);
+  var from_top_disc = towers[from_tower].pop();
+  var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
+  var new_position_x = (parseInt(old_position.x) + x_move);
+  var new_position_y = (POSITION_OF_FIRST_DISC - (towers[to_tower].length * HEIGHT_OF_DISCS));
+  towers[to_tower].push(from_top_disc);
+  var disc_movement = new lime.animation
+    .MoveTo(new_position_x, new_position_y)
+    .setDuration(1);
+  from_top_disc.runAction(disc_movement);
+  verifyWinner(towers,to_tower,4);
 }
 
 function verifyWinner(towers,to_tower,n_disks){
   if(towers[to_tower].length == n_disks && towers[towers] != 0){
-    alert("Winner");
-//  var moviments_lbl = new lime.Label().setFontFamily('Trebuchet MS').setFontColor('#4f96ed').setFontSize(18).
-//      setPosition(30,50).setText('Winner').setAnchorPoint(0, 0).setFontWeight(700);
-//  this.layer.appendChild(moviments_lbl);
-    }
+    var scene = new lime.Scene();
+
   }
+}
