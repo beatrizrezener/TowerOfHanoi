@@ -140,7 +140,7 @@ towerofhanoi.Game = function(qtyDiscs) {
         var disk_to_move_size = list_tower[2];
         if (parseInt(disk_to_move_size) == parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers, list_tower[0], list_tower[1])) {
             moveDisc(towers, list_tower[0], list_tower[1], origin_position);
-            incrementMoviments(moviments);        }
+            incrementMoviments(moviments, list_tower[0], list_tower[1]);        }
         else {
             e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
                 var move = new lime.animation.MoveTo(origin_position);
@@ -185,9 +185,12 @@ towerofhanoi.Game = function(qtyDiscs) {
 };
 goog.inherits(towerofhanoi.Game, lime.Scene);
 
-function incrementMoviments(moviments) {
-    cont_moviments += 1;
+function incrementMoviments(moviments, from_tower, to_tower) {
+    if(from_tower !== to_tower){
+        cont_moviments += 1;
+    }
     moviments.setText(cont_moviments);
+
 }
 ;
 
