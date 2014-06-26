@@ -8,7 +8,7 @@ towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_movim
 
       var layer = new lime.Layer();
 
-      score(number_of_moviments, n_disks);
+      score(layer, number_of_moviments, n_disks);
       
       var continue_play = new lime.Sprite()
         .setSize(200, 100)
