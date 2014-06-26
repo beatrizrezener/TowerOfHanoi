@@ -80,11 +80,17 @@ towerofhanoi.Game = function(qtyDiscs) {
             .setFill('assets/replay.png');
     layer.appendChild(btn_replay);
     goog.events.listen(btn_replay, ['mousedown', 'touchstart'], function(e) {
-        if(confirm("Restart the game?")){
-            towerofhanoi.Game.playAgain(qtyDiscs);
-        } else {
-            //Nothing to do
-        }
+        if(confirm("Restart the game?")){towerofhanoi.Game.playAgain(qtyDiscs);}
+    });
+    /* BACK */
+    var btn_back = new lime.Sprite()
+            .setSize(65, 65)
+            .setPosition(1, 575)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/back.png');
+    layer.appendChild(btn_back);
+    goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
+        if(confirm("Back to menu page?")){towerofhanoi.loadMenu(); cont_moviments = 0;} 
     });
     
     // label for moviments message
