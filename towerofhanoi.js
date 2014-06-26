@@ -128,7 +128,7 @@ towerofhanoi.loadMenu = function() {
            towerofhanoi.help();
    });
     goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.newGame(3);
+        towerofhanoi.newGame(1);
     });
 
     goog.events.listen(btn_level2, ['mousedown', 'touchstart'], function(e) {
