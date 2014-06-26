@@ -15,17 +15,6 @@ towerofhanoi.Game = function(qtyDiscs) {
 
   var layer = new lime.Layer();
 
-  var bg_gradient = new lime.fill.LinearGradient()
-    .setDirection(0.5, 0, 0.5, 1)
-    .addColorStop(0, '#F0F8FF')
-    .addColorStop(1, '#8470FF');
-
-  var background = new lime.Sprite()
-    .setSize(800, 640)
-    .setPosition(0, 0)
-    .setAnchorPoint(0, 0)
-    .setFill(bg_gradient);
-
   var plataform = new lime.Polygon()
     .setPosition(100, 530)
     .setAnchorPoint(0, 0)
@@ -53,7 +42,6 @@ towerofhanoi.Game = function(qtyDiscs) {
             .setRadius(50);
 
     //add elements in the scene
-    //layer.appendChild(background);
     layer.appendChild(leftTower);
     layer.appendChild(middleTower);
     layer.appendChild(rightTower);
@@ -72,7 +60,7 @@ towerofhanoi.Game = function(qtyDiscs) {
         towerofhanoi.pause();
     });
     
-    /* REPLAY */
+    // Replay button
     var btn_replay = new lime.Sprite()
             .setSize(65, 65)
             .setPosition(640, 20)
@@ -82,21 +70,25 @@ towerofhanoi.Game = function(qtyDiscs) {
     goog.events.listen(btn_replay, ['mousedown', 'touchstart'], function(e) {
         if(confirm("Restart the game?")){towerofhanoi.Game.playAgain(qtyDiscs);}
     });
-    /* BACK */
-    var btn_back = new lime.Sprite()
-            .setSize(65, 65)
-            .setPosition(20, 575)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/back.png');
-    layer.appendChild(btn_back);
-    goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
-        if(confirm("Back to menu page?")){towerofhanoi.loadMenu(); cont_moviments = 0;} 
+   
+    // Menu button
+    this.btn_menu = new towerofhanoi.Button('Menu').setSize(100, 50).setPosition(140, 600);
+    goog.events.listen(this.btn_menu, 'click', function() {
+        towerofhanoi.loadMenu();
     });
+    this.appendChild(this.btn_menu);
+    
+    // Hint button
+    this.btn_hint = new towerofhanoi.Button('Hint').setSize(100, 50).setPosition(660, 600);
+    goog.events.listen(this.btn_hint, 'click', function() {
+        //DICA
+    });
+    this.appendChild(this.btn_hint);
     
     // label for moviments message
     var moviments_lbl = new lime.Label()
             .setFontFamily('Trebuchet MS')
-            .setFontColor('#483D8B')
+            .setFontColor('#D8BFD8')
             .setFontSize(24)
             .setPosition(30, 22)
             .setText('Moviments:')
