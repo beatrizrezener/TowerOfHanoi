@@ -1,4 +1,5 @@
 goog.provide('towerofhanoi.Game');
+goog.require('towerofhanoi.verifyWinner');
 goog.require('towerofhanoi.SetOfDiscs');
 
 var cont_moviments = 0;
@@ -6,29 +7,30 @@ var cont_moviments = 0;
  * Game scene for Tower of Hanoi game.
  */
 
-
+var disks = 0;
 towerofhanoi.Game = function(qtyDiscs) {
+    disks  = qtyDiscs;
 
-    lime.Scene.call(this);
+  lime.Scene.call(this);
 
-    var layer = new lime.Layer();
+  var layer = new lime.Layer();
 
-    var bg_gradient = new lime.fill.LinearGradient()
-            .setDirection(0.5, 0, 0.5, 1)
-            .addColorStop(0, '#F0F8FF')
-            .addColorStop(1, '#8470FF');
+  var bg_gradient = new lime.fill.LinearGradient()
+    .setDirection(0.5, 0, 0.5, 1)
+    .addColorStop(0, '#F0F8FF')
+    .addColorStop(1, '#8470FF');
 
-    var background = new lime.Sprite()
-            .setSize(800, 640)
-            .setPosition(0, 0)
-            .setAnchorPoint(0, 0)
-            .setFill(bg_gradient);
+  var background = new lime.Sprite()
+    .setSize(800, 640)
+    .setPosition(0, 0)
+    .setAnchorPoint(0, 0)
+    .setFill(bg_gradient);
 
-    var plataform = new lime.Polygon()
-            .setPosition(100, 560)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/metal.jpg')
-            .addPoints(-30, 30, 0, 0, 600, 0, 630, 30, -30, 30);
+  var plataform = new lime.Polygon()
+    .setPosition(100, 560)
+    .setAnchorPoint(0, 0)
+    .setFill('assets/metal.jpg')
+    .addPoints(-30, 30, 0, 0, 600, 0, 630, 30, -30, 30);
 
     /* BASES */
     var leftTower = new lime.RoundedRect()
@@ -131,17 +133,14 @@ towerofhanoi.Game = function(qtyDiscs) {
             list_tower = [actual_tower, 0, actual_disk.getSize().width];
             return list_tower;
         }
-        return [actual_tower, 0, actual_disck.getSize().width];
+        return [actual_tower, 0, actual_disck.getSize().width];  
     }
-
-
-    function moveOnlyFromTop(towers, list_tower, disck_to_move, origin_position, e) {
+     function moveOnlyFromTop(towers, list_tower, disck_to_move, origin_position, e) {
         disk_of_top = towers[list_tower[0]][towers[list_tower[0]].length - 1];
         var disk_to_move_size = list_tower[2];
-        if (parseInt(disk_to_move_size) === parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers, list_tower[0], list_tower[1])) {
+        if (parseInt(disk_to_move_size) == parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers, list_tower[0], list_tower[1])) {
             moveDisc(towers, list_tower[0], list_tower[1], origin_position);
-            incrementMoviments(moviments);
-        }
+            incrementMoviments(moviments);        }
         else {
             e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
                 var move = new lime.animation.MoveTo(origin_position);
@@ -225,15 +224,9 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .MoveTo(new_position_x, new_position_y)
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
-    verifyWinner(towers, to_tower, 4);
+    towerofhanoi.verifyWinner(towers, to_tower,disks);
 }
 
-function verifyWinner(towers, to_tower, n_disks) {
-    if (towers[to_tower].length == n_disks && towers[towers] != 0) {
-        var scene = new lime.Scene();
-
-    }
-}
 
 function score(number_of_moviments, qtyDiscs) {
     var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
