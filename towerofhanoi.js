@@ -240,3 +240,22 @@ towerofhanoi.pause = function() {
 towerofhanoi.play = function() {
     towerofhanoi.director.setPaused(false);
 };
+
+towerofhanoi.time = function(){
+   var layer = new lime.Layer();
+    if(t > 0)
+    {
+      var time = new lime.Label()
+      .setFontFamily('Trebuchet MS')
+      .setFontColor('#4f96ed').setPosition(600,280)
+      .setAlign('center').setFontSize(50).setText("Faltam: " + t + " segundos.");
+      //document.getElementById("txt").innerText = "Faltam: " + t + " segundos.";
+      setTimeout(function(){"time()"}, 1000);
+      t = t - 1;
+      layer.appendChild(time);
+    }
+    else
+    {
+      towerofhanoi.youLost(); 
+    }
+};
