@@ -3,6 +3,7 @@ goog.require('towerofhanoi.verifyWinner');
 goog.require('towerofhanoi.SetOfDiscs');
 
 var cont_moviments = 0;
+var t = 300;
 /**
  * Game scene for Tower of Hanoi game.
  */
@@ -226,38 +227,6 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
     towerofhanoi.verifyWinner(towers, to_tower,disks);
-}
-
-
-function score(number_of_moviments, qtyDiscs) {
-    var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
-    var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
-    var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
-
-    if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
-        var three_stars = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(350, 250)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/three_stars.png');
-        this.appendChild(three_stars);
-    }
-    if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){
-        var two_stars = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(350, 250)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/two_stars.png');
-        this.appendChild(two_stars);
-    }
-    if(number_of_moviments >= number_moviments_one_star){
-        var one_star = new lime.Sprite()
-            .setSize(100, 100)
-            .setPosition(350, 250)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/one_star.png');
-        this.appendChild(one_star);
-    }
 }
 
 towerofhanoi.Game.playAgain = function(qtyDiscs) {
