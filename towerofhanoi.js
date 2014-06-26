@@ -13,6 +13,7 @@ goog.require('lime.Sprite');
 goog.require('lime.RoundedRect');
 goog.require('lime.Layer');
 goog.require('lime.Polygon');
+goog.require('lime.transitions.Dissolve');
 goog.require('lime.animation.MoveTo');
 goog.require('lime.animation.Loop');
 goog.require('lime.animation.RotateBy');
@@ -139,9 +140,8 @@ towerofhanoi.classicMenu = function() {
 
 
     var tower_imagen = new lime.Sprite()
-            .setPosition(150, 40)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/tof.png');
+            .setFill('assets/tof.png')
+            .setPosition(400, 160);
 
     var logo = new lime.Sprite()
             .setSize(200, 400)
