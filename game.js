@@ -1,5 +1,5 @@
 goog.provide('towerofhanoi.Game');
-goog.require('towerofhanoi.Disc');
+goog.require('towerofhanoi.SetOfDiscs');
 
 var cont_moviments = 0;
 /**
@@ -70,8 +70,8 @@ towerofhanoi.Game = function(qtyDiscs) {
 
 
     /* DISCS */
-    var mydiscs = new towerofhanoi.Disc(layer, qtyDiscs);
-    var discsLeftTower = mydiscs.getDiscs();
+    var setofdiscs = new towerofhanoi.SetOfDiscs(layer, qtyDiscs);
+    var discsLeftTower = setofdiscs.getDiscs();
 
     var towers = new Array(3);
     towers[0] = discsLeftTower;
