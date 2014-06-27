@@ -1,7 +1,7 @@
 goog.provide('towerofhanoi.ClassicMenu');
-
 goog.require('lime.Sprite');
 goog.require('towerofhanoi.Button');
+goog.require('towerofhanoi.music_sound');
 
 towerofhanoi.ClassicMenu = function() {
     lime.Scene.call(this);
@@ -30,7 +30,7 @@ towerofhanoi.ClassicMenu = function() {
     this.appendChild(btn_mute);
 
     goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.pause_sound();
+        towerofhanoi.music_sound();
     });
 
     goog.events.listen(btn_help, ['mousedown', 'touchstart'], function(e) {

@@ -18,7 +18,7 @@ goog.require('lime.animation.MoveTo');
 goog.require('towerofhanoi.Game');
 goog.require('towerofhanoi.PauseScene');
 goog.require('towerofhanoi.Button');
-goog.require('towerofhanoi.play_sound');
+goog.require('towerofhanoi.music_sound');
 goog.require('towerofhanoi.Help');
 goog.require('towerofhanoi.ClassicMenu');
 
@@ -34,6 +34,7 @@ towerofhanoi.start = function() {
     towerofhanoi.director.pauseClassFactory = towerofhanoi.PauseScene;
 
     towerofhanoi.loadMenu();
+    towerofhanoi.play_sound_initial();
 };
 
 towerofhanoi.loadMenu = function(opt_transition) {
@@ -52,7 +53,6 @@ towerofhanoi.loadMenu = function(opt_transition) {
 	layer.appendChild(btns);
 
 	var btn = towerofhanoi.makeButton('Play Classic').setPosition(0, 230);
-  towerofhanoi.play_sound_initial();
 	goog.events.listen(btn, 'click', function() {
 	    //towerofhanoi.usemode = towerofhanoi.Mode.CLASSIC;
 	    towerofhanoi.loadClassicMenu();
@@ -83,7 +83,7 @@ towerofhanoi.loadMenu = function(opt_transition) {
         scene.appendChild(btn_mute);
 
         goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
-            towerofhanoi.pause_sound();
+            towerofhanoi.music_sound();
         });
         
 
