@@ -43,9 +43,14 @@ towerofhanoi.Help = function() {
             .setFontColor('#000080')
             .setFontSize(20)
             .setSize(600, -120)
-            .setText("The problem is to move all the disks of a pin any other, such as by using an auxiliary pins, so that a disk greater never stand on top of a smaller one in any situation.") 
+            .setText("The problem is to move all the disks of a pin any other, such as by using an auxiliary pins, so that a disk greater    never stand on top of a smaller one in any situation.") 
             .setPosition(300, 70);
 
+     var game_instructon = new lime.Sprite()
+            .setSize(450, 450)
+            .setPosition(150, 175)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/instructions3.png');
 
 //    var txt1 = new lime.Label().setFontSize(18).setSize(600, 50).setPosition(300, 40).setAlign('left').setFontFamily('Segoe Print');
 //    txt1.setText('1. A larger disk can not be placed on a smaller disk;');
@@ -61,6 +66,7 @@ towerofhanoi.Help = function() {
     this.appendChild(text);
     this.appendChild(text2);
     this.appendChild(text3);
+    this.appendChild(game_instructon);
     this.appendChild(btn_back);
     
 
