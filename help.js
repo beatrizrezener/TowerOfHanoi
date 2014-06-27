@@ -26,12 +26,29 @@ towerofhanoi.Help = function() {
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(20)
-            .setText("The game is based consists of a base containing three ") // \u00e3 = ã
+            .setSize(600, 10)
+            .setText("The game is based of a base containing three ") // \u00e3 = ã
+            .setPosition(300, 70);
+   
+   var text2 = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(20)
+            .setSize(600, -30)
+            .setText("pins, one of which is arranged a few disks on the other, in ascending order in diameter from top to bottom.") 
             .setPosition(300, 70);
 
-    var txt1 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 40).setAlign('left').setFontFamily('Segoe Print');
-    txt1.setText('1. A larger disk can not be placed on a smaller disk;');
-   // contents.appendChild(txt1);
+   var text3 = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(20)
+            .setSize(600, -120)
+            .setText("The problem is to move all the disks of a pin any other, such as by using an auxiliary pins, so that a disk greater never stand on top of a smaller one in any situation.") 
+            .setPosition(300, 70);
+
+
+//    var txt1 = new lime.Label().setFontSize(18).setSize(600, 50).setPosition(300, 40).setAlign('left').setFontFamily('Segoe Print');
+//    txt1.setText('1. A larger disk can not be placed on a smaller disk;');
 
     var btn_back = new towerofhanoi.makeButton("Back")
             .setPosition(700, 550)
@@ -42,7 +59,8 @@ towerofhanoi.Help = function() {
     
     this.appendChild(title);
     this.appendChild(text);
-    this.appendChild(txt1);
+    this.appendChild(text2);
+    this.appendChild(text3);
     this.appendChild(btn_back);
     
 
