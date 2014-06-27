@@ -105,37 +105,37 @@ towerofhanoi.classicMenu = function() {
 
     var btn_level1 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(300, 375)
+            .setPosition(320, 375)
             .setAnchorPoint(0, 0)
             .setFill('assets/level1.png');
 
     var btn_level2 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(300, 425)
+            .setPosition(320, 425)
             .setAnchorPoint(0, 0)
             .setFill('assets/level2.png');
     
     var btn_level3 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(300, 475)
+            .setPosition(320, 475)
             .setAnchorPoint(0, 0)
             .setFill('assets/level3.png');
 
     var btn_level4 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(300, 525)
+            .setPosition(320, 525)
             .setAnchorPoint(0, 0)
             .setFill('assets/level4.png');
 
     var btn_level5 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(300, 575)
+            .setPosition(320, 575)
             .setAnchorPoint(0, 0)
             .setFill('assets/level5.png');
 
    var btn_help = new lime.Sprite()
-            .setSize(150, 50)
-            .setPosition(625, 575)
+            .setSize(80, 80)
+            .setPosition(700, 20)
             .setAnchorPoint(0, 0)
             .setFill('assets/help.fw.png');
 
@@ -211,7 +211,7 @@ towerofhanoi.help = function() {
             .setSize(150, 50)
             .setPosition(625, 575)
             .setAnchorPoint(0, 0)
-            .setFill('assets/help.fw.png');
+            .setFill('assets/backtomenu.png');
 
       scene.appendChild(title);
       scene.appendChild(text);
