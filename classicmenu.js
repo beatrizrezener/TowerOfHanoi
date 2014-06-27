@@ -21,20 +21,12 @@ towerofhanoi.ClassicMenu = function() {
 
     var btn_help =  towerofhanoi.makeButton('help').setPosition(390, 610).setSize(310, 35); 
 
-    var btn_back = new towerofhanoi.Button("Menu")
-            .setSize(150, 50)
-            .setPosition(395, 590);
+    var btn_back = new towerofhanoi.Button("Menu").setSize(150, 50).setPosition(700, 600);
 
-    var tower_imagen = new lime.Sprite()
-            .setFill('assets/tof.png')
-            .setPosition(400, 160);
+    var tower_imagen = new lime.Sprite().setFill('assets/tof.png').setPosition(400, 160);
 
      /* MUTE */
-    var btn_mute = new lime.Sprite()
-            .setSize(65, 65)
-            .setPosition(700, 20)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/mute.png');
+    var btn_mute = new lime.Sprite().setSize(65, 65).setPosition(700, 20).setAnchorPoint(0, 0).setFill('assets/mute.png');
     this.appendChild(btn_mute);
 
     goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
