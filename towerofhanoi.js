@@ -22,7 +22,8 @@ goog.require('towerofhanoi.Game');
 goog.require('towerofhanoi.PauseScene');
 goog.require('towerofhanoi.Button');
 goog.require('towerofhanoi.play_sound');
-
+goog.require('towerofhanoi.Help');
+goog.require('lime.transitions.MoveInUp');
 
 var WIDTH = 800;
 var HEIGHT = 640;
@@ -37,13 +38,13 @@ towerofhanoi.start = function() {
     towerofhanoi.loadMenu();
 };
 
-towerofhanoi.loadMenu = function() {
+towerofhanoi.loadMenu = function(opt_transition) {
     
-        var scene = new lime.Scene(),
-	    layer = new lime.Layer().setPosition(WIDTH / 2, 0);
+    var scene = new lime.Scene(),
+    layer = new lime.Layer().setPosition(WIDTH / 2, 0);
 
-        var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
-        scene.appendChild(maskSprite);
+    var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
+    scene.appendChild(maskSprite);
 
 	var title = new lime.Sprite().setFill('assets/tof.png').setPosition(0, 160);
 	title.qualityRenderer = true;
@@ -67,14 +68,14 @@ towerofhanoi.loadMenu = function() {
 	btns.appendChild(btn);
 
 	btn = towerofhanoi.makeButton('Help').setPosition(0, 430);
-	goog.events.listen(btn, 'click', function() {
-	    towerofhanoi.help();
+	goog.events.listen(btn, ['mousedown', 'touchstart'], function() {
+	    towerofhanoi.loadHelpScene();
 	});
 	btns.appendChild(btn);
 	scene.appendChild(layer);
 
 	// set current scene active
-	towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
+    towerofhanoi.director.replaceScene(scene, opt_transition ? lime.transitions.MoveInDown : lime.transitions.Dissolve);
 };
 
 // helper for same size buttons
@@ -105,39 +106,37 @@ towerofhanoi.classicMenu = function() {
 
     var btn_level1 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(320, 375)
+            .setPosition(320, 300)
             .setAnchorPoint(0, 0)
             .setFill('assets/level1.png');
 
     var btn_level2 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(320, 425)
+            .setPosition(320, 350)
             .setAnchorPoint(0, 0)
             .setFill('assets/level2.png');
     
     var btn_level3 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(320, 475)
+            .setPosition(320, 400)
             .setAnchorPoint(0, 0)
             .setFill('assets/level3.png');
 
     var btn_level4 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(320, 525)
+            .setPosition(320, 450)
             .setAnchorPoint(0, 0)
             .setFill('assets/level4.png');
 
     var btn_level5 = new lime.Sprite()
             .setSize(150, 50)
-            .setPosition(320, 575)
+            .setPosition(320, 500)
             .setAnchorPoint(0, 0)
             .setFill('assets/level5.png');
 
-   var btn_help = new lime.Sprite()
-            .setSize(80, 80)
-            .setPosition(700, 20)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/help.fw.png');
+    var btn_back = new towerofhanoi.Button("Menu")
+            .setSize(150, 50)
+            .setPosition(395, 590);
 
 
     var tower_imagen = new lime.Sprite()
@@ -158,11 +157,11 @@ towerofhanoi.classicMenu = function() {
     scene.appendChild(btn_level4);
     scene.appendChild(btn_level5);
     scene.appendChild(tower_imagen);
-    scene.appendChild(btn_help);
+    scene.appendChild(btn_back);
    
-  goog.events.listen(btn_help, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.help();
-    })
+  goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.loadMenu();
+    });
 
     goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.newGame(3);
@@ -189,40 +188,10 @@ towerofhanoi.classicMenu = function() {
 
 };
 
-towerofhanoi.help = function() {
-
-    var scene = new lime.Scene();
-
-    var title = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setText("Tower of Hanoi")
-            .setPosition(300, 22);
-   
-    var text = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(20)
-            .setText("Clique no bot\u00e3o para continuar") // \u00e3 = ã
-            .setPosition(300, 70);
-    
-    var btn_menu = new lime.Sprite()
-            .setSize(150, 50)
-            .setPosition(625, 575)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/backtomenu.png');
-
-      scene.appendChild(title);
-      scene.appendChild(text);
-      scene.appendChild(btn_menu);
-  
-   goog.events.listen(btn_menu, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.loadMenu();
-    });
-
-      
-     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
+// load new help scene
+towerofhanoi.loadHelpScene = function() {
+    var scene = new towerofhanoi.Help();
+    towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
 };
 
 // load new game scene
