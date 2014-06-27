@@ -123,29 +123,46 @@ towerofhanoi.Help_level = function() {
             .setFontSize(35)
             .setText("Tower of Hanoi")
             .setPosition(300, 22); 
-    
-      var text = new lime.Label().setAlign('center')
+
+       var text = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(28)
+            .setSize(600, 10)
+            .setText("Level 1:Contains one disks") 
+            .setPosition(300, 70);      
+
+
+      var text1 = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
             .setSize(600, -30)
-            .setText("Level 1:Contains three disks") 
-            .setPosition(300, 70);
-    
-       var text2 = new lime.Label().setAlign('center')
+            .setText("Level 2:Contains two disks") 
+            .setPosition(300, 70);  
+  
+      var text2 = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
             .setSize(600, -70)
-            .setText("Level 2: Contains four disks") 
+            .setText("Level 3:Contains three disks") 
             .setPosition(300, 70);
-     
-        var text3 = new lime.Label().setAlign('center')
+    
+       var text3 = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
-            .setSize(600, -100)
-            .setText("Level 4: Contains five disks") 
+            .setSize(600, -130)
+            .setText("Level 4: Contains four disks") 
+            .setPosition(300, 70);
+     
+        var text4 = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(28)
+            .setSize(600, -200)
+            .setText("Level 5: Contains five disks") 
             .setPosition(300, 70);
 
     
@@ -159,8 +176,10 @@ towerofhanoi.Help_level = function() {
   
     this.appendChild(title);
     this.appendChild(text);
+    this.appendChild(text1);
     this.appendChild(text2);
     this.appendChild(text3);
+    this.appendChild(text4); 
 
 
 };
