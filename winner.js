@@ -56,11 +56,6 @@ function score(layer, number_of_moviments, qtyDiscs) {
     var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
     var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
     var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
-    alert(number_of_moviments);
-    alert(number_moviments_one_star);
-    alert(number_moviments_two_stars);
-    alert(number_moviments_three_stars);
-
 
     if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
         var three_stars = new lime.Sprite()
