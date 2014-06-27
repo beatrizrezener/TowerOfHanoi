@@ -18,7 +18,7 @@ towerofhanoi.PauseScene = function() {
     var label = new lime.Label().setText('PAUSE').setPosition(400,50).setFontColor('#B6767F').setFontSize(50);
     layer.appendChild(label);
 
-    var instructions = new lime.Sprite().setSize(600,300).setPosition(100,170).setAnchorPoint(0,0).setFill('assets/instructions2.png');
+    var instructions = new lime.Sprite().setSize(600,300).setPosition(100,170).setAnchorPoint(0,0).setFill('assets/instructions.png');
     layer.appendChild(instructions);    
     
     var btn_play = new towerofhanoi.Button("RESUME GAME").setSize(220,50).setPosition(585,500).setAnchorPoint(0,0);
