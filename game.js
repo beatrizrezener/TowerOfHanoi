@@ -2,6 +2,7 @@ goog.provide('towerofhanoi.Game');
 goog.require('towerofhanoi.verifyWinner');
 goog.require('towerofhanoi.SetOfDiscs');
 goog.require('towerofhanoi.movementSound');
+goog.require('towerofhanoi.music_sound');
 
 var cont_moviments = 0;
 var t = 300;
@@ -82,6 +83,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     goog.events.listen(this.btn_menu, 'click', function() {
         towerofhanoi.loadMenu();
         towerofhanoi.Game.resetMoviments();
+        towerofhanoi.play_sound_initial();
     });
     this.appendChild(this.btn_menu);
 

@@ -3,6 +3,7 @@ goog.provide('towerofhanoi.PauseScene');
 goog.require('lime.Label');
 goog.require('lime.Scene');
 goog.require('lime.Sprite');
+goog.require('towerofhanoi.music_sound');
 
 /**
  * PauseScene. This scene appears when director is paused.
@@ -31,6 +32,7 @@ towerofhanoi.PauseScene = function() {
         towerofhanoi.play();
         towerofhanoi.Game.resetMoviments();
         towerofhanoi.loadMenu();
+        towerofhanoi.play_sound_initial();
     });
     
     
