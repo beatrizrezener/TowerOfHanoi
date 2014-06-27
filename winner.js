@@ -8,6 +8,8 @@ towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_movim
 
       var layer = new lime.Layer();
 
+      towerofhanoi.play_sound_win();
+
       number_of_moviments += 1;
       score(layer, number_of_moviments, n_disks);
       
