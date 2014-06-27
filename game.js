@@ -63,19 +63,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.pause();
     });
-
-    /* MUTE */
-    var btn_mute = new lime.Sprite()
-            .setSize(65, 65)
-            .setPosition(640, 20)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/mute.png');
-    layer.appendChild(btn_mute);
-
-    goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.pause_sound();
-    });
-
+    
     // Replay button
     var btn_replay = new lime.Sprite()
             .setSize(65, 65)
@@ -249,7 +237,7 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .MoveTo(new_position_x, new_position_y)
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
-    towerofhanoi.verifyWinner(towers, to_tower, disks);
+    towerofhanoi.verifyWinner(towers, to_tower,disks, cont_moviments);
 }
 
 towerofhanoi.Game.playAgain = function(qtyDiscs) {

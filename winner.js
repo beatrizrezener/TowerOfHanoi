@@ -3,10 +3,12 @@ goog.require('towerofhanoi.Game');
 
 
 towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_moviments) {
-    if (towers[to_tower].length == n_disks && to_tower != 0) {
+    if (towers[2].length == n_disks && towers[0] == 0 && towers[1] == 0) {
       var scene = new lime.Scene();
 
       var layer = new lime.Layer();
+
+      towerofhanoi.play_sound_win();
 
       number_of_moviments += 1;
       score(layer, number_of_moviments, n_disks);
@@ -58,8 +60,7 @@ function score(layer, number_of_moviments, qtyDiscs) {
     var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
     var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
 
-
-    if(true){
+    if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
         var three_stars = new lime.Sprite()
             .setSize(512, 256)
             .setPosition(135, 60)
@@ -70,7 +71,7 @@ function score(layer, number_of_moviments, qtyDiscs) {
     if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){
         var two_stars = new lime.Sprite()
             .setSize(512, 256)
-            .setPosition(110, 100)
+            .setPosition(135, 60)
             .setAnchorPoint(0, 0)
             .setFill('assets/two_stars.png');
         layer.appendChild(two_stars);
@@ -78,7 +79,7 @@ function score(layer, number_of_moviments, qtyDiscs) {
     if(number_of_moviments >= number_moviments_one_star){
         var one_star = new lime.Sprite()
             .setSize(512, 256)
-            .setPosition(110, 100)
+            .setPosition(135, 60)
             .setAnchorPoint(0, 0)
             .setFill('assets/one_star.png');
         layer.appendChild(one_star);
