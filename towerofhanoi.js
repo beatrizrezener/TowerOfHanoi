@@ -133,7 +133,7 @@ towerofhanoi.classicMenu = function() {
             .setFill('assets/level5.png');
 
    var btn_help = new lime.Sprite()
-            .setSize(80, 80)
+            .setSize(65, 65)
             .setPosition(640, 20)
             .setAnchorPoint(0, 0)
             .setFill('assets/help.fw.png');
