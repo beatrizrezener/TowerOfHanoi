@@ -80,7 +80,8 @@ towerofhanoi.Help = function() {
     });
   
      goog.events.listen(btn_next, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.Help_level();
+        scene = new towerofhanoi.Help_level(); 
+        towerofhanoi.director.replaceScene(scene);
     }); 
     
     this.appendChild(title);
@@ -113,7 +114,6 @@ towerofhanoi.Help = function() {
 towerofhanoi.Help_level = function() {
 
  lime.Scene.call(this);
-
     var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);      
     this.appendChild(maskSprite);
 
