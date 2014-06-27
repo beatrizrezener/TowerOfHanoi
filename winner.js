@@ -21,7 +21,7 @@ towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_movim
         .setSize(200, 100)
         .setPosition(550, 360);
 
-      var back_to_menu = new towerofhanoi.Button("Back to menu")
+      var back_to_menu = new towerofhanoi.Button("Menu")
         .setSize(170, 70)
         .setPosition(140, 590);
 

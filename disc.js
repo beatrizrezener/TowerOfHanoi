@@ -1,4 +1,5 @@
 goog.provide('towerofhanoi.Disc');
+goog.require('lime.RoundedRect');
 
 /**
  * Disc element. 
