@@ -11,7 +11,7 @@ towerofhanoi.play_sound_initial = function() {
     music_audio.play();
 }
 towerofhanoi.pause_sound = function(){
-    audio.pause();
+    music_audio.pause();
 };
 towerofhanoi.play_sound_win = function() {
 	audio.setAttribute("src","sounds/wins.wav");
