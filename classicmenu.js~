@@ -8,12 +8,23 @@ towerofhanoi.ClassicMenu = function() {
     var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
     this.appendChild(maskSprite);
 
- 
-    var btn_level1 = towerofhanoi.makeButton('Level 1').setPosition(390, 320).setSize(270, 50); 
+    var btn_level1 = new lime.Sprite()
+            .setSize(150, 50)
+            .setPosition(320, 300)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/level1.png');
 
-    var btn_level2 = towerofhanoi.makeButton('Level 2').setPosition(390, 380).setSize(270, 50); 
-
-    var btn_level3 = towerofhanoi.makeButton('Level 3').setPosition(390, 440).setSize(270, 50); 
+    var btn_level2 = new lime.Sprite()
+            .setSize(150, 50)
+            .setPosition(320, 350)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/level2.png');
+    
+    var btn_level3 = new lime.Sprite()
+            .setSize(150, 50)
+            .setPosition(320, 400)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/level3.png');
 
     var btn_level4 = new lime.Sprite()
             .setSize(150, 50)
