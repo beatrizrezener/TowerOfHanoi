@@ -21,6 +21,7 @@ goog.require('towerofhanoi.Button');
 goog.require('towerofhanoi.music_sound');
 goog.require('towerofhanoi.Help');
 goog.require('towerofhanoi.ClassicMenu');
+goog.require('towerofhanoi.music_sound');
 
 var WIDTH = 800;
 var HEIGHT = 640;
@@ -110,6 +111,7 @@ towerofhanoi.loadHelpScene = function() {
 
 // load new game scene
 towerofhanoi.newGame = function(qtyDiscs) {
+    towerofhanoi.music_sound();
     var scene = new towerofhanoi.Game(qtyDiscs);
     maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
     scene.appendChild(maskSprite);
