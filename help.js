@@ -65,11 +65,19 @@ towerofhanoi.Help = function() {
 //    txt1.setText('1. A larger disk can not be placed on a smaller disk;');
 
     var btn_back = new towerofhanoi.makeButton("Back")
-            .setPosition(700, 550)
+            .setPosition(100, 600)
             .setSize(125, 50);
     goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();
     });
+
+    var btn_next = new towerofhanoi.makeButton("Next")
+            .setPosition(700, 600)
+            .setSize(125, 50);
+    goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.loadMenu();
+    });
+    
     
     this.appendChild(title);
     this.appendChild(text);
@@ -78,6 +86,7 @@ towerofhanoi.Help = function() {
     this.appendChild(text4);
     this.appendChild(game_instructon);
     this.appendChild(btn_back);
+    this.appendChild(btn_next);
     
 
     /* MUTE */
@@ -93,5 +102,8 @@ towerofhanoi.Help = function() {
     });
 
 
+};
+
+towerofhanoi.Help_level = function() {
 };
 goog.inherits(towerofhanoi.Help, lime.Scene);
