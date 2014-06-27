@@ -78,7 +78,7 @@ towerofhanoi.loadMenu = function(opt_transition) {
         /* MUTE */
         var btn_mute = new lime.Sprite()
                 .setSize(65, 65)
-                .setPosition(700, 20)
+                .setPosition(720, 20)
                 .setAnchorPoint(0, 0)
                 .setFill('assets/mute.png');
         scene.appendChild(btn_mute);

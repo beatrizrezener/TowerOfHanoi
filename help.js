@@ -42,7 +42,7 @@ towerofhanoi.Help = function() {
     /* MUTE */
     var btn_mute = new lime.Sprite()
             .setSize(65, 65)
-            .setPosition(700, 20)
+            .setPosition(720, 20)
             .setAnchorPoint(0, 0)
             .setFill('assets/mute.png');
     this.appendChild(btn_mute);
