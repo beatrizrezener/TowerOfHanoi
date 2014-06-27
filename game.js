@@ -114,12 +114,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     var txt4 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 190).setAlign('left');
     txt4.setText('4. It is not allowed to move a disk that is below another.');
     contents.appendChild(txt4);    
-    
-    
- 
-
-
-    
+      
     var current_screen = this;
     goog.events.listen(this.btn_rules, 'mousedown', function() {
         current_screen.appendChild(rules);
@@ -127,9 +122,6 @@ towerofhanoi.Game = function(qtyDiscs) {
             current_screen.removeChild(rules);
         });
     });
-    
-    
-    
 
     // label for moviments message
     var moviments_lbl = new lime.Label()
@@ -179,6 +171,7 @@ towerofhanoi.Game = function(qtyDiscs) {
         }
         return [actual_tower, 0, actual_disck.getSize().width];
     }
+    
     function moveOnlyFromTop(towers, list_tower, disck_to_move, origin_position, e) {
         disk_of_top = towers[list_tower[0]][towers[list_tower[0]].length - 1];
         var disk_to_move_size = list_tower[2];
