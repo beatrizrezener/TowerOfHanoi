@@ -56,9 +56,13 @@ function score(layer, number_of_moviments, qtyDiscs) {
     var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
     var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
     var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
+    alert(number_of_moviments);
+    alert(number_moviments_one_star);
+    alert(number_moviments_two_stars);
+    alert(number_moviments_three_stars);
 
 
-    if(true){
+    if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
         var three_stars = new lime.Sprite()
             .setSize(512, 256)
             .setPosition(135, 60)
@@ -69,7 +73,7 @@ function score(layer, number_of_moviments, qtyDiscs) {
     if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){
         var two_stars = new lime.Sprite()
             .setSize(512, 256)
-            .setPosition(110, 100)
+            .setPosition(135, 60)
             .setAnchorPoint(0, 0)
             .setFill('assets/two_stars.png');
         layer.appendChild(two_stars);
@@ -77,7 +81,7 @@ function score(layer, number_of_moviments, qtyDiscs) {
     if(number_of_moviments >= number_moviments_one_star){
         var one_star = new lime.Sprite()
             .setSize(512, 256)
-            .setPosition(110, 100)
+            .setPosition(135, 60)
             .setAnchorPoint(0, 0)
             .setFill('assets/one_star.png');
         layer.appendChild(one_star);
