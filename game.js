@@ -60,11 +60,23 @@ towerofhanoi.Game = function(qtyDiscs) {
     goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.pause();
     });
+
+    /* MUTE */
+    var btn_mute = new lime.Sprite()
+            .setSize(65, 65)
+            .setPosition(640, 20)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/mute.png');
+    layer.appendChild(btn_mute);
+
+    goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.pause_sound();
+    });
     
     // Replay button
     var btn_replay = new lime.Sprite()
             .setSize(65, 65)
-            .setPosition(640, 20)
+            .setPosition(365, 570)
             .setAnchorPoint(0, 0)
             .setFill('assets/replay.png');
     layer.appendChild(btn_replay);
@@ -85,6 +97,8 @@ towerofhanoi.Game = function(qtyDiscs) {
         //DICA
     });
     this.appendChild(this.btn_hint);
+
+   
     
     // label for moviments message
     var moviments_lbl = new lime.Label()
