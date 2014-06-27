@@ -15,23 +15,11 @@ towerofhanoi.ClassicMenu = function() {
 
     var btn_level3 = towerofhanoi.makeButton('Level 3').setPosition(390, 440).setSize(270, 50); 
 
-    var btn_level4 = new lime.Sprite()
-            .setSize(150, 50)
-            .setPosition(320, 450)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/level4.png');
+    var btn_level4 =  towerofhanoi.makeButton('Level 4').setPosition(390, 500).setSize(270, 50); 
 
-    var btn_level5 = new lime.Sprite()
-            .setSize(150, 50)
-            .setPosition(320, 500)
-            .setAnchorPoint(0, 0)
-            .setFill('assets/level5.png');
-    
-     var btn_help = new lime.Sprite()
-              .setSize(65, 65)
-              .setPosition(640, 20)
-              .setAnchorPoint(0, 0)
-              .setFill('assets/help.fw.png');
+    var btn_level5 =  towerofhanoi.makeButton('Level 5').setPosition(390, 560).setSize(270, 50); 
+
+    var btn_help =  towerofhanoi.makeButton('help').setPosition(390, 610).setSize(310, 35); 
 
     var btn_back = new towerofhanoi.Button("Menu")
             .setSize(150, 50)
