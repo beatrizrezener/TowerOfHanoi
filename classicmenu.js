@@ -19,11 +19,8 @@ towerofhanoi.ClassicMenu = function() {
     var btn_help = new lime.Sprite().setSize(65, 65).setPosition(650, 20).setAnchorPoint(0, 0).setFill('assets/help.fw.png');
     this.appendChild(btn_help);
 
-    var btn_back = new towerofhanoi.Button("Menu").setSize(150, 50).setPosition(700, 600);
-
      /* MUTE */
     var btn_mute = new lime.Sprite().setSize(65, 65).setPosition(720, 20).setAnchorPoint(0, 0).setFill('assets/mute.png');
-    this.appendChild(btn_mute);
 
     goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.music_sound();
@@ -38,11 +35,6 @@ towerofhanoi.ClassicMenu = function() {
     this.appendChild(btn_level3);
     this.appendChild(btn_level4);
     this.appendChild(btn_level5);
-    this.appendChild(btn_back);
-   
-  goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.loadMenu();
-    });
 
     goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.newGame(3);
