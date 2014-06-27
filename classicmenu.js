@@ -4,11 +4,8 @@ goog.require('towerofhanoi.Button');
 goog.require('towerofhanoi.music_sound');
 
 towerofhanoi.ClassicMenu = function() {
-    lime.Scene.call(this);
-    var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
-    this.appendChild(maskSprite);
-
- 
+    lime.Layer.call(this);
+    
     var btn_level1 = towerofhanoi.makeButton('Level 1').setPosition(390, 320).setSize(270, 50); 
 
     var btn_level2 = towerofhanoi.makeButton('Level 2').setPosition(390, 380).setSize(270, 50); 
@@ -23,8 +20,6 @@ towerofhanoi.ClassicMenu = function() {
     this.appendChild(btn_help);
 
     var btn_back = new towerofhanoi.Button("Menu").setSize(150, 50).setPosition(700, 600);
-
-    var tower_imagen = new lime.Sprite().setFill('assets/tof.png').setPosition(400, 160);
 
      /* MUTE */
     var btn_mute = new lime.Sprite().setSize(65, 65).setPosition(720, 20).setAnchorPoint(0, 0).setFill('assets/mute.png');
@@ -43,7 +38,6 @@ towerofhanoi.ClassicMenu = function() {
     this.appendChild(btn_level3);
     this.appendChild(btn_level4);
     this.appendChild(btn_level5);
-    this.appendChild(tower_imagen);
     this.appendChild(btn_back);
    
   goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
@@ -70,4 +64,4 @@ towerofhanoi.ClassicMenu = function() {
         towerofhanoi.newGame(7);
     });
 };
-goog.inherits(towerofhanoi.ClassicMenu, lime.Scene);
+goog.inherits(towerofhanoi.ClassicMenu, lime.Layer);

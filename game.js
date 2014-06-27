@@ -96,22 +96,22 @@ towerofhanoi.Game = function(qtyDiscs) {
     var btn_closerules = new towerofhanoi.Button('x').setSize(50, 50).setPosition(715, 130);
     rules.appendChild(btn_closerules);
     
-    var title = new lime.Label().setFontSize(22).setSize(560, 100).setPosition(0, -120).setAlign('center');
+    var title = new lime.Label().setFontSize(22).setSize(560, 100).setPosition(0, -120).setAlign('center').setFontFamily('Segoe Print');
     title.setText('Tower of Hanoi - Rules');
     contents.appendChild(title);
-    var purpose = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, -50).setAlign('left');
+    var purpose = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, -50).setAlign('left').setFontFamily('Segoe Print');
     purpose.setText('The purpose is to transfer all the disks from one tower to the other, so that each movement is done only with a disc, never having a larger disk on a smaller disk.');
     contents.appendChild(purpose);
-    var txt1 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 40).setAlign('left');
+    var txt1 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 40).setAlign('left').setFontFamily('Segoe Print');
     txt1.setText('1. A larger disk can not be placed on a smaller disk;');
     contents.appendChild(txt1);
-    var txt2 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 90).setAlign('left');
+    var txt2 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 90).setAlign('left').setFontFamily('Segoe Print');
     txt2.setText('2. You can move only one disk at a time;');
     contents.appendChild(txt2);
-    var txt3 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 140).setAlign('left');
+    var txt3 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 140).setAlign('left').setFontFamily('Segoe Print');
     txt3.setText('3. A disc must always be one of the three rods or moving.');
     contents.appendChild(txt3);
-    var txt4 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 190).setAlign('left');
+    var txt4 = new lime.Label().setFontSize(18).setSize(560, 100).setPosition(0, 190).setAlign('left').setFontFamily('Segoe Print');
     txt4.setText('4. It is not allowed to move a disk that is below another.');
     contents.appendChild(txt4);    
       
