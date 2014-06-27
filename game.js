@@ -1,7 +1,7 @@
 goog.provide('towerofhanoi.Game');
 goog.require('towerofhanoi.verifyWinner');
 goog.require('towerofhanoi.SetOfDiscs');
-goog.require('towerofhanoi.validMoveSound');
+goog.require('towerofhanoi.movementSound');
 
 var cont_moviments = 0;
 var t = 300;
@@ -70,7 +70,7 @@ towerofhanoi.Game = function(qtyDiscs) {
             .setFill('assets/mute.png');
     layer.appendChild(btn_mute);
 
-    goog.events.listen(btn_pause, ['mousedown', 'touchstart'], function(e) {
+    goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.pause_sound();
     });
     
@@ -154,11 +154,13 @@ towerofhanoi.Game = function(qtyDiscs) {
         var disk_to_move_size = list_tower[2];
         if (parseInt(disk_to_move_size) == parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers, list_tower[0], list_tower[1])) {
             moveDisc(towers, list_tower[0], list_tower[1], origin_position);
+            towerofhanoi.movementSound(0); 
             incrementMoviments(moviments, list_tower[0], list_tower[1]);        }
         else {
             e.swallow(['touchend', 'touchcancel', 'mouseup'], function(e) {
                 var move = new lime.animation.MoveTo(origin_position);
                 disck_to_move.runAction(move);
+                towerofhanoi.movementSound(1); 
             });
         }
     }
@@ -241,7 +243,6 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .MoveTo(new_position_x, new_position_y)
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
-    towerofhanoi.validMoveSound(); 
     towerofhanoi.verifyWinner(towers, to_tower,disks);
 }
 

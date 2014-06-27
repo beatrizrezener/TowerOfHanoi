@@ -1,9 +1,13 @@
-goog.provide('towerofhanoi.validMoveSound');
-goog.provide('towerofhanoi.invalidMoveSound');
-goog.require('lime.audio.Audio');
+goog.provide('towerofhanoi.movementSound');
 
-towerofhanoi.validMoveSound  = function() {
+towerofhanoi.movementSound  = function(msc_option) {
+
   var validsound = new Audio();
-  validsound.setAttribute("src","sounds/correct_move.wav");
-  validsound.play();
+  if(msc_option == 0){
+    validsound.setAttribute("src","sounds/correct_move.wav");
+    }
+  else{
+    validsound.setAttribute("src","sounds/incorrect_move.wav");
+  }
+    validsound.play();
 }
