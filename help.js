@@ -48,7 +48,7 @@ towerofhanoi.Help = function() {
     this.appendChild(btn_mute);
 
     goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.pause_sound();
+        towerofhanoi.music_sound();
     });
 
 
