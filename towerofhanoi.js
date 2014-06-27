@@ -38,11 +38,11 @@ towerofhanoi.start = function() {
 
 towerofhanoi.loadMenu = function(opt_transition) {
     
-    var scene = new lime.Scene(),
-    layer = new lime.Layer().setPosition(WIDTH / 2, 0);
+ var scene = new lime.Scene(),
+ layer = new lime.Layer().setPosition(WIDTH / 2, 0);
 
-    var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
-    scene.appendChild(maskSprite);
+ var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
+ scene.appendChild(maskSprite);
 
 	var title = new lime.Sprite().setFill('assets/tof.png').setPosition(0, 160);
 	title.qualityRenderer = true;
@@ -52,6 +52,7 @@ towerofhanoi.loadMenu = function(opt_transition) {
 	layer.appendChild(btns);
 
 	var btn = towerofhanoi.makeButton('Play Classic').setPosition(0, 230);
+  towerofhanoi.play_sound_initial();
 	goog.events.listen(btn, 'click', function() {
 	    //towerofhanoi.usemode = towerofhanoi.Mode.CLASSIC;
 	    towerofhanoi.loadClassicMenu();
