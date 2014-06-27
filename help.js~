@@ -78,7 +78,10 @@ towerofhanoi.Help = function() {
     goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();
     });
-    
+  
+     goog.events.listen(btn_next, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.Help_level();
+    }); 
     
     this.appendChild(title);
     this.appendChild(text);
@@ -102,9 +105,7 @@ towerofhanoi.Help = function() {
         towerofhanoi.music_sound();
     });
 
-   goog.events.listen(btn_next, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.Help_level();
-    });
+ 
 
 
 };
@@ -122,18 +123,44 @@ towerofhanoi.Help_level = function() {
             .setFontSize(35)
             .setText("Tower of Hanoi")
             .setPosition(300, 22); 
+    
+      var text = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(28)
+            .setSize(600, -30)
+            .setText("Level 1:Contains three disks") 
+            .setPosition(300, 70);
+    
+       var text2 = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(28)
+            .setSize(600, -70)
+            .setText("Level 2: Contains four disks") 
+            .setPosition(300, 70);
+     
+        var text3 = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(28)
+            .setSize(600, -100)
+            .setText("Level 4: Contains five disks") 
+            .setPosition(300, 70);
 
     
      var btn_back = new towerofhanoi.makeButton("Back")
             .setPosition(100, 600)
             .setSize(700, 600);
+
     goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();
     });
-
-     goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.loadMenu();
-    });
+  
+    this.appendChild(title);
+    this.appendChild(text);
+    this.appendChild(text2);
+    this.appendChild(text3);
 
 
 };
