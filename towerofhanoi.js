@@ -46,17 +46,18 @@ towerofhanoi.loadMenu = function(opt_transition) {
  var maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
  scene.appendChild(maskSprite);
 
-	var title = new lime.Sprite().setFill('assets/tof.png').setPosition(0, 160);
+	var title = new lime.Sprite().setFill('assets/toh3.png').setPosition(0, 160).setSize(490,259);
 	title.qualityRenderer = true;
 	layer.appendChild(title);
 
 	var btns = new lime.Layer().setPosition(0, 120);
 	layer.appendChild(btns);
 
+        var move = new lime.animation.MoveBy(-WIDTH, 0).enableOptimizations();
+
 	var btn = towerofhanoi.makeButton('Play Classic').setPosition(0, 230);
 	goog.events.listen(btn, 'click', function() {
-	    //towerofhanoi.usemode = towerofhanoi.Mode.CLASSIC;
-	    towerofhanoi.loadClassicMenu();
+             btns.runAction(move);
 	});
 	btns.appendChild(btn);
 
@@ -73,8 +74,11 @@ towerofhanoi.loadMenu = function(opt_transition) {
 	});
 	btns.appendChild(btn);
 
+        var btns2 = new towerofhanoi.ClassicMenu().setPosition(WIDTH/2, -120);;
+        btns.appendChild(btns2);
+        
         scene.appendChild(layer);
-    
+        
         /* MUTE */
         var btn_mute = new lime.Sprite()
                 .setSize(65, 65)
