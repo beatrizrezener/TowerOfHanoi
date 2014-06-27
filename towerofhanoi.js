@@ -74,11 +74,6 @@ towerofhanoi.loadMenu = function(opt_transition) {
 	});
 	btns.appendChild(btn);
 
-        var btns2 = new towerofhanoi.ClassicMenu().setPosition(WIDTH/2, -120);;
-        btns.appendChild(btns2);
-        
-        scene.appendChild(layer);
-        
         /* MUTE */
         var btn_mute = new lime.Sprite()
                 .setSize(65, 65)
@@ -86,15 +81,24 @@ towerofhanoi.loadMenu = function(opt_transition) {
                 .setAnchorPoint(0, 0)
                 .setFill('assets/mute.png');
         scene.appendChild(btn_mute);
-
         goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
             towerofhanoi.music_sound();
         });
-        
 
-	// set current scene active
-    towerofhanoi.director.replaceScene(scene, opt_transition ? lime.transitions.MoveInDown : lime.transitions.Dissolve);
-};
+        var btns2 = new towerofhanoi.ClassicMenu().setPosition(WIDTH/2, -120);;
+        var move_back = new lime.animation.MoveBy(WIDTH, 0).enableOptimizations();
+        var btn_back = new towerofhanoi.Button("Menu").setSize(150, 50).setPosition(700, 600);
+        btns2.appendChild(btn_back);
+        goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
+            btns.runAction(move_back);
+        });
+    
+        btns.appendChild(btns2);
+        scene.appendChild(layer);
+	
+    // set current scene active
+        towerofhanoi.director.replaceScene(scene, opt_transition ? lime.transitions.MoveInDown : lime.transitions.Dissolve);
+};  
 
 // helper for same size buttons
 towerofhanoi.makeButton = function(text) {
