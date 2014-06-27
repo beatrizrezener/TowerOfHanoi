@@ -48,6 +48,7 @@ towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_movim
 
       goog.events.listen(back_to_menu, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();
+        towerofhanoi.Game.resetMoviments();
       });
     }
 }

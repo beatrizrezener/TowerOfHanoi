@@ -21,14 +21,15 @@ towerofhanoi.PauseScene = function() {
     var instructions = new lime.Sprite().setSize(600,300).setPosition(100,170).setAnchorPoint(0,0).setFill('assets/instructions2.png');
     layer.appendChild(instructions);    
     
-    var btn_play = new lime.Sprite().setSize(220,50).setPosition(470,500).setAnchorPoint(0,0).setFill('assets/resume.png');
+    var btn_play = new towerofhanoi.Button("RESUME GAME").setSize(220,50).setPosition(585,500).setAnchorPoint(0,0);
     layer.appendChild(btn_play);
     
-    var btn_backtomenu = new lime.Sprite().setSize(220,50).setPosition(100,500).setAnchorPoint(0,0).setFill('assets/backtomenu.png');
+    var btn_backtomenu = new towerofhanoi.Button("BACK TO MENU").setSize(220,50).setPosition(215,500);
     layer.appendChild(btn_backtomenu);
 
     goog.events.listen(btn_backtomenu, ['mousedown', 'touchstart'], function(e){
         towerofhanoi.play();
+        towerofhanoi.Game.resetMoviments();
         towerofhanoi.loadMenu();
     });
     
