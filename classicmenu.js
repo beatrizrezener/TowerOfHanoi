@@ -37,23 +37,23 @@ towerofhanoi.ClassicMenu = function() {
     this.appendChild(btn_level5);
 
     goog.events.listen(btn_level1, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.newGame(3);
+        towerofhanoi.newGame(3,30);
     });
 
     goog.events.listen(btn_level2, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.newGame(4);
+        towerofhanoi.newGame(4,60);
     });
 
     goog.events.listen(btn_level3, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.newGame(5);
+        towerofhanoi.newGame(5,120);
     });
 
     goog.events.listen(btn_level4, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.newGame(6);
+        towerofhanoi.newGame(6,240);
     });
 
     goog.events.listen(btn_level5, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.newGame(7);
+        towerofhanoi.newGame(7,480);
     });
 };
 goog.inherits(towerofhanoi.ClassicMenu, lime.Layer);

@@ -1,7 +1,9 @@
+goog.provide('towerofhanoi.verifyWinnerTimed');
 goog.require('towerofhanoi.Game');
 
 
-towerofhanoi.verifyWinnerTimed = function () {
+towerofhanoi.verifyWinnerTimed = function (maxTime) {
+    
     if(ganhador){
       var scene = new lime.Scene();
 
@@ -36,14 +38,14 @@ towerofhanoi.verifyWinnerTimed = function () {
 
       this.director.replaceScene(scene);
       goog.events.listen(continue_play, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.Game.playAgain(n_disks);
+        towerofhanoi.Game.playAgain(n_disks, maxTime);
       });
 
       goog.events.listen(next_level, ['mousedown', 'touchstart'], function(e) {
         if(n_disks === 7) {
           alert("This is the last level.");
         } else {
-          towerofhanoi.Game.playAgain(n_disks+1);
+          towerofhanoi.Game.playAgain(n_disks+1, maxTime);
         }
       });
 
@@ -77,7 +79,7 @@ towerofhanoi.verifyWinnerTimed = function () {
 
       this.director.replaceScene(scene);
       goog.events.listen(continue_play, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.Game.playAgain(n_disks);
+        towerofhanoi.Game.playAgain(n_disks, maxTime);
       });
 
       goog.events.listen(back_to_menu, ['mousedown', 'touchstart'], function(e) {

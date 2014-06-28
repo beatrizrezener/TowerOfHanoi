@@ -38,6 +38,14 @@ towerofhanoi.start = function() {
     towerofhanoi.play_sound_initial();
 };
 
+/**
+ * enum Modes
+ */
+towerofhanoi.Mode = {
+    CLASSIC: 0,
+    TIMED: 1
+};
+
 towerofhanoi.loadMenu = function(opt_transition) {
     
  var scene = new lime.Scene(),
@@ -57,14 +65,15 @@ towerofhanoi.loadMenu = function(opt_transition) {
 
 	var btn = towerofhanoi.makeButton('Play Classic').setPosition(0, 230);
 	goog.events.listen(btn, 'click', function() {
-             btns.runAction(move);
+            towerofhanoi.usemode = towerofhanoi.Mode.CLASSIC; 
+            btns.runAction(move);
 	});
 	btns.appendChild(btn);
 
 	btn = towerofhanoi.makeButton('Play Timed').setPosition(0, 330);
 	goog.events.listen(btn, 'click', function() {
-	    //towerofhanoi.usemode = towerofhanoi.Mode.TIMED;
-	    //alert('timed');
+	    towerofhanoi.usemode = towerofhanoi.Mode.TIMED;
+            btns.runAction(move);
 	});
 	btns.appendChild(btn);
 
@@ -118,9 +127,9 @@ towerofhanoi.loadHelpScene = function() {
 };
 
 // load new game scene
-towerofhanoi.newGame = function(qtyDiscs) {
+towerofhanoi.newGame = function(qtyDiscs, maxTime) {
     towerofhanoi.music_sound();
-    var scene = new towerofhanoi.Game(qtyDiscs);
+    var scene = new towerofhanoi.Game(qtyDiscs, maxTime);
     maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
     scene.appendChild(maskSprite);
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
@@ -148,6 +157,7 @@ towerofhanoi.time = function(){
       setTimeout(function(){"time()"}, 1000);
       t = t - 1;
       layer.appendChild(time);
+      scene.appendChild(layer);
     }
     else
     {

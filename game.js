@@ -1,8 +1,10 @@
 goog.provide('towerofhanoi.Game');
 goog.require('towerofhanoi.verifyWinner');
+goog.require('towerofhanoi.verifyWinnerTimed');
 goog.require('towerofhanoi.SetOfDiscs');
 goog.require('towerofhanoi.movementSound');
 goog.require('towerofhanoi.music_sound');
+goog.require('towerofhanoi.ProgressBar');
 
 var cont_moviments = 0;
 var t = 300;
@@ -11,10 +13,13 @@ var t = 300;
  */
 
 var disks = 0;
-towerofhanoi.Game = function(qtyDiscs) {
-    disks = qtyDiscs;
-
+towerofhanoi.Game = function(qtyDiscs, maxTime) {
     lime.Scene.call(this);
+    
+    maxTime ? this.maxTime = maxTime: this.maxTime = 0;
+    this.curTime = maxTime;
+    
+    disks = qtyDiscs;
 
     this.cont_moviments = 0;
 
@@ -74,7 +79,7 @@ towerofhanoi.Game = function(qtyDiscs) {
     layer.appendChild(btn_replay);
     goog.events.listen(btn_replay, ['mousedown', 'touchstart'], function(e) {
         if (confirm("Restart the game?")) {
-            towerofhanoi.Game.playAgain(qtyDiscs);
+            towerofhanoi.Game.playAgain(qtyDiscs, maxTime);
         }
     });
 
@@ -154,6 +159,23 @@ towerofhanoi.Game = function(qtyDiscs) {
     towers[0] = discsLeftTower;
     towers[1] = new Array();
     towers[2] = new Array();
+    
+    // Timed Mode
+    if (towerofhanoi.usemode === towerofhanoi.Mode.TIMED) {
+        
+        this.time_lbl = new lime.Label().setFontFamily('Trebuchet MS').setFontColor('#D8BFD8')
+            .setFontSize(24).setPosition(680, 22).setText('Time left:').setAnchorPoint(1, 0)
+            .setFontWeight(700).setSize(300, 30).setAlign('right');
+        layer.appendChild(this.time_lbl);
+
+        // time left progressbar
+        this.time_left = new towerofhanoi.ProgressBar().setPosition(356, 90);
+        layer.appendChild(this.time_left);
+
+        //decrease time on every second
+        lime.scheduleManager.scheduleWithDelay(this.decreaseTime, this, 1000);
+     }
+    
 
     /* validation methods */
 
@@ -227,14 +249,31 @@ towerofhanoi.Game = function(qtyDiscs) {
 };
 goog.inherits(towerofhanoi.Game, lime.Scene);
 
+
+/**
+ * Subtract one second from left time in timed mode
+ */
+towerofhanoi.Game.prototype.decreaseTime = function() {
+    this.curTime--;
+    if (this.curTime < 1) {
+        //falhará, pois o método está incompleto
+        towerofhanoi.verifyWinnerTimed(this.maxTimed);
+    }
+    // update progressbar
+    this.time_left.setProgress(this.curTime / this.maxTime);
+};
+
+towerofhanoi.Game.prototype.getMaxTime = function() {
+    return this.maxTime;
+}
+
 function incrementMoviments(moviments, from_tower, to_tower) {
     if (from_tower !== to_tower) {
         cont_moviments += 1;
     }
     moviments.setText(cont_moviments);
 
-}
-;
+};
 
 function verifyDiscSize(towers, from_tower, to_tower) {
     if (towers[to_tower].length === 0) {
@@ -258,7 +297,6 @@ function verifyDiscSize(towers, from_tower, to_tower) {
     return;
 }
 
-
 function moveDisc(towers, from_tower, to_tower, old_position) {
     var from_top_disc = towers[from_tower].pop();
     var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
@@ -269,14 +307,19 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .MoveTo(new_position_x, new_position_y)
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
-    towerofhanoi.verifyWinner(towers, to_tower,disks, cont_moviments);
+    if(towerofhanoi.usemode === towerofhanoi.Mode.CLASSIC) {
+        towerofhanoi.verifyWinner(towers, to_tower,disks, cont_moviments);
+    } else {
+        //falhará, pois o método está incompleto
+        towerofhanoi.verifyWinnerTimed(this.maxTimed);
+    }
 }
 
-towerofhanoi.Game.playAgain = function(qtyDiscs) {
+towerofhanoi.Game.playAgain = function(qtyDiscs, maxTime) {
     towerofhanoi.Game.resetMoviments();
-    towerofhanoi.newGame(qtyDiscs);
-}
+    towerofhanoi.newGame(qtyDiscs, maxTime);
+};
 
 towerofhanoi.Game.resetMoviments  = function(qtyDiscs) {
     cont_moviments = 0;
-}
+};
