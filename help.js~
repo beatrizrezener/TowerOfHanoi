@@ -32,7 +32,7 @@ towerofhanoi.Help = function() {
 
      var game_instructon = new lime.Sprite()
             .setSize(550, 550)
-            .setPosition(100, 175)
+            .setPosition(120, 185)
             .setAnchorPoint(0, 0)
             .setFill('assets/instructions3.png');
 
@@ -155,22 +155,22 @@ towerofhanoi.Help_level = function() {
              .setPosition(400, 70);
 
 
- //       var text4 = new lime.Label().setAlign('center')
- //           .setFontFamily('"Trebuchet MS"')
- //           .setFontColor('#000080')
- //           .setFontSize(28)
- //           .setSize(600, -260)
- //           .setText("Level 5: Contains five disks") 
- //           .setPosition(300, 70);
+        var text8 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#1C1C1C')
+             .setFontSize(23)
+             .setSize(600, -700)
+             .setText("Level 5") 
+             .setPosition(150, 70);
        
       
-//        var text5 = new lime.Label().setAlign('center')
-//            .setFontFamily('"Trebuchet MS"')
-//            .setFontColor('#000080')
-//            .setFontSize(28)
-//            .setSize(600, -360)
-//            .setText("Em construcao!! ") 
-//            .setPosition(300, 70);
+        var text9 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#000080')
+             .setFontSize(20)
+             .setSize(600, -755)
+             .setText("The fifth level and the more difficult it contains seven discs and get win and a great challenge.") 
+             .setPosition(400, 70);
 
      var btn_previous = new towerofhanoi.makeButton("Previous")
             .setPosition(100, 600)
@@ -198,6 +198,8 @@ towerofhanoi.Help_level = function() {
     this.appendChild(text5);
     this.appendChild(text6);
     this.appendChild(text7);
+    this.appendChild(text8);
+    this.appendChild(text9);
     this.appendChild(btn_previous);  
     this.appendChild(btn_menu);
 
