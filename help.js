@@ -95,49 +95,49 @@ towerofhanoi.Help_level = function() {
             .setFontColor('#000080')
             .setFontSize(23)
             .setSize(600, -50)
-            .setText("Level 1:Contains one disks") 
-            .setPosition(300, 70);      
+            .setText("Level 1:The first larval level contains only three discs, with the objetido pass these three discs without any disc is higher upon lower using the three towers as aids in this task. This nivem is suitable for beginners.") 
+            .setPosition(400, 70);      
 
-      var text1 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -100)
-            .setText("Level 2:Contains two disks") 
-            .setPosition(300, 70);  
+       var text1 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#000080')
+             .setFontSize(23)
+             .setSize(600, -250)
+             .setText("Level 2:The second level is increased one pocuo the difficulty instead of three disks on the second level we have a total of four drives.") 
+             .setPosition(400, 70);  
   
-      var text2 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -150)
-            .setText("Level 3:Contains three disks") 
-            .setPosition(300, 70);
+       var text2 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#000080')
+             .setFontSize(23)
+             .setSize(600, -400)
+             .setText("Level 3:The third level is further increased the degree of difficulty instead of three disks on the second level we have a total of five discs.") 
+             .setPosition(400, 70);
     
-       var text3 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -200)
-            .setText("Level 4: Contains four disks") 
-            .setPosition(300, 70);
+ //      var text3 = new lime.Label().setAlign('center')
+ //           .setFontFamily('"Trebuchet MS"')
+ //           .setFontColor('#000080')
+ //           .setFontSize(28)
+ //           .setSize(600, -200)
+ //           .setText("Level 4: Contains four disks") 
+ //           .setPosition(300, 70);
      
-        var text4 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -260)
-            .setText("Level 5: Contains five disks") 
-            .setPosition(300, 70);
+ //       var text4 = new lime.Label().setAlign('center')
+ //           .setFontFamily('"Trebuchet MS"')
+ //           .setFontColor('#000080')
+ //           .setFontSize(28)
+ //           .setSize(600, -260)
+ //           .setText("Level 5: Contains five disks") 
+ //           .setPosition(300, 70);
        
       
-        var text5 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -360)
-            .setText("Em construcao!! ") 
-            .setPosition(300, 70);
+//        var text5 = new lime.Label().setAlign('center')
+//            .setFontFamily('"Trebuchet MS"')
+//            .setFontColor('#000080')
+//            .setFontSize(28)
+//            .setSize(600, -360)
+//            .setText("Em construcao!! ") 
+//            .setPosition(300, 70);
 
      var btn_previous = new towerofhanoi.makeButton("Previous")
             .setPosition(100, 600)
@@ -160,11 +160,11 @@ towerofhanoi.Help_level = function() {
     this.appendChild(text);
     this.appendChild(text1);
     this.appendChild(text2);
-    this.appendChild(text3);
-    this.appendChild(text4);
-    this.appendChild(text5);
-    this.appendChild(btn_previous);  
-    this.appendChild(btn_menu);
+ //   this.appendChild(text3);
+ //   this.appendChild(text4);
+ //   this.appendChild(text5);
+      this.appendChild(btn_previous);  
+      this.appendChild(btn_menu);
 
      /* MUTE */
     var btn_mute = new lime.Sprite()
