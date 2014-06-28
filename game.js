@@ -308,7 +308,7 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
     from_top_disc.runAction(disc_movement);
     var obj = new _winner();
     classic_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments};
-    pro_mode_args = [this.maxTime,cont_moviments];
+    pro_mode_args = {max_time:this.maxTime,cont_moviments:cont_moviments};
     if(towerofhanoi.usemode === towerofhanoi.Mode.CLASSIC) {
         obj.verifyWinner(classic_mode_args);
     } 

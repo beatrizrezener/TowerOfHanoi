@@ -1,5 +1,8 @@
 goog.provide("towerofhanoi.winner_design");
- towerofhanoi.winner_design = function winner_design(number_of_moviments,n_disks){
+ towerofhanoi.winner_design = function winner_design(args){
+   
+    var n_disks = args["disks"];
+    var number_of_moviments = args["cont_moviments"]
 
 
       var scene = new lime.Scene();
@@ -8,8 +11,9 @@ goog.provide("towerofhanoi.winner_design");
 
       towerofhanoi.play_sound_win();
 
-      number_of_moviments += 1;
-      score(layer, number_of_moviments, n_disks);
+      args["cont_moviments"] = args["cont_moviments"] += 1;
+      
+      score(layer,args);
       
       var continue_play = new towerofhanoi.Button("PLAY AGAIN")
         .setSize(200, 100)
@@ -52,7 +56,11 @@ goog.provide("towerofhanoi.winner_design");
       });
     }
 
-function score(layer, number_of_moviments, qtyDiscs) {
+function score(layer,args) {
+    if(Object.keys(args).length == 2){
+      qtyDiscs = args["disks"];
+      number_of_moviments = args["cont_moviments"];
+      alert(number_of_moviments);
     var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
     var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
     var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
@@ -80,5 +88,10 @@ function score(layer, number_of_moviments, qtyDiscs) {
             .setAnchorPoint(0, 0)
             .setFill('assets/one_star.png');
         layer.appendChild(one_star);
+    }
+ }
+    else{
+      alert("pro");
+
     }
 }
