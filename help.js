@@ -32,7 +32,7 @@ towerofhanoi.Help = function() {
 
      var game_instructon = new lime.Sprite()
             .setSize(550, 550)
-            .setPosition(100, 175)
+            .setPosition(120, 185)
             .setAnchorPoint(0, 0)
             .setFill('assets/instructions3.png');
 
@@ -92,52 +92,85 @@ towerofhanoi.Help_level = function() {
 
        var text = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
+            .setFontColor('#1C1C1C')
             .setFontSize(23)
-            .setSize(600, -50)
-            .setText("Level 1:Contains one disks") 
-            .setPosition(300, 70);      
+            .setSize(200, -50)
+            .setText("Level 1") 
+            .setPosition(150, 70);      
 
-      var text1 = new lime.Label().setAlign('center')
+       var text1 = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
-            .setFontSize(28)
+            .setFontSize(20)
             .setSize(600, -100)
-            .setText("Level 2:Contains two disks") 
-            .setPosition(300, 70);  
+            .setText("The first larval level contains only three discs, with the objetido pass these three discs without any disc is higher upon lower using the three towers as aids in this task. This nivem is suitable for beginners.") 
+            .setPosition(400, 70); 
+
+       var text2 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#1C1C1C')
+             .setFontSize(23)
+             .setSize(600, -250)
+             .setText("Level 2") 
+             .setPosition(150, 70);  
+       
+      var text3 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#000080')
+             .setFontSize(20)
+             .setSize(600, -300)
+             .setText("The second level is increased one pocuo the difficulty instead of three disks on the second level we have a total of four drives.") 
+             .setPosition(400, 70);  
   
-      var text2 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -150)
-            .setText("Level 3:Contains three disks") 
-            .setPosition(300, 70);
+       var text4 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+              .setFontColor('#1C1C1C')
+             .setFontSize(23)
+             .setSize(600, -400)
+             .setText("Level 3.") 
+             .setPosition(150, 70);
+
+     var text5 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+              .setFontColor('#000080')
+             .setFontSize(20)
+             .setSize(600, -450)
+             .setText("The third level is further increased the degree of difficulty instead of three disks on the second level we have a total of five discs.") 
+             .setPosition(400, 70);
     
-       var text3 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -200)
-            .setText("Level 4: Contains four disks") 
-            .setPosition(300, 70);
+        var text6 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#1C1C1C')
+             .setFontSize(23)
+             .setSize(600, -545)
+             .setText("Level 4") 
+             .setPosition(150, 70);
      
-        var text4 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -260)
-            .setText("Level 5: Contains five disks") 
-            .setPosition(300, 70);
+       var text7 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#000080')
+             .setFontSize(20)
+             .setSize(600, -600)
+             .setText("The third quarter the degree of difficulty increases significantly the investment of five disks on the second level we have a total of six disks.") 
+             .setPosition(400, 70);
+
+
+        var text8 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#1C1C1C')
+             .setFontSize(23)
+             .setSize(600, -700)
+             .setText("Level 5") 
+             .setPosition(150, 70);
        
       
-        var text5 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(28)
-            .setSize(600, -360)
-            .setText("Em construcao!! ") 
-            .setPosition(300, 70);
+        var text9 = new lime.Label().setAlign('center')
+             .setFontFamily('"Trebuchet MS"')
+             .setFontColor('#000080')
+             .setFontSize(20)
+             .setSize(600, -755)
+             .setText("The fifth level and the more difficult it contains seven discs and get win and a great challenge.") 
+             .setPosition(400, 70);
 
      var btn_previous = new towerofhanoi.makeButton("Previous")
             .setPosition(100, 600)
@@ -163,6 +196,10 @@ towerofhanoi.Help_level = function() {
     this.appendChild(text3);
     this.appendChild(text4);
     this.appendChild(text5);
+    this.appendChild(text6);
+    this.appendChild(text7);
+    this.appendChild(text8);
+    this.appendChild(text9);
     this.appendChild(btn_previous);  
     this.appendChild(btn_menu);
 
