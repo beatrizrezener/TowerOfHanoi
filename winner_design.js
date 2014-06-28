@@ -57,10 +57,10 @@ goog.provide("towerofhanoi.winner_design");
     }
 
 function score(layer,args) {
+    //classic mode
     if(Object.keys(args).length == 2){
       qtyDiscs = args["disks"];
       number_of_moviments = args["cont_moviments"];
-      alert(number_of_moviments);
     var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
     var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
     var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
@@ -91,7 +91,34 @@ function score(layer,args) {
     }
  }
     else{
-      alert("pro");
 
+    var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
+    var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
+    var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
+
+    if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
+        var three_stars = new lime.Sprite()
+            .setSize(512, 256)
+            .setPosition(135, 60)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/three_stars.png');
+        layer.appendChild(three_stars);
     }
+    if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){
+        var two_stars = new lime.Sprite()
+            .setSize(512, 256)
+            .setPosition(135, 60)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/two_stars.png');
+        layer.appendChild(two_stars);
+    }
+    if(number_of_moviments >= number_moviments_one_star){
+        var one_star = new lime.Sprite()
+            .setSize(512, 256)
+            .setPosition(135, 60)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/one_star.png');
+        layer.appendChild(one_star);
+    }
+}
 }

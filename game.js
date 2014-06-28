@@ -4,6 +4,7 @@ goog.require('towerofhanoi.SetOfDiscs');
 goog.require('towerofhanoi.movementSound');
 goog.require('towerofhanoi.music_sound');
 goog.require('towerofhanoi.ProgressBar');
+goog.require('towerofhanoi.end_design');
 
 var cont_moviments = 0;
 var t = 300;
@@ -158,6 +159,8 @@ towerofhanoi.Game = function(qtyDiscs, maxTime) {
     towers[0] = discsLeftTower;
     towers[1] = new Array();
     towers[2] = new Array();
+    this.valid = true;
+
     
     // Timed Mode
     if (towerofhanoi.usemode === towerofhanoi.Mode.TIMED) {
@@ -172,7 +175,9 @@ towerofhanoi.Game = function(qtyDiscs, maxTime) {
         layer.appendChild(this.time_left);
 
         //decrease time on every second
+        if(this.valid == true){
         lime.scheduleManager.scheduleWithDelay(this.decreaseTime, this, 1000);
+        }
      }
     
 
@@ -252,15 +257,17 @@ goog.inherits(towerofhanoi.Game, lime.Scene);
 /**
  * Subtract one second from left time in timed mode
  */
+var act_time = 0;
 towerofhanoi.Game.prototype.decreaseTime = function() {
     this.curTime--;
-    if (this.curTime < 1) {
-        //falhará, pois o método está incompleto
-        towerofhanoi.verifyWinnerTimed(this.maxTimed);
-    }
-    // update progressbar
     this.time_left.setProgress(this.curTime / this.maxTime);
+    if (this.curTime < 1) {
+    //Stop recursive calls of clock
+    this.curTime = 50000000;
+    towerofhanoi.end_design();
 };
+}
+
 
 towerofhanoi.Game.prototype.getMaxTime = function() {
     return this.maxTime;
@@ -295,7 +302,6 @@ function verifyDiscSize(towers, from_tower, to_tower) {
     }
     return;
 }
-
 function moveDisc(towers, from_tower, to_tower, old_position) {
     var from_top_disc = towers[from_tower].pop();
     var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
@@ -308,7 +314,8 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
     from_top_disc.runAction(disc_movement);
     var obj = new _winner();
     classic_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments};
-    pro_mode_args = {max_time:this.maxTime,cont_moviments:cont_moviments};
+    alert(this.maxTime);
+    pro_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments,act_time:act_time};
     if(towerofhanoi.usemode === towerofhanoi.Mode.CLASSIC) {
         obj.verifyWinner(classic_mode_args);
     } 

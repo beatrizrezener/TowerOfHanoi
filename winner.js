@@ -14,6 +14,7 @@ function _winner() {
 
   this.pro_verify  = function classic_verify(args){
     max_time = args["max_time"];
+    alert("max_time:" + max_time);
     return max_time != 0;
   }
 
@@ -24,10 +25,11 @@ this.verifyWinner = function verifyWinner(args){
           towerofhanoi.winner_design(args_classic);
         }
     }
-    if(Object.keys(args).length == 2){
-      if(this.pro_verify && this.game_verify(args)){
-        towerofhanoi.winner_design(args);
+    if(Object.keys(args).length == 5){
+        if(this.game_verify(args)){
+          args_pro = {cont_moviments:args["cont_moviments"],disks:args["disks"],max_time:args["max_time"]};
+        towerofhanoi.winner_design(args_pro);
     }
-  }
-}
+      }
+      }
 }
