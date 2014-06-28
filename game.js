@@ -19,7 +19,7 @@ towerofhanoi.Game = function(qtyDiscs, maxTime) {
     
     maxTime ? this.maxTime = maxTime: this.maxTime = 0;
     this.curTime = maxTime;
-    
+
     disks = qtyDiscs;
 
     this.cont_moviments = 0;
@@ -201,11 +201,11 @@ towerofhanoi.Game = function(qtyDiscs, maxTime) {
         return [actual_tower, 0, actual_disck.getSize().width];
     }
     
-    function moveOnlyFromTop(towers, list_tower, disck_to_move, origin_position, e) {
+    function moveOnlyFromTop(towers, list_tower, disck_to_move, origin_position, e, maxTime) {
         disk_of_top = towers[list_tower[0]][towers[list_tower[0]].length - 1];
         var disk_to_move_size = list_tower[2];
         if (parseInt(disk_to_move_size) == parseInt(disk_of_top.getSize().width) && verifyDiscSize(towers, list_tower[0], list_tower[1])) {
-            moveDisc(towers, list_tower[0], list_tower[1], origin_position);
+            moveDisc(towers, list_tower[0], list_tower[1], origin_position, maxTime);
             towerofhanoi.movementSound(0);
             incrementMoviments(moviments, list_tower[0], list_tower[1]);
         }
@@ -229,18 +229,18 @@ towerofhanoi.Game = function(qtyDiscs, maxTime) {
             if (jQuery.inArray(this, towers[0]) !== NO_SUCH_OBJECT) {
                 var list = [];
                 list = checkTowerPositToMoveDisk(this, 0);
-                moveOnlyFromTop(towers, list, this, origin_position, e);
+                moveOnlyFromTop(towers, list, this, origin_position, e, maxTime);
             }
             else if (jQuery.inArray(this, towers[1]) !== NO_SUCH_OBJECT) {
                 var list = [];
                 list = checkTowerPositToMoveDisk(this, 1);
-                moveOnlyFromTop(towers, list, this, origin_position, e);
+                moveOnlyFromTop(towers, list, this, origin_position, e, maxTime);
 
             }
             else if (jQuery.inArray(this, towers[2]) !== NO_SUCH_OBJECT) {
                 var list = [];
                 list = checkTowerPositToMoveDisk(this, 2);
-                moveOnlyFromTop(towers, list, this, origin_position, e);
+                moveOnlyFromTop(towers, list, this, origin_position, e, maxTime);
             }
         });
         e.event.stopPropagation();
@@ -310,7 +310,7 @@ function verifyDiscSize(towers, from_tower, to_tower) {
     }
     return;
 }
-function moveDisc(towers, from_tower, to_tower, old_position) {
+function moveDisc(towers, from_tower, to_tower, old_position, maxTime) {
     var from_top_disc = towers[from_tower].pop();
     var x_move = (to_tower - from_tower) * DISTANCE_BETWEEN_TOWERS;
     var new_position_x = (parseInt(old_position.x) + x_move);
@@ -322,7 +322,7 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
     from_top_disc.runAction(disc_movement);
     var obj = new _winner();
     classic_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments};
-    pro_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments,act_time:act_value};
+    pro_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments,act_time:act_value, maxTime:maxTime};
 
     if(towerofhanoi.usemode === towerofhanoi.Mode.CLASSIC) {
         obj.verifyWinner(classic_mode_args);

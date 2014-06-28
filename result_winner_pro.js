@@ -63,46 +63,75 @@ goog.provide("towerofhanoi.result_winner_pro");
     }
 
 function score(layer,args) {
-    //classic mode
-    if(Object.keys(args).length == 2){
     qtyDiscs = args["disks"];
     number_of_moviments = args["cont_moviments"];
     var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1
     var number_moviments_two_stars = ((Math.pow(2, qtyDiscs)) - 1) + (((Math.pow(2, qtyDiscs)) - 1)/2)
     var number_moviments_one_star = ((Math.pow(2, qtyDiscs)) - 1) + ((Math.pow(2, qtyDiscs)) - 1)
 
-    if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
-        var three_stars = new lime.Sprite()
+    var three_stars = new lime.Sprite()
             .setSize(512, 256)
             .setPosition(135, 60)
             .setAnchorPoint(0, 0)
             .setFill('assets/three_stars.png');
-        layer.appendChild(three_stars);
-    }
-    if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){
-        var two_stars = new lime.Sprite()
+    var two_stars = new lime.Sprite()
             .setSize(512, 256)
             .setPosition(135, 60)
             .setAnchorPoint(0, 0)
             .setFill('assets/two_stars.png');
-        layer.appendChild(two_stars);
-    }
-    if(number_of_moviments >= number_moviments_one_star){
-        var one_star = new lime.Sprite()
+    var one_star = new lime.Sprite()
             .setSize(512, 256)
             .setPosition(135, 60)
             .setAnchorPoint(0, 0)
             .setFill('assets/one_star.png');
+
+    //classic mode    
+    if(Object.keys(args).length == 2){    
+      if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
+        layer.appendChild(three_stars);
+      }
+      if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){        
+        layer.appendChild(two_stars);
+      }
+      if(number_of_moviments >= number_moviments_one_star){  
         layer.appendChild(one_star);
+      }
     }
- }
     else{
     //pro mode 
     qtyDiscs = args["disks"];
     number_of_moviments = args["cont_moviments"];
     //Time exato de quando o jogador resolve a torre.
     time = args["act_time"];
-    //Function to calc stars in pro mode
+    maxTime = args["maxTime"];
 
-}
+    time_three_stars = maxTime/3;
+    time_two_stars = (maxTime/3)*2;
+    time_one_star = maxTime;
+    //Function to calc stars in pro mode
+    if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
+        if(time <= time_three_stars){
+          layer.appendChild(three_stars);
+        }
+        if(time <= time_two_stars){
+          layer.appendChild(two_stars);
+        }
+        if(time <= time_one_star){
+          layer.appendChild(one_star);
+        }
+        
+      }
+      if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){        
+        if(time <= time_two_stars){
+          layer.appendChild(two_stars);
+        }
+        if(time <= time_one_star){
+          layer.appendChild(one_star);
+        }
+      }
+      if(number_of_moviments >= number_moviments_one_star){  
+        layer.appendChild(one_star);
+      }
+
+    }
 }
