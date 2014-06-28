@@ -18,7 +18,7 @@ this.verifyWinner = function verifyWinner(args){
           towerofhanoi.result_winner_pro(args_classic);
         }
     }
-    if(Object.keys(args).length == 6){
+    if(Object.keys(args).length == 5){
         if(this.game_verify(args)){
         args_pro = {cont_moviments:args["cont_moviments"],disks:args["disks"],act_time:args["act_time"]};
         towerofhanoi.result_winner_pro(args_pro);
