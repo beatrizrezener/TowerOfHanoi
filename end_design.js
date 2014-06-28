@@ -1,6 +1,6 @@
 goog.provide("towerofhanoi.end_design");
 
-towerofhanoi.end_design = function(){
+towerofhanoi.end_design = function(n_disks){
     var scene = new lime.Scene();
     var layer = new lime.Layer();
 

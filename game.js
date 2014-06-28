@@ -8,6 +8,7 @@ goog.require('towerofhanoi.end_design');
 
 var cont_moviments = 0;
 var t = 300;
+act_value = 0;
 /**
  * Game scene for Tower of Hanoi game.
  */
@@ -257,17 +258,24 @@ goog.inherits(towerofhanoi.Game, lime.Scene);
 /**
  * Subtract one second from left time in timed mode
  */
-var act_time = 0;
+
+
 towerofhanoi.Game.prototype.decreaseTime = function() {
     this.curTime--;
     this.time_left.setProgress(this.curTime / this.maxTime);
+    this.dataProgress(this.curTime/this.maxTime);
+    //this.act_time = this.curTime / this.maxTime;
     if (this.curTime < 1) {
     //Stop recursive calls of clock
     this.curTime = 50000000;
-    towerofhanoi.end_design();
+    towerofhanoi.end_design(disks);
 };
 }
 
+towerofhanoi.Game.prototype.dataProgress = function(value){
+  act_value = value;
+  return this.act_value;
+};
 
 towerofhanoi.Game.prototype.getMaxTime = function() {
     return this.maxTime;
@@ -314,8 +322,8 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
     from_top_disc.runAction(disc_movement);
     var obj = new _winner();
     classic_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments};
-    alert(this.maxTime);
-    pro_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments,act_time:act_time};
+    pro_mode_args = {towers:towers,to_tower:to_tower,disks:disks,cont_moviments:cont_moviments,act_time:act_value};
+
     if(towerofhanoi.usemode === towerofhanoi.Mode.CLASSIC) {
         obj.verifyWinner(classic_mode_args);
     } 
