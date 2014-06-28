@@ -16,10 +16,7 @@ towerofhanoi.result_winner_pro = function result_winner_pro(args){
       
       score(layer,args);
       
-      var win  = new lime.Label().setText("YOU WIN").setFontFamily('Verdana')
-        .setFontColor('#c00').setFontSize(40)
-        .setPosition(250, 200);
-
+      var win  = new lime.Label();
 
       var continue_play = new towerofhanoi.Button("PLAY AGAIN")
         .setSize(200, 100)
