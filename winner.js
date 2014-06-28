@@ -1,22 +1,19 @@
-goog.provide('towerofhanoi.verifyWinner');
+goog.provide('_winner');
 goog.require('towerofhanoi.Game');
 
 
-towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_moviments) {
+function _winner() {
 
-  if(!has_time){
-    if (towers[to_tower].length == n_disks && to_tower != 0) {
-      winner_design(number_of_moviments,n_disks);
-   }
+  var verifyWinnerClassic;
+
+this.verifyWinner = function verifyWinner(args){
+    if(args.length == 4){
+      alert("classic");
+    }
+    if(args.length == 2){
+      alert("pro");
+    }
   }
-  else{
-    
-  }
-}
-
-towerofhanoi.verifyWinner = function (maxTime) {
-  alert("ok");
-
 }
 
 function winner_design(number_of_moviments,n_disks){
