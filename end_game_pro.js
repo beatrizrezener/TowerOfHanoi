@@ -6,6 +6,9 @@ towerofhanoi.end_game_pro = function(n_disks){
 
     towerofhanoi.play_sound_lost();
 
+      var loose  = new lime.Label().setText("YOU LOSE").setFontFamily('Verdana')
+        .setFontColor('#c00').setFontSize(40)
+        .setPosition(250, 200);
   
     var continue_play = new towerofhanoi.Button("PLAY AGAIN")
       .setSize(200, 100)
@@ -21,6 +24,7 @@ towerofhanoi.end_game_pro = function(n_disks){
 
     layer.appendChild(continue_play);
     layer.appendChild(back_to_menu);
+    layer.appendChild(loose);
     scene.appendChild(layer);
 
     towerofhanoi.director.replaceScene(scene);

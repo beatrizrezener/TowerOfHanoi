@@ -11,12 +11,6 @@ function _winner() {
     return towers[to_tower].length == disks && to_tower != 0;
   }
 
-  this.pro_verify  = function classic_verify(args){
-    max_time = args["max_time"];
-    alert("max_time:" + max_time);
-    return max_time != 0;
-  }
-
 this.verifyWinner = function verifyWinner(args){
     if(Object.keys(args).length == 4){
         if(this.game_verify(args)){

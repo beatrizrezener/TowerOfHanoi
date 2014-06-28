@@ -15,6 +15,11 @@ goog.provide("towerofhanoi.result_winner_pro");
       
       score(layer,args);
       
+      var win  = new lime.Label().setText("YOU WIN").setFontFamily('Verdana')
+        .setFontColor('#c00').setFontSize(40)
+        .setPosition(250, 200);
+
+
       var continue_play = new towerofhanoi.Button("PLAY AGAIN")
         .setSize(200, 100)
         .setPosition(250, 360);
@@ -35,6 +40,7 @@ goog.provide("towerofhanoi.result_winner_pro");
       layer.appendChild(continue_play);
       layer.appendChild(back_to_menu);
       layer.appendChild(next_level);
+      layer.appendChild(win);
       scene.appendChild(layer);
 
       towerofhanoi.director.replaceScene(scene);
