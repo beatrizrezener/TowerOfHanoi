@@ -1,22 +1,32 @@
 goog.provide('_winner');
+goog.provide('towerofhanoi.winner_design');
 goog.require('towerofhanoi.Game');
 
 
 function _winner() {
 
-  var verifyWinnerClassic;
+
+  this.classic_verify = function classic_verify(args){
+    towers = args["towers"];
+    to_tower = args["to_tower"];
+    disks = args["disks"];
+    return towers[to_tower].length == disks && to_tower != 0;
+  }
 
 this.verifyWinner = function verifyWinner(args){
-    if(args.length == 4){
-      alert("classic");
+  //alert(Object.keys(args).length);
+    if(Object.keys(args).length == 4){
+        if(this.classic_verify(args)){
+          winner_design(args["cont_moviments"],args["disks"]);
+        }
     }
-    if(args.length == 2){
-      alert("pro");
+    if(Object.keys(args).length == 2){
     }
   }
 }
 
-function winner_design(number_of_moviments,n_disks){
+ function winner_design(number_of_moviments,n_disks){
+
 
       var scene = new lime.Scene();
 
@@ -49,7 +59,7 @@ function winner_design(number_of_moviments,n_disks){
       layer.appendChild(next_level);
       scene.appendChild(layer);
 
-      this.director.replaceScene(scene);
+      towerofhanoi.director.replaceScene(scene);
       goog.events.listen(continue_play, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.Game.playAgain(n_disks);
       });
