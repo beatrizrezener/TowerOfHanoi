@@ -3,7 +3,24 @@ goog.require('towerofhanoi.Game');
 
 
 towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_moviments) {
-    if (towers[to_tower].length == n_disks && to_tower != 0 ) {
+
+  if(!has_time){
+    if (towers[to_tower].length == n_disks && to_tower != 0) {
+      winner_design(number_of_moviments,n_disks);
+   }
+  }
+  else{
+    
+  }
+}
+
+towerofhanoi.verifyWinner = function (maxTime) {
+  alert("ok");
+
+}
+
+function winner_design(number_of_moviments,n_disks){
+
       var scene = new lime.Scene();
 
       var layer = new lime.Layer();
@@ -53,7 +70,6 @@ towerofhanoi.verifyWinner = function (towers, to_tower, n_disks, number_of_movim
         towerofhanoi.Game.resetMoviments();
       });
     }
-}
 
 function score(layer, number_of_moviments, qtyDiscs) {
     var number_moviments_three_stars = (Math.pow(2, qtyDiscs)) - 1

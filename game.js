@@ -1,6 +1,5 @@
 goog.provide('towerofhanoi.Game');
 goog.require('towerofhanoi.verifyWinner');
-goog.require('towerofhanoi.verifyWinnerTimed');
 goog.require('towerofhanoi.SetOfDiscs');
 goog.require('towerofhanoi.movementSound');
 goog.require('towerofhanoi.music_sound');
@@ -308,10 +307,10 @@ function moveDisc(towers, from_tower, to_tower, old_position) {
             .setDuration(1);
     from_top_disc.runAction(disc_movement);
     if(towerofhanoi.usemode === towerofhanoi.Mode.CLASSIC) {
-        towerofhanoi.verifyWinner(towers, to_tower,disks, cont_moviments);
+        towerofhanoi.verifyWinner(towers, to_tower,disks, cont_moviments,false,0);
     } else {
         //falhará, pois o método está incompleto
-        towerofhanoi.verifyWinnerTimed(this.maxTimed);
+        towerofhanoi.verifyWinner(this.maxTime);
     }
 }
 
