@@ -67,6 +67,7 @@ towerofhanoi.Help = function() {
     var btn_back = new towerofhanoi.makeButton("Back")
             .setPosition(100, 600)
             .setSize(125, 50);
+
     goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();
     });
@@ -128,16 +129,15 @@ towerofhanoi.Help_level = function() {
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
-            .setSize(600, 10)
+            .setSize(600, -50)
             .setText("Level 1:Contains one disks") 
             .setPosition(300, 70);      
-
 
       var text1 = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
-            .setSize(600, -30)
+            .setSize(600, -100)
             .setText("Level 2:Contains two disks") 
             .setPosition(300, 70);  
   
@@ -145,7 +145,7 @@ towerofhanoi.Help_level = function() {
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
-            .setSize(600, -70)
+            .setSize(600, -150)
             .setText("Level 3:Contains three disks") 
             .setPosition(300, 70);
     
@@ -153,7 +153,7 @@ towerofhanoi.Help_level = function() {
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
-            .setSize(600, -130)
+            .setSize(600, -200)
             .setText("Level 4: Contains four disks") 
             .setPosition(300, 70);
      
@@ -161,14 +161,28 @@ towerofhanoi.Help_level = function() {
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(28)
-            .setSize(600, -200)
+            .setSize(600, -260)
             .setText("Level 5: Contains five disks") 
+            .setPosition(300, 70);
+       
+      
+        var text5 = new lime.Label().setAlign('center')
+            .setFontFamily('"Trebuchet MS"')
+            .setFontColor('#000080')
+            .setFontSize(28)
+            .setSize(600, -360)
+            .setText("Em construcao!! ") 
             .setPosition(300, 70);
 
     
-     var btn_back = new towerofhanoi.makeButton("Back")
+     var btn_back = new towerofhanoi.makeButton("Previous")
             .setPosition(100, 600)
-            .setSize(700, 600);
+            .setSize(125, 50);
+    
+     var btn_menu = new towerofhanoi.makeButton("Menu")
+            .setPosition(700, 600)
+            .setSize(125, 50);
+
 
     goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.loadMenu();
@@ -179,8 +193,10 @@ towerofhanoi.Help_level = function() {
     this.appendChild(text1);
     this.appendChild(text2);
     this.appendChild(text3);
-    this.appendChild(text4); 
-
+    this.appendChild(text4);
+    this.appendChild(text5);
+    this.appendChild(btn_back);  
+    this.appendChild(btn_menu);
 
 };
 goog.inherits(towerofhanoi.Help_level, lime.Scene);
