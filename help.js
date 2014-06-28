@@ -20,49 +20,21 @@ towerofhanoi.Help = function() {
             .setFontColor('#1C1C1C')
             .setFontSize(35)
             .setText("Tower of Hanoi")
-            .setPosition(300, 22);
+            .setPosition(400, 55);
 
     var text = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
             .setFontSize(20)
-            .setSize(600, 10)
-            .setText("The game is based of a base containing three ") // \u00e3 = ã
-            .setPosition(300, 70);
-   
-   var text2 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(20)
-            .setSize(600, -30)
-            .setText("pins, one of which is arranged a few disks on the other, in ascending order in diameter from top to bottom.") 
-            .setPosition(300, 70);
-
-   var text3 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(20)
-            .setSize(550, -120)
-            .setText("The problem is to move all the disks of a pin any other, such as by using an auxiliary pins, so that a disk greater    never stand on top of a smaller one in any situation.") 
-            .setPosition(300, 70);
-   
-   var text4 = new lime.Label().setAlign('center')
-            .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#000080')
-            .setFontSize(20)
-            .setSize(550, -260)
-            .setText("The number of discs may vary and the most simple contains only three.") 
-            .setPosition(300, 70); 
-
+            .setSize(700, 10)
+            .setText("The game is based of a base containing three pins, one of which is arranged a few disks on the other, in ascending order in diameter from top to bottom.The problem is to move all the disks of a pin any other, such as by using an auxiliary pins, so that a disk greater    never stand on top of a smaller one in any situation.The number of discs may vary and the most simple contains only three.") // 
+            .setPosition(400, 110);
 
      var game_instructon = new lime.Sprite()
             .setSize(550, 550)
             .setPosition(100, 175)
             .setAnchorPoint(0, 0)
             .setFill('assets/instructions3.png');
-
-//    var txt1 = new lime.Label().setFontSize(18).setSize(600, 50).setPosition(300, 40).setAlign('left').setFontFamily('Segoe Print');
-//    txt1.setText('1. A larger disk can not be placed on a smaller disk;');
 
     var btn_back = new towerofhanoi.makeButton("Back")
             .setPosition(100, 600)
@@ -87,9 +59,6 @@ towerofhanoi.Help = function() {
     
     this.appendChild(title);
     this.appendChild(text);
-    this.appendChild(text2);
-    this.appendChild(text3);
-    this.appendChild(text4);
     this.appendChild(game_instructon);
     this.appendChild(btn_back);
     this.appendChild(btn_next);
@@ -106,10 +75,6 @@ towerofhanoi.Help = function() {
     goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
         towerofhanoi.music_sound();
     });
-
- 
-
-
 };
 
 towerofhanoi.Help_level = function() {
@@ -123,12 +88,12 @@ towerofhanoi.Help_level = function() {
             .setFontColor('#1C1C1C')
             .setFontSize(35)
             .setText("Tower of Hanoi")
-            .setPosition(300, 22); 
+            .setPosition(400, 50); 
 
        var text = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
             .setFontColor('#000080')
-            .setFontSize(28)
+            .setFontSize(23)
             .setSize(600, -50)
             .setText("Level 1:Contains one disks") 
             .setPosition(300, 70);      
@@ -174,8 +139,7 @@ towerofhanoi.Help_level = function() {
             .setText("Em construcao!! ") 
             .setPosition(300, 70);
 
-    
-     var btn_back = new towerofhanoi.makeButton("Previous")
+     var btn_previous = new towerofhanoi.makeButton("Previous")
             .setPosition(100, 600)
             .setSize(125, 50);
     
@@ -183,9 +147,13 @@ towerofhanoi.Help_level = function() {
             .setPosition(700, 600)
             .setSize(125, 50);
 
+    goog.events.listen(btn_menu, ['mousedown', 'touchstart'], function(e) {
+           towerofhanoi.loadMenu();
+    });
 
-    goog.events.listen(btn_back, ['mousedown', 'touchstart'], function(e) {
-        towerofhanoi.loadMenu();
+    goog.events.listen(btn_previous, ['mousedown', 'touchstart'], function(e) {
+        scene = new towerofhanoi.Help(); 
+        towerofhanoi.director.replaceScene(scene);
     });
   
     this.appendChild(title);
@@ -195,8 +163,20 @@ towerofhanoi.Help_level = function() {
     this.appendChild(text3);
     this.appendChild(text4);
     this.appendChild(text5);
-    this.appendChild(btn_back);  
+    this.appendChild(btn_previous);  
     this.appendChild(btn_menu);
+
+     /* MUTE */
+    var btn_mute = new lime.Sprite()
+            .setSize(65, 65)
+            .setPosition(720, 30)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/mute.png');
+    this.appendChild(btn_mute);
+
+    goog.events.listen(btn_mute, ['mousedown', 'touchstart'], function(e) {
+        towerofhanoi.music_sound();
+    });
 
 };
 goog.inherits(towerofhanoi.Help_level, lime.Scene);
