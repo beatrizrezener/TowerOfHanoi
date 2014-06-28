@@ -1,5 +1,6 @@
 goog.provide("towerofhanoi.result_winner_pro");
- towerofhanoi.result_winner_pro = function result_winner_pro(args){
+
+towerofhanoi.result_winner_pro = function result_winner_pro(args){
    
     var n_disks = args["disks"];
     var number_of_moviments = args["cont_moviments"]
@@ -86,7 +87,7 @@ function score(layer,args) {
             .setFill('assets/one_star.png');
 
     //classic mode    
-    if(Object.keys(args).length == 2){    
+    if(Object.keys(args).length == 2){
       if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
         layer.appendChild(three_stars);
       }
@@ -99,8 +100,6 @@ function score(layer,args) {
     }
     else{
     //pro mode 
-    qtyDiscs = args["disks"];
-    number_of_moviments = args["cont_moviments"];
     //Time exato de quando o jogador resolve a torre.
     time = args["act_time"];
     maxTime = args["maxTime"];
@@ -108,29 +107,39 @@ function score(layer,args) {
     time_three_stars = maxTime/3;
     time_two_stars = (maxTime/3)*2;
     time_one_star = maxTime;
+
     //Function to calc stars in pro mode
     if(number_of_moviments >= number_moviments_three_stars && number_of_moviments < number_moviments_two_stars){
-        if(time <= time_three_stars){
+        if(time > 0 && time <= time_three_stars ){
           layer.appendChild(three_stars);
+          alert("tres estrelas if1");
+          alert(time);
         }
-        if(time <= time_two_stars){
+        if(time > time_three_stars && time <= time_two_stars){
           layer.appendChild(two_stars);
+          alert("duas estrelas if1");
+          alert(time)
+
         }
-        if(time <= time_one_star){
+        if(time > time_two_stars && time <= time_one_star){
           layer.appendChild(one_star);
+          alert("uma estrelas if1")
         }
         
       }
       if(number_of_moviments >= number_moviments_two_stars && number_of_moviments < number_moviments_one_star){        
-        if(time <= time_two_stars){
+        if(time > time_three_stars && time <= time_two_stars){
           layer.appendChild(two_stars);
+          alert("duas estrelas if2")
         }
-        if(time <= time_one_star){
+        if(time > time_two_stars && time <= time_one_star){
           layer.appendChild(one_star);
+          alert("uma estrelas if2")
         }
       }
       if(number_of_moviments >= number_moviments_one_star){  
         layer.appendChild(one_star);
+        alert("uma estrelas if3")
       }
 
     }
