@@ -1,5 +1,5 @@
-goog.provide("towerofhanoi.winner_design");
- towerofhanoi.winner_design = function winner_design(args){
+goog.provide("towerofhanoi.result_winner_pro");
+ towerofhanoi.result_winner_pro = function result_winner_pro(args){
    
     var n_disks = args["disks"];
     var number_of_moviments = args["cont_moviments"]

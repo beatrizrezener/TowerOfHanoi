@@ -4,7 +4,7 @@ goog.require('towerofhanoi.SetOfDiscs');
 goog.require('towerofhanoi.movementSound');
 goog.require('towerofhanoi.music_sound');
 goog.require('towerofhanoi.ProgressBar');
-goog.require('towerofhanoi.end_design');
+goog.require('towerofhanoi.end_game_pro');
 
 var cont_moviments = 0;
 var t = 300;
@@ -266,9 +266,9 @@ towerofhanoi.Game.prototype.decreaseTime = function() {
     this.dataProgress(this.curTime/this.maxTime);
     //this.act_time = this.curTime / this.maxTime;
     if (this.curTime < 1) {
-    //Stop recursive calls of clock
+    //Time is over. end game;
     this.curTime = 50000000;
-    towerofhanoi.end_design(disks);
+    towerofhanoi.end_game_pro(disks);
 };
 }
 
