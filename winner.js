@@ -1,4 +1,4 @@
-goog.provide('_winner');
+goog.provide('result_winner');
 goog.require('towerofhanoi.result_winner_pro');
 goog.require('towerofhanoi.Game');
 

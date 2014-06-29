@@ -1,5 +1,5 @@
 goog.provide('towerofhanoi.Game');
-goog.require('_winner');
+goog.require('result_winner');
 goog.require('towerofhanoi.SetOfDiscs');
 goog.require('towerofhanoi.movementSound');
 goog.require('towerofhanoi.music_sound');
