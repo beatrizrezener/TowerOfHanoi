@@ -17,14 +17,14 @@ towerofhanoi.Help = function() {
 
     var title = new lime.Label().setAlign('center')
             .setFontFamily('"Trebuchet MS"')
-            .setFontColor('#1C1C1C')
+            .setFontColor('#000000')
             .setFontSize(35)
             .setText("Tower of Hanoi")
             .setPosition(400, 55);
 
     var text = new lime.Label().setAlign('center')
             .setFontFamily('Segoe Print')
-            .setFontColor('#000080')
+            .setFontColor('#FFFAFA')
             .setFontSize(20)
             .setSize(700, 10)
             .setText("The game is based of a base containing three pins, one of which is arranged a few disks on the other, in ascending order in diameter from top to bottom.The problem is to move all the disks of a pin any other, such as by using an auxiliary pins, so that a disk greater    never stand on top of a smaller one in any situation.The number of discs may vary and the most simple contains only three.") // 
@@ -85,14 +85,14 @@ towerofhanoi.Help_level = function() {
 
       var title = new lime.Label().setAlign('center')
             .setFontFamily('"Segoe Print"')
-            .setFontColor('#1C1C1C')
+            .setFontColor('#000000')
             .setFontSize(35)
             .setText("Tower of Hanoi")
             .setPosition(400, 50); 
 
        var text = new lime.Label().setAlign('center')
             .setFontFamily('"Segoe Print"')
-            .setFontColor('#1C1C1C')
+            .setFontColor('#000000')
             .setFontSize(23)
             .setSize(200, -50)
             .setText("Level 1") 
@@ -100,7 +100,7 @@ towerofhanoi.Help_level = function() {
 
        var text1 = new lime.Label().setAlign('center')
             .setFontFamily('"Segoe Print"')
-            .setFontColor('#000080')
+            .setFontColor('#FFFAFA')
             .setFontSize(20)
             .setSize(600, -100)
             .setText("The first larval level contains only three discs, with the objetido pass these three discs without any disc is higher upon lower using the three towers as aids in this task. This nivem is suitable for beginners.") 
@@ -108,7 +108,7 @@ towerofhanoi.Help_level = function() {
 
        var text2 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-             .setFontColor('#1C1C1C')
+             .setFontColor('#000000')
              .setFontSize(23)
              .setSize(600, -250)
              .setText("Level 2") 
@@ -116,7 +116,7 @@ towerofhanoi.Help_level = function() {
        
       var text3 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-             .setFontColor('#000080')
+             .setFontColor('#FFFAFA')
              .setFontSize(20)
              .setSize(600, -300)
              .setText("The second level is increased one pocuo the difficulty instead of three disks on the second level we have a total of four drives.") 
@@ -124,7 +124,7 @@ towerofhanoi.Help_level = function() {
   
        var text4 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-              .setFontColor('#1C1C1C')
+              .setFontColor('#000000')
              .setFontSize(23)
              .setSize(600, -400)
              .setText("Level 3.") 
@@ -132,7 +132,7 @@ towerofhanoi.Help_level = function() {
 
      var text5 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-              .setFontColor('#000080')
+              .setFontColor('#FFFAFA')
              .setFontSize(20)
              .setSize(600, -450)
              .setText("The third level is further increased the degree of difficulty instead of three disks on the second level we have a total of five discs.") 
@@ -140,7 +140,7 @@ towerofhanoi.Help_level = function() {
     
         var text6 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-             .setFontColor('#1C1C1C')
+             .setFontColor('#000000')
              .setFontSize(23)
              .setSize(600, -545)
              .setText("Level 4") 
@@ -148,7 +148,7 @@ towerofhanoi.Help_level = function() {
      
        var text7 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-             .setFontColor('#000080')
+             .setFontColor('#FFFAFA')
              .setFontSize(20)
              .setSize(600, -600)
              .setText("The third quarter the degree of difficulty increases significantly the investment of five disks on the second level we have a total of six disks.") 
@@ -157,7 +157,7 @@ towerofhanoi.Help_level = function() {
 
         var text8 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-             .setFontColor('#1C1C1C')
+             .setFontColor('#000000')
              .setFontSize(23)
              .setSize(600, -700)
              .setText("Level 5") 
@@ -166,7 +166,7 @@ towerofhanoi.Help_level = function() {
       
         var text9 = new lime.Label().setAlign('center')
              .setFontFamily('"Segoe Print"')
-             .setFontColor('#000080')
+             .setFontColor('#FFFAFA')
              .setFontSize(20)
              .setSize(600, -755)
              .setText("The fifth level and the more difficult it contains seven discs and get win and a great challenge.") 
