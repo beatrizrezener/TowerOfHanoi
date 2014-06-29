@@ -6,13 +6,15 @@ towerofhanoi.end_game_pro = function(n_disks){
 
     towerofhanoi.play_sound_lost();
 
-      var loose  = new lime.Label().setText("YOU LOSE").setFontFamily('Verdana')
-        .setFontColor('#c00').setFontSize(40)
-        .setPosition(250, 200);
+    var loose = new lime.Sprite()
+            .setSize(512, 150)
+            .setPosition(100, 100)
+            .setAnchorPoint(0, 0)
+            .setFill('assets/gameover.png');
   
     var continue_play = new towerofhanoi.Button("PLAY AGAIN")
       .setSize(200, 100)
-      .setPosition(250, 360);
+      .setPosition(365, 400);
 
     var back_to_menu = new towerofhanoi.Button("Menu")
       .setSize(170, 70)
