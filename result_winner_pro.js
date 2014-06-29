@@ -16,8 +16,6 @@ towerofhanoi.result_winner_pro = function result_winner_pro(args){
       
       score(layer,args);
       
-      var win  = new lime.Label();
-
       var continue_play = new towerofhanoi.Button("PLAY AGAIN")
         .setSize(200, 100)
         .setPosition(250, 360);
@@ -38,7 +36,6 @@ towerofhanoi.result_winner_pro = function result_winner_pro(args){
       layer.appendChild(continue_play);
       layer.appendChild(back_to_menu);
       layer.appendChild(next_level);
-      layer.appendChild(win);
       scene.appendChild(layer);
 
       towerofhanoi.director.replaceScene(scene);

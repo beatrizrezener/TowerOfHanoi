@@ -127,9 +127,9 @@ towerofhanoi.loadHelpScene = function() {
 };
 
 // load new game scene
-towerofhanoi.newGame = function(qtyDiscs, maxTime) {
+towerofhanoi.newGame = function(qtyDiscs) {
     towerofhanoi.music_sound();
-    var scene = new towerofhanoi.Game(qtyDiscs, maxTime);
+    var scene = new towerofhanoi.Game(qtyDiscs);
     maskSprite = new lime.Sprite().setSize(800, 640).setFill(100, 0, 0, .1).setAnchorPoint(0, 0);
     scene.appendChild(maskSprite);
     towerofhanoi.director.replaceScene(scene, lime.transitions.Dissolve);
@@ -143,24 +143,4 @@ towerofhanoi.pause = function() {
 
 towerofhanoi.play = function() {
     towerofhanoi.director.setPaused(false);
-};
-
-towerofhanoi.time = function(){
-   var layer = new lime.Layer();
-    if(t > 0)
-    {
-      var time = new lime.Label()
-      .setFontFamily('Trebuchet MS')
-      .setFontColor('#4f96ed').setPosition(600,280)
-      .setAlign('center').setFontSize(50).setText("Faltam: " + t + " segundos.");
-      //document.getElementById("txt").innerText = "Faltam: " + t + " segundos.";
-      setTimeout(function(){"time()"}, 1000);
-      t = t - 1;
-      layer.appendChild(time);
-      scene.appendChild(layer);
-    }
-    else
-    {
-      towerofhanoi.youLost(); 
-    }
 };
